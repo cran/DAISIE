@@ -1,4 +1,4 @@
-4b1659428ed5576a7e9e6dd6c5ae3863 *DESCRIPTION
+ca20fb8d855f28110ea98e9181eb0f50 *DESCRIPTION
 cfd7fce96a845ee55be69f794d8e83a7 *NAMESPACE
 b96bb75117cc715528a6866bdeb89d80 *R/DAISIE_ExpEIN.R
 b78beab392ff5986976cb33a158aaa41 *R/DAISIE_ML.R
@@ -21,7 +21,7 @@ a4ba4e0e3b3367a94b72c40e4ecadd90 *data/islands_1type_1000reps.RData
 c23868d1e82add63b51bb0456211c8b7 *data/islands_2types_1000reps.RData
 da1fd575e9700dfb8cc590646ed4195c *inst/DAISIE_tutorial.pdf
 1b9effc84e5800bc311f51d51729a9be *man/DAISIE-internal.Rd
-e844e1e25d719d92917e700e1306880a *man/DAISIE-package.Rd
+850056bc4ef3c59c24d9e8afca8a2d75 *man/DAISIE-package.Rd
 07db915b825def10b8ee15745afc7a92 *man/DAISIE_ExpEIN.Rd
 11edafa2a9acfad727e08f11aaf5266c *man/DAISIE_ML.Rd
 ac332eaecaac815d8c18241ff3ca5619 *man/DAISIE_dataprep.Rd

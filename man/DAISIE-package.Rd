@@ -12,8 +12,8 @@ DAISIE is an island biogeography model that assumes island biota assembly is gov
 \tabular{ll}{
 Package: \tab DAISIE\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2015-05-20\cr
+Version: \tab 1.0.1\cr
+Date: \tab 2015-06-02\cr
 License: \tab GPL 2.0\cr
 }
 
