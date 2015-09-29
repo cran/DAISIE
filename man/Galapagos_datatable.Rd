@@ -21,8 +21,7 @@ data(Galapagos_datatable)
   A table with 8 rows and 4 columns.
 }
 \source{
-Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters. In press. Please contact r.s.etienne@rug.nl for updated info.
-}
+Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters 18: 844-852.}
 \seealso{
   \code{\link{DAISIE_dataprep}},
   \code{\link{DAISIE_ML}}

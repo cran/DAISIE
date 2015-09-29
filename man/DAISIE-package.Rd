@@ -12,8 +12,8 @@ DAISIE is an island biogeography model that assumes island biota assembly is gov
 \tabular{ll}{
 Package: \tab DAISIE\cr
 Type: \tab Package\cr
-Version: \tab 1.0.1\cr
-Date: \tab 2015-06-02\cr
+Version: \tab 1.0.2\cr
+Date: \tab 2015-09-25\cr
 License: \tab GPL 2.0\cr
 }
 
@@ -33,11 +33,11 @@ DAISIE_ExpEIN computes the expected number of endemics, non-endemics and their s
 
 }
 \author{
-Rampal S. Etienne, Luis M. Valente and Albert B. Phillimore\cr
+Rampal S. Etienne, Luis M. Valente, Albert B. Phillimore & Bart Haegeman\cr
 Maintainer: Rampal S. Etienne <r.s.etienne@rug.nl>
 }
 \references{
-Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters. In press. Please contact r.s.etienne@rug.nl for updated info.
+Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters 18: 844-852.
 }
 \keyword{ models }
 \seealso{

@@ -1,11 +1,12 @@
-DAISIE_tutorial = function(os)
+DAISIE_tutorial = function()
 {
    filename = system.file("DAISIE_tutorial.pdf",package = "DAISIE")
-   if(os == "windows" | os == "win")
+   os = .Platform$OS.type
+   if(os == "windows")
    {
        shell.exec(filename)
    }
-   if(os == "mac")
+   if(os == "unix")
    {
        system(paste("open",filename,sep = " "))
    }

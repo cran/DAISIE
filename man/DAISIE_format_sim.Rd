@@ -47,8 +47,7 @@ Each of the island replicates is a list in itself. The first (e.g. island_replic
   \code{$type_1or2} - whether the colonist belongs to type 1 or type 2 \cr
 }
 \references{
-Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters. In press. Please contact r.s.etienne@rug.nl for updated info.
-}
+Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters 18: 844-852.}
 \author{
 Luis Valente
 }

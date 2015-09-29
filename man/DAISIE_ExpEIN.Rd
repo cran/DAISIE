@@ -29,8 +29,7 @@ The output is a list with three elements
   \item{ExpN}{ The sum of the number of endemics and non-endemics}
 }
 \references{
-Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters. In press. Please contact r.s.etienne@rug.nl for updated info.
-}
+Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters 18: 844-852.}
 \author{ Rampal S. Etienne }
 \examples{
 ### Compute the expected values at t = 4, for a mainland pool size of 1000 potential

@@ -24,8 +24,7 @@ data(islands_1type_1000reps)
 A list with 1000 items.
 }
 \source{
-Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters. In press. Please contact r.s.etienne@rug.nl for updated info.
-}
+Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters 18: 844-852.}
 \seealso{
   \code{\link{DAISIE_sim}},
   \code{\link{DAISIE_plot_sims}}

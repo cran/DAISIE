@@ -110,8 +110,7 @@ Including the 11th parameter (p_f) in either idparsopt or idparsfix (and therefo
   \item{conv}{ gives a message on convergence of optimization; conv = 0 means convergence}
 }
 \references{
-Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters. In press. Please contact r.s.etienne@rug.nl for updated info.
-}
+Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters 18: 844-852.}
 \author{
 Rampal S. Etienne
 }

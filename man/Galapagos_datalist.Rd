@@ -25,8 +25,7 @@ data(Galapagos_datalist)
   A list with 9 elements the first of which contains 2 elements and the following 8 containing 5 components.
 }
 \source{
-Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters. In press. Please contact r.s.etienne@rug.nl for updated info.
-}
+Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters 18: 844-852.}
 \seealso{
   \code{\link{DAISIE_dataprep}},
   \code{\link{DAISIE_ML}}

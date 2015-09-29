@@ -69,10 +69,9 @@ The output is a loglikelihood value
 }
 \value{The loglikelihood}
 \references{
-Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters. In press. Please contact r.s.etienne@rug.nl for updated info.
-}
+Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters 18: 844-852.}
 \author{
-Rampal S. Etienne
+Rampal S. Etienne & Bart Haegeman
 }
 \seealso{
  \code{\link{DAISIE_ML}},
