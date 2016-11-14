@@ -12,10 +12,12 @@
 \alias{countimmi}
 \alias{fconstr13}
 \alias{fconstr15}
+\alias{antidiagSums}
+\alias{quantiles}
 \alias{calcMN}
+\alias{DAISIE_IC}
 \alias{DAISIE_eq}
 \alias{DAISIE_probdist_rhs}
-\alias{DAISIE_probdist}
 \alias{DAISIE_numcol_dist}
 \alias{DAISIE_KLdist}
 \alias{DAISIE_loglik_all_choosepar}

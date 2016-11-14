@@ -13,7 +13,7 @@ DAISIE_probdist_rhs = function(t,x,m)
    return(list(dx))
 }
 
-DAISIE_probdist = function(pars1,pars2,tvec)
+DAISIE_probdist = function(pars1,pars2,tvec,initEI = c(0,0),initprobs = NULL)
 {
    lac = pars1[1]
    mu = pars1[2]
@@ -35,11 +35,55 @@ DAISIE_probdist = function(pars1,pars2,tvec)
    m[[5]] = lac * nx2[3:(lx + 2),4:(lx + 3)]       # I + 1
    m[[6]] = lac * nx1[2:(lx + 1),3:(lx + 2)]       # E - 1
    m[[7]] = (mu + lac) * nx1[3:(lx + 2),3:(lx + 2)] + (mu + laa + lac) * nx2[3:(lx + 2),3:(lx + 2)] + ga * (M - nx2[3:(lx + 2),3:(lx + 2)])                       # E, I, I
-   probs = matrix(0,lx,lx)
-   probs[1,1] = 1 # We start with an empty island
-   dim(probs) = c(lx*lx,1)
+   if(!is.null(initprobs))
+   {
+      probs = initprobs
+   } else
+   {
+      probs = matrix(0,lx,lx)
+      probs[initEI[1] + 1,initEI[2] + 1] = 1 
+   }
+   dim(probs) = c(lx * lx,1)
    y = ode(probs,c(0,tvec),DAISIE_probdist_rhs,m,rtol = reltol,atol = abstol, method = "ode45")
    return(y)
+}
+
+DAISIE_convertprobdist = function(pb)
+{
+   out = list()
+   dime = dim(pb)
+   for(i in 1:dime[1])
+   {
+      pb2 = pb[i,2:dime[2]]
+      d = sqrt(dime[2] - 1)
+      dim(pb2) = c(d,d)
+      out[[i]] = pb2
+   }
+   out[[i + 1]] = pb[,1]
+   return(out)
+}
+
+DAISIE_margprobdist = function(pars1,pars2,tvec,initEI = c(0,0),initprobs = NULL,pb = NULL)
+{
+   if(is.null(pb))
+   {
+      pb = DAISIE_probdist(pars1,pars2,tvec,initEI,initprobs)
+   }
+   lx = pars2[1]
+   pbE = matrix(nrow = length(tvec) + 1,ncol = lx)
+   pbI = matrix(nrow = length(tvec) + 1,ncol = lx)
+   pbN = matrix(nrow = length(tvec) + 1,ncol = 2 * lx - 1)
+   for(i in 1:(length(tvec) + 1))
+   {
+      pbEI = pb[i,2:(lx * lx + 1)]
+      dim(pbEI) = c(lx,lx)
+      pbE[i,1:lx] = rowSums(pbEI)
+      pbI[i,1:lx] = colSums(pbEI)
+      pbN[i,1:(2 * lx - 1)] = antidiagSums(pbEI)
+   }
+   out = list(pbE,pbI,pbN)
+   names(out) = c("pE","pI","pN")
+   return(out)
 }
 
 DAISIE_numcol_dist = function(pars1,pars2,tvec)
@@ -76,6 +120,59 @@ DAISIE_numcol_dist = function(pars1,pars2,tvec)
    cat('The approximation for the expected number of colonizations is',expC,'\n')   
    out = list(pC,expC,expEINtp,expEtpapprox,expEINteq,expEteqapprox)
    names(out) = list("pC","expC","expEINtp","expEtpapprox","expEINteq","expEteqapprox")
+   return(out)
+}
+                                  
+DAISIE_numcol = function(pars1,pars2,tvec,initEI = NULL)
+{
+   lx = pars2[1]
+   M = pars2[2]
+   nC = length(initEI)
+   lt = length(tvec)
+   unique_initEI = unique(initEI)
+   nuC = length(unique_initEI)
+   if(!is.na(pars1[11]))
+   {
+      Mnonfinches = M - round(pars1[11] * M) - nC
+   } else {
+      Mnonfinches = M - nC  
+   }
+   pC = matrix(nrow = lt,ncol = Mnonfinches + nC + 1)
+   y = DAISIE_probdist(pars1,c(pars2[1],1),tvec,initEI = c(0,0),initprobs = NULL)
+   probs00 = y[2:(lt + 1),2]       
+   expC = Mnonfinches * (1 - probs00)
+   lpC = Mnonfinches + 1
+   for(j in 1:lt)
+   {
+      pC[j,1:lpC] = dbinom(0:Mnonfinches,Mnonfinches,1 - probs00[j])
+   }
+   if(nuC > 0)
+   {
+      for(i in 1:nuC)
+      {
+         abund_initEI = 0
+         for(j in 1:nC)
+         {
+            if(prod(initEI[[j]] == unique_initEI[[i]]))
+            {
+               abund_initEI = abund_initEI + 1
+            }
+         }
+         y = DAISIE_probdist(pars1,c(pars2[1],1),tvec,initEI = unique_initEI[[i]],initprobs = NULL)
+         probs00 = y[2:(lt + 1),2]
+         expC = expC + abund_initEI * (1 - probs00)
+         lpC = lpC + abund_initEI
+         for(j in 1:lt)
+         {
+            pC[j,1:lpC] = DDD::conv(pC[j,1:(lpC - abund_initEI)],dbinom(0:abund_initEI,abund_initEI,1 - probs00[j]))
+         }
+      }
+   } 
+   names(expC) = tvec
+   colnames(pC) = 0:(lpC - 1)
+   rownames(pC) = tvec
+   out = list(expC,pC)
+   names(out) = c("expC","pC")
    return(out)
 }
 

@@ -6,7 +6,8 @@
 DAISIE_ExpEIN(
    t,
    pars,
-   M
+   M,
+   initEI = c(0,0)
    )
 }
 \arguments{
@@ -19,14 +20,16 @@ DAISIE_ExpEIN(
     \code{pars[5]} corresponds to lambda^a (anagenesis rate) 
   }  
   \item{M}{ The size of the mainland pool, i.e the number of species that can potentially colonize the island }
+  \item{initEI}{ The initial values of the number of endemics and non-endemics }
+
 }
-\details{
-The output is a list with three elements
-}
+
 \value{
-  \item{ExpE}{ The number of endemic species }
-  \item{ExpI}{ The number of non-endemic species }
-  \item{ExpN}{ The sum of the number of endemics and non-endemics}
+ \item{out}{The output is a list with three elements: \cr \cr
+  \code{ExpE} The number of endemic species \cr
+  \code{ExpI} The number of non-endemic species \cr
+  \code{ExpN} The sum of the number of endemics and non-endemics
+}
 }
 \references{
 Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters 18: 844-852.}

@@ -114,7 +114,7 @@ DAISIE_format_sim = function(island_replicates,time,M,sample_freq)
       	stt_type2[i,c(2:5)] = apply(store_richness_time_slice,2,sum)
       }
       
-      island_list[[1]] = list(island_age = time,not_present_type1 = roundn(M *(1 - prop_type2_pool)) - (number_type1_cols),not_present_type2 = roundn(M * prop_type2_pool) - number_type2_cols,stt_all = stt_all, stt_type1 = stt_type1,stt_type2 = stt_type2)
+      island_list[[1]] = list(island_age = time,not_present_type1 = DDD::roundn(M *(1 - prop_type2_pool)) - (number_type1_cols),not_present_type2 = DDD::roundn(M * prop_type2_pool) - number_type2_cols,stt_all = stt_all, stt_type1 = stt_type1,stt_type2 = stt_type2)
     } else {
       island_list[[1]] = list(island_age = time,not_present = number_not_present, stt_all = stt_all)
     }

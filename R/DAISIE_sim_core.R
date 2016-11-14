@@ -41,7 +41,7 @@ DAISIE_sim_core = function(time,mainland_n,pars)
       #IMMIGRATION
     	if(possible_event == 1)
    		{  	
-      	colonist = sample(mainland_spec,1)
+      	colonist = DDD::sample2(mainland_spec,1)
       
       	if(length(island_spec[,1]) != 0)
         {
@@ -68,7 +68,7 @@ DAISIE_sim_core = function(time,mainland_n,pars)
       #EXTINCTION
     	if(possible_event == 2)
    		{ 	
-    		extinct = sample(1:length(island_spec[,1]),1)
+    		extinct = DDD::sample2(1:length(island_spec[,1]),1)
     		#this chooses the row of species data to remove
     	
     		typeofspecies = island_spec[extinct,4]
@@ -150,7 +150,7 @@ DAISIE_sim_core = function(time,mainland_n,pars)
         }
       	if(length(immi_specs) > 1)
         {
-      		anagenesis = sample(immi_specs,1)
+      		anagenesis = DDD::sample2(immi_specs,1)
         }
       		
       	maxspecID = maxspecID + 1
@@ -163,7 +163,7 @@ DAISIE_sim_core = function(time,mainland_n,pars)
       #CLADOGENESIS - this splits species into two new species - both of which receive 
     	if(possible_event == 4)
     	{ 		
-    		tosplit = sample(1:length(island_spec[,1]),1)
+    		tosplit = DDD::sample2(1:length(island_spec[,1]),1)
     		
     		#if the species that speciates is cladogenetic
     		if(island_spec[tosplit,4] == "C")

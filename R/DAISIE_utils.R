@@ -1,9 +1,3 @@
-roundn = function(x, digits = 0)
-{
-    fac = 10^digits
-    return(trunc(fac * x + 0.5)/fac)
-}
-
 countspecies = function(datalistelement)
 {
     N = length(datalistelement$branching_times) - 1 + datalistelement$missing_species
@@ -70,7 +64,7 @@ calcMN = function(datalist,pars1)
            {
               M = datalist[[1]]$not_present_type1 + sum(unlist(lapply(datalist,counttype1)))
            } else {
-              M = M - max(0,roundn(pars1[11] * M)) 
+              M = M - max(0,DDD::roundn(pars1[11] * M)) 
            }
            N = sum(unlist(lapply(datalist,countspeciestype1)))      
         }
@@ -150,4 +144,46 @@ DAISIE_eq = function(datalist,pars1,pars2)
         pars1[4] = -1/age * log(1 - x_I) - pars1[1] - pars1[2] - pars1[5]
     }                                                                               
     return(pars1)
+}
+
+quantiles = function(probdist,probs)
+{ 
+    result = NULL
+    cdf = cumsum(probdist[2,])
+    for(i in 1:length(probs))
+    {
+        n = max(which(cdf <= probs[i]))
+        x = probdist[1,n]
+        if(cdf[n] == probs[i])
+        {
+           result[i] = x
+        } else
+        if(n < length(cdf))
+        {
+           result[i] = ((x + 1) * (probs[i] - cdf[n]) + x * (cdf[n + 1] - probs[i]))/(cdf[n + 1] - cdf[n])
+        } else
+        {
+           result[i] = x
+        } 
+    }  
+    names(result) = probs 
+    return(result)
+}
+
+antidiagSums = function(mat)
+{
+    dime = dim(mat)
+    out = rep(0,sum(dime) - 1)
+    nr = nrow(mat)
+    nc = ncol(mat)
+    for(i in 1:(nr + nc - 1))
+    {
+        rownums = min(i,nr):max(1,i - nc + 1)
+        colnums = max(1,i - nr + 1):min(i,nc)
+        for(j in 1:length(rownums))
+        {
+           out[i] = out[i] + mat[rownums[j],colnums[j]]
+        }
+    }
+    return(out)
 }

@@ -13,11 +13,11 @@ DAISIE_dataprep = function(datatable,island_age,M,number_clade_types = 1,list_ty
    	 number_type1_colonisations = number_colonisations - number_type2_colonisations
 		 if (prop_type2_pool == "proportional")
 		 {
-       	not_present_type1 = roundn((M/number_colonisations) * number_type1_colonisations) - number_type1_colonisations
-		    not_present_type2 = roundn((M/number_colonisations) * number_type2_colonisations) - number_type2_colonisations
+       	not_present_type1 = DDD::roundn((M/number_colonisations) * number_type1_colonisations) - number_type1_colonisations
+		    not_present_type2 = DDD::roundn((M/number_colonisations) * number_type2_colonisations) - number_type2_colonisations
 		 } else {
-		    not_present_type1 = roundn(M * (1 - prop_type2_pool)) - number_type1_colonisations
-    		not_present_type2 = roundn(M * prop_type2_pool) - number_type2_colonisations
+		    not_present_type1 = DDD::roundn(M * (1 - prop_type2_pool)) - number_type1_colonisations
+    		not_present_type2 = DDD::roundn(M * prop_type2_pool) - number_type2_colonisations
 		 }
 	   datalist[[1]] = list(island_age = island_age, not_present_type1 = not_present_type1, not_present_type2 = not_present_type2)
 	}

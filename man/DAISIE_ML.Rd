@@ -22,7 +22,8 @@ DAISIE_ML(
    x_I = 0.98,
    tol = c(1e-04, 1e-05, 1e-07),
    maxiter = 1000 * round((1.25)^length(idparsopt)),
-   methode = "lsodes"
+   methode = "lsodes",
+   optimmethod = 'subplex'
    )
 }
 \arguments{
@@ -90,6 +91,7 @@ This can only apply to ids 6:10, e.g. idparsnoshift = c(6,7) means that lambda^c
   }
   \item{maxiter}{Sets the maximum number of iterations in the optimization}
   \item{methode}{Method of the ODE-solver. See package deSolve for details. Default is "lsodes"}
+  \item{optimmethod}{Method used in likelihood optimization. Default is "subplex" (see subplex package). Alternative is 'simplex' which was the method in previous versions.}  
 }
 \details{The result of sort(c(idparsopt, idparsfix, idparsnoshift)) should be identical to c(1:10). If not, an error is reported that the input is incoherent. The same happens when the length of initparsopt is different from the length of idparsopt, and the length of parsfix is different from the length of idparsfix.\cr
 Including the 11th parameter (p_f) in either idparsopt or idparsfix (and therefore initparsopt or parsfix) is optional. If this parameter is not specified, then the information in the data is used, otherwise the information in the data is overruled.
@@ -110,7 +112,7 @@ Including the 11th parameter (p_f) in either idparsopt or idparsfix (and therefo
   \item{conv}{ gives a message on convergence of optimization; conv = 0 means convergence}
 }
 \references{
-Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters 18: 844-852.}
+Valente, L.M., A.B. Phillimore and R.S. Etienne (2015). Equilibrium and non-equilibrium dynamics simultaneously operate in the Galapagos islands. Ecology Letters 18: 844-852. <DOI:10.1111/ele.12461>.}
 \author{
 Rampal S. Etienne
 }

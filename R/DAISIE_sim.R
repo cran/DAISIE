@@ -28,7 +28,7 @@ DAISIE_sim = function(time,M,pars,replicates,prop_type2_pool = NA,replicates_app
   	} else {
       for(rep in 1:replicates)
       {
-    		pool2 = roundn(M * prop_type2_pool)
+    		pool2 = DDD::roundn(M * prop_type2_pool)
     		pool1 = M - pool2
       
       	lac_1 = pars[1]

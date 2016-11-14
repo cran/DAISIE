@@ -5,7 +5,7 @@ DAISIE_sim_min_type2 = function(time,M,pars,replicates, prop_type2_pool)
   counter = 0
   while(n_islands_with_type2 < replicates)
   {
-    pool2 = roundn(M * prop_type2_pool)
+    pool2 = DDD::roundn(M * prop_type2_pool)
     pool1 = M - pool2
     
     lac_1 = pars[1]
