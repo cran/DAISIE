@@ -19,57 +19,87 @@ DAISIE_SR_loglik_CS(
 )
 }
 \arguments{
-\item{pars1}{Contains the model parameters: \cr \cr \code{pars1[1]}
-corresponds to lambda^c (cladogenesis rate) \cr \code{pars1[2]} corresponds
-to mu (extinction rate) \cr \code{pars1[3]} corresponds to K (clade-level
-carrying capacity) \cr \code{pars1[4]} corresponds to gamma (immigration
-rate) \cr \code{pars1[5]} corresponds to lambda^a (anagenesis rate) \cr
+\item{pars1}{Contains the model parameters: \cr \cr
+\code{pars1[1]}
+corresponds to lambda^c (cladogenesis rate) \cr
+\code{pars1[2]} corresponds
+to mu (extinction rate) \cr
+\code{pars1[3]} corresponds to K (clade-level
+carrying capacity) \cr
+\code{pars1[4]} corresponds to gamma (immigration
+rate) \cr
+\code{pars1[5]} corresponds to lambda^a (anagenesis rate) \cr
 \code{pars1[6]} corresponds to lambda^c (cladogenesis rate) after the shift
-\cr \code{pars1[7]} corresponds to mu (extinction rate) after the shift \cr
+\cr
+\code{pars1[7]} corresponds to mu (extinction rate) after the shift \cr
 \code{pars1[8]} corresponds to K (clade-level carrying capacity) after the
-shift \cr \code{pars1[9]} corresponds to gamma (immigration rate) after the
-shift \cr \code{pars1[10]} corresponds to lambda^a (anagenesis rate) after
-the shift \cr \code{pars1[11]} corresponds to the time of shift \cr}
+shift \cr
+\code{pars1[9]} corresponds to gamma (immigration rate) after the
+shift \cr
+\code{pars1[10]} corresponds to lambda^a (anagenesis rate) after
+the shift \cr
+\code{pars1[11]} corresponds to the time of shift \cr}
 
-\item{pars2}{Contains the model settings \cr \cr \code{pars2[1]} corresponds
-to lx = length of ODE variable x \cr \code{pars2[2]} corresponds to ddmodel
-= diversity-dependent model, model of diversity-dependence, which can be one
-of\cr \cr ddmodel = 0 : no diversity dependence \cr ddmodel = 1 : linear
-dependence in speciation rate \cr ddmodel = 11: linear dependence in
-speciation rate and in immigration rate \cr ddmodel = 2 : exponential
-dependence in speciation rate\cr ddmodel = 21: exponential dependence in
-speciation rate and in immigration rate\cr \cr \code{pars2[3]} corresponds
-to cond = setting of conditioning\cr \cr cond = 0 : conditioning on island
-age \cr cond = 1 : conditioning on island age and non-extinction of the
-island biota \cr \cr \code{pars2[4]} sets whether parameters and likelihood
-should be printed (1) or not (0)}
+\item{pars2}{Contains the model settings \cr \cr
+\code{pars2[1]} corresponds
+to lx = length of ODE variable x \cr
+\code{pars2[2]} corresponds to ddmodel = diversity-dependent model,
+model of diversity-dependence, which can be one of\cr \cr
+ddmodel = 0 : no diversity dependence \cr
+ddmodel = 1 : linear dependence in speciation rate \cr
+ddmodel = 11: linear dependence in speciation rate and in immigration rate \cr
+ddmodel = 2 : exponential dependence in speciation rate\cr
+ddmodel = 21: exponential dependence in speciation rate and in immigration rate\cr \cr
+\code{pars2[3]} corresponds
+to cond = setting of conditioning\cr \cr
+cond = 0 : conditioning on island age \cr
+cond = 1 : conditioning on island age and non-extinction of the
+island biota \cr
+cond > 1 : conditioning on island age and having at least cond colonizations on the island \cr \cr
+\code{pars2[4]} sets whether parameters and likelihood should be printed (1) or not (0)}
 
 \item{datalist}{Data object containing information on colonisation and
 branching times. This object can be generated using the DAISIE_dataprep
 function, which converts a user-specified data table into a data object, but
 the object can of course also be entered directly. It is an R list object
-with the following elements.\cr The first element of the list has two or
-three components: \cr \cr \code{$island_age} - the island age \cr Then,
-depending on whether a distinction between types is made, we have:\cr
+with the following elements.\cr
+The first element of the list has two or three components: \cr \cr
+\code{$island_age} - the island age \cr
+Then, depending on whether a distinction between types is made, we have:\cr
 \code{$not_present} - the number of mainland lineages that are not present
-on the island \cr The remaining elements of the list each contains
+on the island \cr
+The remaining elements of the list each contains
 information on a single colonist lineage on the island and has 5
-components:\cr \cr \code{$colonist_name} - the name of the species or clade
-that colonized the island \cr \code{$branching_times} - island age and stem
+components:\cr \cr
+\code{$colonist_name} - the name of the species or clade
+that colonized the island \cr
+\code{$branching_times} - island age and stem
 age of the population/species in the case of Non-endemic, Non-endemic_MaxAge
 and Endemic anagenetic species. For cladogenetic species these should be
 island age and branching times of the radiation including the stem age of
-the radiation.\cr \code{$stac} - the status of the colonist \cr \cr *
-Non_endemic_MaxAge: 1 \cr * Endemic: 2 \cr * Endemic&Non_Endemic: 3 \cr *
-Non_endemic: 4 \cr * Endemic_MaxAge: 5 \cr \cr \code{$missing_species} -
+the radiation.\cr
+\code{$stac} - the status of the colonist \cr \cr
+- Non_endemic_MaxAge: 1 \cr * Endemic: 2 \cr
+- Endemic&Non_Endemic: 3 \cr
+- Non_endemic: 4 \cr
+- Endemic_MaxAge: 5 \cr \cr
+\code{$missing_species} -
 number of island species that were not sampled for particular clade (only
 applicable for endemic clades) \cr}
 
 \item{methode}{Method of the ODE-solver. See package deSolve for details.
 Default is "lsodes"}
 
-\item{CS_version}{For internal testing purposes only. Default is 1, the
-original DAISIE code.}
+\item{CS_version}{a numeric or list. Default is 1 for the standard DAISIE
+model, for a relaxed-rate model a list with the following elements:
+\itemize{
+  \item{model: the CS model to run, options are \code{1} for single rate
+  DAISIE model, \code{2} for multi-rate DAISIE, or \code{0} for IW test
+  model.}
+  \item{relaxed_par: the parameter to relax (integrate over). Options are
+\code{"cladogenesis"}, \code{"extinction"}, \code{"carrying_capacity"},
+\code{"immigration"}, or \code{"anagenesis"}.}
+  }}
 
 \item{abstolint}{Absolute tolerance of the integration}
 
@@ -103,7 +133,7 @@ Equilibrium and non-equilibrium dynamics simultaneously operate in the
 Galapagos islands. Ecology Letters 18: 844-852.
 }
 \seealso{
-\code{\link{DAISIE_ML}}, \code{\link{DAISIE_sim_constant_rate}}
+\code{\link{DAISIE_ML}}, \code{\link{DAISIE_sim_cr}}
 }
 \author{
 Rampal S. Etienne & Bart Haegeman

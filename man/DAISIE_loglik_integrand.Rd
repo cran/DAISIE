@@ -17,8 +17,8 @@ DAISIE_loglik_integrand(
   reltolint,
   verbose,
   pick,
-  mean,
-  sd
+  par_mean,
+  par_sd
 )
 }
 \arguments{
@@ -45,8 +45,17 @@ colonize the island.}
 
 \item{missnumspec}{Numeric of missing species}
 
-\item{methode}{Method of the ODE-solver. See package deSolve for details.
-Default is "lsodes".}
+\item{methode}{Method of the ODE-solver. Supported Boost \code{ODEINT}
+solvers (steppers) are:
+\code{"odeint::runge_kutta_cash_karp54"}
+\code{"odeint::runge_kutta_fehlberg78"}
+\code{"odeint::runge_kutta_dopri5"}
+\code{"odeint::bulirsch_stoer"}
+without \code{odeint::}-prefix, \code{\link{deSolve}{ode}} method is
+assumed. The default method overall is
+\code{"lsodes"} for \code{\link{DAISIE_ML_CS}()}
+and \code{"ode45"} from \code{\link[deSolve]{ode}()} for
+\code{\link{DAISIE_ML_IW}()}.}
 
 \item{abstolint}{Numeric absolute tolerance of the integration}
 
@@ -61,10 +70,6 @@ means also intermediate progress during loglikelihood computation is shown.}
 
 \item{pick}{Numeric determining which parameter is selected for the
 relaxed-rate model}
-
-\item{mean}{Numeric mean of the distribution}
-
-\item{sd}{Numeric standard deviation of the distribution}
 }
 \value{
 A numeric

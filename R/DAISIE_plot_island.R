@@ -11,9 +11,9 @@
 #'
 #' @return R plot.
 #' @author Luis Valente
-#' @seealso \code{\link{DAISIE_sim_constant_rate}},
-#' \code{\link{DAISIE_sim_time_dependent}},
-#' \code{\link{DAISIE_sim_constant_rate_shift}},
+#' @seealso \code{\link{DAISIE_sim_cr}},
+#' \code{\link{DAISIE_sim_time_dep}},
+#' \code{\link{DAISIE_sim_cr_shift}},
 #' \code{\link{DAISIE_plot_age_diversity}}
 #' @references Valente, L.M., A.B. Phillimore and R.S. Etienne (2015).
 #' Equilibrium and non-equilibrium dynamics simultaneously operate in the
@@ -34,7 +34,7 @@
 #'
 #' @export DAISIE_plot_island
 DAISIE_plot_island <- function (island, island_age = NA) {
-  if (class(island) == "data.frame") {
+  if (is.data.frame(island)) {
     if (is.na(island_age)) {
       stop("Island age must be specified if the input file is a table")
       }

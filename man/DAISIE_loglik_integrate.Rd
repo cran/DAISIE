@@ -2,8 +2,8 @@
 % Please edit documentation in R/DAISIE_loglik_integrate.R
 \name{DAISIE_loglik_integrate}
 \alias{DAISIE_loglik_integrate}
-\title{Integrates the loglikelihood of a single clade across a parameter weighted by a
-given distribution}
+\title{Integrates the loglikelihood of a single clade across a parameter weighted
+by a given distribution}
 \usage{
 DAISIE_loglik_integrate(
   pars1,
@@ -44,14 +44,23 @@ model, for a relaxed-rate model a list with the following elements:
 \itemize{
   \item{model: the CS model to run, options are \code{1} for single rate
   DAISIE model, \code{2} for multi-rate DAISIE, or \code{0} for IW test
-  model}
+  model.}
   \item{relaxed_par: the parameter to relax (integrate over). Options are
 \code{"cladogenesis"}, \code{"extinction"}, \code{"carrying_capacity"},
-\code{"immigration"}, or \code{"anagenesis"}}
+\code{"immigration"}, or \code{"anagenesis"}.}
   }}
 
-\item{methode}{Method of the ODE-solver. See package deSolve for details.
-Default is "lsodes".}
+\item{methode}{Method of the ODE-solver. Supported Boost \code{ODEINT}
+solvers (steppers) are:
+\code{"odeint::runge_kutta_cash_karp54"}
+\code{"odeint::runge_kutta_fehlberg78"}
+\code{"odeint::runge_kutta_dopri5"}
+\code{"odeint::bulirsch_stoer"}
+without \code{odeint::}-prefix, \code{\link{deSolve}{ode}} method is
+assumed. The default method overall is
+\code{"lsodes"} for \code{\link{DAISIE_ML_CS}()}
+and \code{"ode45"} from \code{\link[deSolve]{ode}()} for
+\code{\link{DAISIE_ML_IW}()}.}
 
 \item{abstolint}{Numeric absolute tolerance of the integration}
 
@@ -68,7 +77,7 @@ means also intermediate progress during loglikelihood computation is shown.}
 A loglikelihood value
 }
 \description{
-Integrates the loglikelihood of a single clade across a parameter weighted by a
-given distribution
+Integrates the loglikelihood of a single clade across a parameter weighted
+by a given distribution
 }
 \keyword{internal}

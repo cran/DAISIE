@@ -35,7 +35,7 @@ DAISIE_make_archipelago <- function(archipelago,
   archipelago_daisie[[1]]$distance_nearest_big <- distance_nearest_big
   archipelago_daisie[[1]]$name <- archipelago
 
-  archipelago_daisie <- Add_brt_table(archipelago_daisie)
+  archipelago_daisie <- add_brt_table(archipelago_daisie)
   archipelago_daisie[[1]]$brts_table <- NULL
 
   return(archipelago_daisie)
@@ -49,7 +49,6 @@ DAISIE_make_archipelago <- function(archipelago,
 #' @param archipelago_data  something
 #' @keywords internal
 #' @return  something
-#' @export
 DAISIE_make_global <- function(archipelago_list, M, phylo_data, archipelago_data) {
   global_object <- list()
   for (i in 1:length(archipelago_list)) {

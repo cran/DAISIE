@@ -29,7 +29,8 @@ DAISIE_ML_CS(
   CS_version = 1,
   verbose = 0,
   tolint = c(1e-16, 1e-10),
-  jitter = 0
+  jitter = 0,
+  num_cycles = 1
 )
 }
 \arguments{
@@ -114,16 +115,20 @@ rate\cr ddmodel = 21: exponential dependence in speciation rate and in
 immigration rate\cr}
 
 \item{cond}{cond = 0 : conditioning on island age \cr cond = 1 :
-conditioning on island age and non-extinction of the island biota \cr.}
+conditioning on island age and non-extinction of the island biota \cr.
+cond > 1 : conditioning on island age and having at least cond colonizations
+on the island. This last option is not yet available for the IW model \cr}
 
-\item{island_ontogeny}{In \code{\link{DAISIE_sim_time_dependent}()},
+\item{island_ontogeny}{In \code{\link{DAISIE_sim_time_dep}()},
 \code{\link{DAISIE_ML_CS}} and plotting a string describing the type of
 island ontogeny. Can be \code{"const"}, \code{"beta"} for a beta function
 describing area through time. String checked by
 \code{\link{is_island_ontogeny_input}()}. \cr In all other functions a
 numeric describing the type of island ontogeny. Can be \code{0} for
 constant, \code{1} for a beta function describing area through time. In ML
-functions \code{island_ontogeny = NA} assumes constant ontogeny.}
+functions \code{island_ontogeny = NA} assumes constant ontogeny. Time
+dependent estimation is not yet available as development is still ongoing.
+Will return an error if called in that case.}
 
 \item{eqmodel}{Sets the equilibrium constraint that can be used during the
 likelihood optimization. Only available for datatype = 'single'.\cr\cr
@@ -150,22 +155,31 @@ tolerance of parameter values in optimization.}
 
 \item{maxiter}{Sets the maximum number of iterations in the optimization.}
 
-\item{methode}{Method of the ODE-solver. See package deSolve for details.
-Default is "lsodes".}
+\item{methode}{Method of the ODE-solver. Supported Boost \code{ODEINT}
+solvers (steppers) are:
+\code{"odeint::runge_kutta_cash_karp54"}
+\code{"odeint::runge_kutta_fehlberg78"}
+\code{"odeint::runge_kutta_dopri5"}
+\code{"odeint::bulirsch_stoer"}
+without \code{odeint::}-prefix, \code{\link{deSolve}{ode}} method is
+assumed. The default method overall is
+\code{"lsodes"} for \code{\link{DAISIE_ML_CS}()}
+and \code{"ode45"} from \code{\link[deSolve]{ode}()} for
+\code{\link{DAISIE_ML_IW}()}.}
 
 \item{optimmethod}{Method used in likelihood optimization. Default is
-"subplex" (see subplex package). Alternative is 'simplex' which was the
-method in previous versions.}
+`subplex` (see `\link[subplex]{subplex}()` for full details).
+Alternative is \code{"simplex"} which was the method in previous versions.}
 
 \item{CS_version}{a numeric or list. Default is 1 for the standard DAISIE
 model, for a relaxed-rate model a list with the following elements:
 \itemize{
   \item{model: the CS model to run, options are \code{1} for single rate
   DAISIE model, \code{2} for multi-rate DAISIE, or \code{0} for IW test
-  model}
+  model.}
   \item{relaxed_par: the parameter to relax (integrate over). Options are
 \code{"cladogenesis"}, \code{"extinction"}, \code{"carrying_capacity"},
-\code{"immigration"}, or \code{"anagenesis"}}
+\code{"immigration"}, or \code{"anagenesis"}.}
   }}
 
 \item{verbose}{In simulation and dataprep functions a logical,
@@ -180,8 +194,11 @@ tolerance of the integration.}
 
 \item{jitter}{Numeric for \code{\link[DDD]{optimizer}()}. Jitters the
 parameters being optimized by the specified amount which should be very
-small, e.g. 1e-5. Jitter when \code{link[subplex]{subplex}()} produces
+small, e.g. 1e-5. Jitter when \code{link{subplex}{subplex}()} produces
 incorrect output due to parameter transformation.}
+
+\item{num_cycles}{The number of cycles the optimizer will go through.
+Default is 1.}
 }
 \value{
 The output is a dataframe containing estimated parameters and
@@ -338,9 +355,9 @@ Galapagos islands. Ecology Letters 18: 844-852. <DOI:10.1111/ele.12461>.
 }
 \seealso{
 \code{\link{DAISIE_loglik_all}},
-\code{\link{DAISIE_sim_constant_rate}},
-\code{\link{DAISIE_sim_time_dependent}},
-\code{\link{DAISIE_sim_constant_rate_shift}}
+\code{\link{DAISIE_sim_cr}},
+\code{\link{DAISIE_sim_time_dep}},
+\code{\link{DAISIE_sim_cr_shift}}
 }
 \author{
 Rampal S. Etienne

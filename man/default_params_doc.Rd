@@ -30,7 +30,7 @@ default_params_doc(
   rates,
   max_rates,
   timeval,
-  totaltime,
+  total_time,
   possible_event,
   maxspecID,
   mainland_spec,
@@ -113,6 +113,7 @@ default_params_doc(
   proptime_max,
   current_area,
   jitter,
+  num_cycles,
   trait_pars,
   relaxed_par,
   relaxed_rate_pars,
@@ -125,7 +126,12 @@ default_params_doc(
   reltolint,
   pick,
   mean,
-  sd
+  sd,
+  clado_rate,
+  ext_rate,
+  carr_cap,
+  immig_rate,
+  ana_rate
 )
 }
 \arguments{
@@ -241,16 +247,18 @@ calculations as returned by \code{\link{create_hyper_pars}()}:
   \item{[2]: is x the exponent for calculating extinction rate}
 }}
 
-\item{island_ontogeny}{In \code{\link{DAISIE_sim_time_dependent}()},
+\item{island_ontogeny}{In \code{\link{DAISIE_sim_time_dep}()},
 \code{\link{DAISIE_ML_CS}} and plotting a string describing the type of
 island ontogeny. Can be \code{"const"}, \code{"beta"} for a beta function
 describing area through time. String checked by
 \code{\link{is_island_ontogeny_input}()}. \cr In all other functions a
 numeric describing the type of island ontogeny. Can be \code{0} for
 constant, \code{1} for a beta function describing area through time. In ML
-functions \code{island_ontogeny = NA} assumes constant ontogeny.}
+functions \code{island_ontogeny = NA} assumes constant ontogeny. Time
+dependent estimation is not yet available as development is still ongoing.
+Will return an error if called in that case.}
 
-\item{sea_level}{In \code{\link{DAISIE_sim_time_dependent}()} and plotting a
+\item{sea_level}{In \code{\link{DAISIE_sim_time_dep}()} and plotting a
 string describing the type of sea level. Can be \code{"const"} or
 \code{"sine"} for a sine function describing area through time. String
 checked by \code{\link{is_sea_level_input}()}.
@@ -271,9 +279,9 @@ If using an island-wide diversity dependence, this value is set to the
 number of mainland species.}
 
 \item{island_replicates}{List output from
-\code{\link{DAISIE_sim_core_constant_rate}()},
-\code{\link{DAISIE_sim_core_time_dependent}()},
-\code{\link{DAISIE_sim_core_constant_rate_shift}()} or
+\code{\link{DAISIE_sim_core_cr}()},
+\code{\link{DAISIE_sim_core_time_dep}()},
+\code{\link{DAISIE_sim_core_cr_shift}()} or
 \code{\link{DAISIE_sim_min_type2}()} functions. Minimally, this must be a
 list that has as many elements as replicates. Each element must be a list
 with the elements \code{island_age}, \code{not_present} and \code{stt_all}.
@@ -293,7 +301,8 @@ of species.}
 
 \item{timeval}{Numeric defining current time of simulation.}
 
-\item{totaltime}{Numeric defining the length of the simulation in time units.}
+\item{total_time}{Numeric defining the length of the simulation in time
+units.}
 
 \item{possible_event}{Numeric defining what event will happen.}
 
@@ -419,7 +428,9 @@ rate\cr ddmodel = 21: exponential dependence in speciation rate and in
 immigration rate\cr}
 
 \item{cond}{cond = 0 : conditioning on island age \cr cond = 1 :
-conditioning on island age and non-extinction of the island biota \cr.}
+conditioning on island age and non-extinction of the island biota \cr.
+cond > 1 : conditioning on island age and having at least cond colonizations
+on the island. This last option is not yet available for the IW model \cr}
 
 \item{eqmodel}{Sets the equilibrium constraint that can be used during the
 likelihood optimization. Only available for datatype = 'single'.\cr\cr
@@ -446,29 +457,38 @@ tolerance of parameter values in optimization.}
 
 \item{maxiter}{Sets the maximum number of iterations in the optimization.}
 
-\item{methode}{Method of the ODE-solver. See package deSolve for details.
-Default is "lsodes".}
+\item{methode}{Method of the ODE-solver. Supported Boost \code{ODEINT}
+solvers (steppers) are:
+\code{"odeint::runge_kutta_cash_karp54"}
+\code{"odeint::runge_kutta_fehlberg78"}
+\code{"odeint::runge_kutta_dopri5"}
+\code{"odeint::bulirsch_stoer"}
+without \code{odeint::}-prefix, \code{\link{deSolve}{ode}} method is
+assumed. The default method overall is
+\code{"lsodes"} for \code{\link{DAISIE_ML_CS}()}
+and \code{"ode45"} from \code{\link[deSolve]{ode}()} for
+\code{\link{DAISIE_ML_IW}()}.}
 
 \item{optimmethod}{Method used in likelihood optimization. Default is
-"subplex" (see subplex package). Alternative is 'simplex' which was the
-method in previous versions.}
+`subplex` (see `\link[subplex]{subplex}()` for full details).
+Alternative is \code{"simplex"} which was the method in previous versions.}
 
 \item{CS_version}{a numeric or list. Default is 1 for the standard DAISIE
 model, for a relaxed-rate model a list with the following elements:
 \itemize{
   \item{model: the CS model to run, options are \code{1} for single rate
   DAISIE model, \code{2} for multi-rate DAISIE, or \code{0} for IW test
-  model}
+  model.}
   \item{relaxed_par: the parameter to relax (integrate over). Options are
 \code{"cladogenesis"}, \code{"extinction"}, \code{"carrying_capacity"},
-\code{"immigration"}, or \code{"anagenesis"}}
+\code{"immigration"}, or \code{"anagenesis"}.}
   }}
 
 \item{tolint}{Vector of two elements containing the absolute and relative
 tolerance of the integration.}
 
 \item{datatable}{Data frame (table) with user-specified data. See file
-Galapagos_datatable.Rdata for a template of an input table. Each row on the
+\code{Galapagos_datatable} for a template of an input table. Each row on the
 table represents and independent colonisation event. Table has the
 following four columns. \cr \cr \code{$Clade_name} - name of independent
 colonization event \cr \code{$Status} - One of the following categories:
@@ -647,11 +667,14 @@ at the end of the simulation).}
 
 \item{jitter}{Numeric for \code{\link[DDD]{optimizer}()}. Jitters the
 parameters being optimized by the specified amount which should be very
-small, e.g. 1e-5. Jitter when \code{link[subplex]{subplex}()} produces
+small, e.g. 1e-5. Jitter when \code{link{subplex}{subplex}()} produces
 incorrect output due to parameter transformation.}
 
+\item{num_cycles}{The number of cycles the optimizer will go through.
+Default is 1.}
+
 \item{trait_pars}{A named list containing diversification rates considering
-two trait states created by \code{\link{create_trait_pars}}:
+  two trait states created by \code{\link{create_trait_pars}}:
 \itemize{
   \item{[1]:A numeric with the per capita transition rate with state1}
   \item{[2]:A numeric with the per capita immigration rate with state2}
@@ -693,6 +716,16 @@ relaxed-rate model}
 \item{mean}{Numeric mean of the distribution}
 
 \item{sd}{Numeric standard deviation of the distribution}
+
+\item{clado_rate}{Numeric rate of cladogenesis}
+
+\item{ext_rate}{Numeric rate of extinction}
+
+\item{carr_cap}{Numeric carrying capacity}
+
+\item{immig_rate}{Numeric rate of immigration}
+
+\item{ana_rate}{Numeric rate of anagenesis}
 }
 \value{
 Nothing

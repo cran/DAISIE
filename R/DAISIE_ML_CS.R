@@ -44,9 +44,9 @@
 #' message on convergence of optimization; conv = 0 means convergence}
 #' @author Rampal S. Etienne
 #' @seealso \code{\link{DAISIE_loglik_all}},
-#' \code{\link{DAISIE_sim_constant_rate}},
-#' \code{\link{DAISIE_sim_time_dependent}},
-#' \code{\link{DAISIE_sim_constant_rate_shift}}
+#' \code{\link{DAISIE_sim_cr}},
+#' \code{\link{DAISIE_sim_time_dep}},
+#' \code{\link{DAISIE_sim_cr_shift}}
 #' @references Valente, L.M., A.B. Phillimore and R.S. Etienne (2015).
 #' Equilibrium and non-equilibrium dynamics simultaneously operate in the
 #' Galapagos islands. Ecology Letters 18: 844-852. <DOI:10.1111/ele.12461>.
@@ -182,11 +182,12 @@ DAISIE_ML_CS <- DAISIE_ML <- function(
   CS_version = 1,
   verbose = 0,
   tolint = c(1E-16, 1E-10),
-  jitter = 0) {
+  jitter = 0,
+  num_cycles = 1) {
 
   if (datatype == "single") {
     if (is.na(island_ontogeny)) {
-      if(CS_version[[1]] == 2) {
+      if(CS_version[[1]] %in% c(2,3)) {
         out <- DAISIE_ML4(datalist = datalist,
                           initparsopt = initparsopt,
                           idparsopt = idparsopt,
@@ -203,7 +204,8 @@ DAISIE_ML_CS <- DAISIE_ML <- function(
                           CS_version = CS_version,
                           verbose = verbose,
                           tolint = tolint,
-                          jitter = jitter)
+                          jitter = jitter,
+                          num_cycles = num_cycles)
       } else
       {
         out <- DAISIE_ML1(datalist = datalist,
@@ -226,27 +228,13 @@ DAISIE_ML_CS <- DAISIE_ML <- function(
                           CS_version = CS_version,
                           verbose = verbose,
                           tolint = tolint,
-                          jitter = jitter)
+                          jitter = jitter,
+                          num_cycles = num_cycles)
       }
-    } else
-      {
-        out <- DAISIE_ML3(datalist = datalist,
-                          initparsopt = initparsopt,
-                          idparsopt = idparsopt,
-                          parsfix = parsfix,
-                          idparsfix = idparsfix,
-                          res = res,
-                          ddmodel = ddmodel,
-                          cond = cond,
-                          island_ontogeny = island_ontogeny,
-                          tol = tol,
-                          maxiter = maxiter,
-                          methode = methode,
-                          optimmethod = optimmethod,
-                          CS_version = CS_version,
-                          verbose = verbose,
-                          tolint = tolint,
-                          jitter = jitter)
+    } else {
+        stop(
+          "Time dependent estimation not yet available. Development ongoing."
+        )
       }
   } else
     {
@@ -265,7 +253,8 @@ DAISIE_ML_CS <- DAISIE_ML <- function(
                         optimmethod = optimmethod,
                         verbose = verbose,
                         tolint = tolint,
-                        jitter = jitter)
+                        jitter = jitter,
+                        num_cycles = num_cycles)
   }
   return(out)
 }

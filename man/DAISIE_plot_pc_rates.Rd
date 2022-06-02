@@ -5,7 +5,7 @@
 \title{Plot per capita STT and per-capita rate change thourgh simulation}
 \usage{
 DAISIE_plot_pc_rates(
-  totaltime,
+  total_time,
   pars,
   island_ontogeny,
   sea_level = "const",
@@ -18,7 +18,8 @@ DAISIE_plot_pc_rates(
 )
 }
 \arguments{
-\item{totaltime}{Numeric defining the length of the simulation in time units.}
+\item{total_time}{Numeric defining the length of the simulation in time
+units.}
 
 \item{pars}{A numeric vector containing the model parameters:
 \itemize{
@@ -45,16 +46,18 @@ or in the rate shift model. For \code{\link{DAISIE_sim_relaxed_rate}()}
 relaxed parameter and the parameter chosen by the \code{relaxed_par}
 argument is the mean of the gamma distribution for the relaxed parameter.}
 
-\item{island_ontogeny}{In \code{\link{DAISIE_sim_time_dependent}()},
+\item{island_ontogeny}{In \code{\link{DAISIE_sim_time_dep}()},
 \code{\link{DAISIE_ML_CS}} and plotting a string describing the type of
 island ontogeny. Can be \code{"const"}, \code{"beta"} for a beta function
 describing area through time. String checked by
 \code{\link{is_island_ontogeny_input}()}. \cr In all other functions a
 numeric describing the type of island ontogeny. Can be \code{0} for
 constant, \code{1} for a beta function describing area through time. In ML
-functions \code{island_ontogeny = NA} assumes constant ontogeny.}
+functions \code{island_ontogeny = NA} assumes constant ontogeny. Time
+dependent estimation is not yet available as development is still ongoing.
+Will return an error if called in that case.}
 
-\item{sea_level}{In \code{\link{DAISIE_sim_time_dependent}()} and plotting a
+\item{sea_level}{In \code{\link{DAISIE_sim_time_dep}()} and plotting a
 string describing the type of sea level. Can be \code{"const"} or
 \code{"sine"} for a sine function describing area through time. String
 checked by \code{\link{is_sea_level_input}()}.

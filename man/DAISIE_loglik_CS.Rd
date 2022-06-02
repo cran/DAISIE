@@ -49,6 +49,7 @@ ddmodel = 21: exponential dependence in speciation rate and in immigration rate\
 \code{pars2[3]} corresponds to cond = setting of conditioning\cr \cr
 cond = 0 : conditioning on island age \cr
 cond = 1 : conditioning on island age and non-extinction of the island biota \cr \cr
+cond > 1 : conditioning on island age and having at least cond colonizations on the island \cr \cr
 \code{pars2[4]} sets whether parameters and likelihood should be printed (1) or not (0)}
 
 \item{datalist}{Data object containing information on colonisation and
@@ -83,6 +84,8 @@ the stem age of the radiation.\cr
 * Endemic_Singleton_MaxAge: 5 \cr
 * Endemic_Clade_MaxAge: 6 \cr
 * Endemic&Non_Endemic_Clade_MaxAge: 7 \cr \cr
+* Non_endemic_MaxAge_MinAge: 8 \cr
+* Endemic_Singleton_MaxAge_MinAge: 9 \cr
 \code{$missing_species} - number of island species that were not sampled for
 particular clade (only applicable for endemic clades) \cr
 \code{$type1or2} - whether the colonist belongs to type 1 or type 2 \cr}
@@ -90,8 +93,16 @@ particular clade (only applicable for endemic clades) \cr
 \item{methode}{Method of the ODE-solver. See package deSolve for details.
 Default is "lsodes"}
 
-\item{CS_version}{For internal testing purposes only. Default is 1, the
-original DAISIE code.}
+\item{CS_version}{a numeric or list. Default is 1 for the standard DAISIE
+model, for a relaxed-rate model a list with the following elements:
+\itemize{
+  \item{model: the CS model to run, options are \code{1} for single rate
+  DAISIE model, \code{2} for multi-rate DAISIE, or \code{0} for IW test
+  model.}
+  \item{relaxed_par: the parameter to relax (integrate over). Options are
+\code{"cladogenesis"}, \code{"extinction"}, \code{"carrying_capacity"},
+\code{"immigration"}, or \code{"anagenesis"}.}
+  }}
 
 \item{abstolint}{Absolute tolerance of the integration}
 
@@ -120,9 +131,9 @@ Equilibrium and non-equilibrium dynamics simultaneously operate in the
 Galapagos islands. Ecology Letters 18: 844-852.
 }
 \seealso{
-\code{\link{DAISIE_ML}}, \code{\link{DAISIE_sim_constant_rate}},
-\code{\link{DAISIE_sim_time_dependent}},
-\code{\link{DAISIE_sim_constant_rate_shift}}
+\code{\link{DAISIE_ML}}, \code{\link{DAISIE_sim_cr}},
+\code{\link{DAISIE_sim_time_dep}},
+\code{\link{DAISIE_sim_cr_shift}}
 }
 \author{
 Rampal S. Etienne & Bart Haegeman

@@ -1,8 +1,6 @@
-context("update_rates")
-
 test_that("update_rates constant rates is silent and gives correct output", {
   timeval <- 0
-  totaltime <- 1
+  total_time <- 1
   gam <- 0.009
   mu <- 2.0
   laa <- 1.0
@@ -25,7 +23,7 @@ test_that("update_rates constant rates is silent and gives correct output", {
   set.seed(42)
   expect_silent(rates <- update_rates(
     timeval = timeval,
-    totaltime = totaltime,
+    total_time = total_time,
     gam = gam,
     laa = laa,
     lac = lac,
@@ -59,14 +57,15 @@ test_that("update area-dependent rates is silent and gives correct output", {
     max_area = 1.0,
     current_area = 0.5,
     proportional_peak_t = 0.5,
-    total_island_age = 1.0,
+    total_island_age = 1.2,
     sea_level_amplitude = 0,
     sea_level_frequency = 0,
     island_gradient_angle = 0)
   hyper_pars <- create_hyper_pars(d = 0.2, x = 0.1)
+  peak <- calc_peak(total_time = 1, area_pars = area_pars)
   expect_silent(rates <- DAISIE:::update_rates(
     timeval = 0,
-    totaltime = 1,
+    total_time = 1,
     gam = gam,
     laa = laa,
     lac = lac,
@@ -79,7 +78,8 @@ test_that("update area-dependent rates is silent and gives correct output", {
     K = K,
     num_spec = 0,
     num_immigrants = 0,
-    mainland_n = 1))
+    mainland_n = 1,
+    peak = peak))
   expect_true(are_rates(rates))
   expected_rates <- list(immig_rate = 0,
                          ext_rate = 0,

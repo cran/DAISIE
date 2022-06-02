@@ -6,7 +6,7 @@
 \usage{
 DAISIE_create_island(
   stt_table,
-  totaltime,
+  total_time,
   island_spec,
   mainland_n,
   trait_pars = NULL
@@ -15,7 +15,8 @@ DAISIE_create_island(
 \arguments{
 \item{stt_table}{Matrix with number of species at each time step.}
 
-\item{totaltime}{Numeric defining the length of the simulation in time units.}
+\item{total_time}{Numeric defining the length of the simulation in time
+units.}
 
 \item{island_spec}{Matrix with current state of simulation containing number
 of species.}
@@ -27,7 +28,7 @@ If using an island-wide diversity dependence, this value is set to the
 number of mainland species.}
 
 \item{trait_pars}{A named list containing diversification rates considering
-two trait states created by \code{\link{create_trait_pars}}:
+  two trait states created by \code{\link{create_trait_pars}}:
 \itemize{
   \item{[1]:A numeric with the per capita transition rate with state1}
   \item{[2]:A numeric with the per capita immigration rate with state2}
@@ -47,3 +48,4 @@ the island and number of missing species.
 \description{
 Converts simulation output into island output
 }
+\keyword{internal}

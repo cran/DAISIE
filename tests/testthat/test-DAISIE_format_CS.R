@@ -1,5 +1,3 @@
-context("DAISIE_format_CS")
-
 test_that("silent with empty island with correct output", {
   pars <- c(0.4, 0.2, 10, 0.0001, 0.5)
   time <- 1
@@ -9,7 +7,7 @@ test_that("silent with empty island with correct output", {
   set.seed(1)
   island_replicates <- list()
   out <- list()
-  out[[1]] <- DAISIE:::DAISIE_sim_core_constant_rate(
+  out[[1]] <- DAISIE:::DAISIE_sim_core_cr(
     time = time,
     pars = pars,
     mainland_n = mainland_n,
@@ -56,7 +54,7 @@ test_that("silent with non-empty island with correct output", {
   set.seed(1)
   island_replicates <- list()
   out <- list()
-  out[[1]] <- DAISIE:::DAISIE_sim_core_constant_rate(
+  out[[1]] <- DAISIE:::DAISIE_sim_core_cr(
     time = time,
     pars = pars,
     mainland_n = mainland_n,
@@ -108,7 +106,7 @@ test_that("output with empty island and verbose = TRUE", {
   set.seed(1)
   island_replicates <- list()
   out <- list()
-  out[[1]] <- DAISIE:::DAISIE_sim_core_constant_rate(
+  out[[1]] <- DAISIE:::DAISIE_sim_core_cr(
     time = time,
     pars = pars,
     mainland_n = mainland_n,
@@ -124,60 +122,21 @@ test_that("output with empty island and verbose = TRUE", {
       island_gradient_angle = 0)
   )
   island_replicates[[1]] <- out
-  expect_output(
+  expect_message(
     formatted_CS_sim <- DAISIE:::DAISIE_format_CS(
       island_replicates = island_replicates,
       time = time,
       M = mainland_n,
       sample_freq = sample_freq,
       verbose = verbose
-    )
-  )
-})
-
-test_that("silent with empty 2 type island", {
-  skip("this scenario can't run (min_type2 always produces species)")
-  pars <- c(0, 10, 1, 0.0001, 0, 0, 10, 1, 0.0001, 0)
-  totaltime <- 1
-  M <- 1
-  mainland_n <- M
-  replicates <- 1
-  prop_type2_pool <- 0.1
-  verbose <- FALSE
-  sample_freq <- 1
-  set.seed(1)
-  island_replicates <- list()
-  island_replicates <- DAISIE:::DAISIE_sim_min_type2(
-    time = totaltime,
-    M = M,
-    pars = pars,
-    replicates = replicates,
-    prop_type2_pool = prop_type2_pool,
-    verbose = verbose,
-    hyper_pars = create_hyper_pars(d = 0, x = 0),
-    area_pars = DAISIE::create_area_pars(
-      max_area = 1,
-      current_area = 1,
-      proportional_peak_t = 0,
-      total_island_age = 0,
-      sea_level_amplitude = 0,
-      sea_level_frequency = 0,
-      island_gradient_angle = 0)
-    )
-  expect_silent(
-    formatted_CS_sim <- DAISIE:::DAISIE_format_CS( # sim_min_type2 produces list with one extra element and fails
-      island_replicates = island_replicates,
-      time = totaltime,
-      M = mainland_n,
-      sample_freq = sample_freq,
-      verbose = verbose
-    )
+    ),
+    regexp = "Island being formatted: 1/1"
   )
 })
 
 test_that("silent with non-empty 2 type island", {
   pars <- c(0.4, 0.1, 10, 1, 0.5, 0.4, 0.1, 10, 1, 0.5)
-  totaltime <- 1
+  total_time <- 1
   M <- 10
   mainland_n <- M
   verbose <- FALSE
@@ -187,7 +146,7 @@ test_that("silent with non-empty 2 type island", {
   island_replicates <- list()
   prop_type2_pool <- 0.4
   island_replicates <- DAISIE:::DAISIE_sim_min_type2(
-    time = totaltime,
+    time = total_time,
     M = M,
     pars = pars,
     replicates = replicates,
@@ -205,7 +164,7 @@ test_that("silent with non-empty 2 type island", {
   expect_silent(
     formatted_CS_sim <- DAISIE:::DAISIE_format_CS(
       island_replicates = island_replicates,
-      time = totaltime,
+      time = total_time,
       M = mainland_n,
       sample_freq = sample_freq,
       verbose = verbose
@@ -215,7 +174,7 @@ test_that("silent with non-empty 2 type island", {
 
 test_that("silent with non-empty 2 type island full stt", {
   pars <- c(0.4, 0.1, 10, 1, 0.5, 0.4, 0.1, 10, 1, 0.5)
-  totaltime <- 1
+  total_time <- 1
   M <- 10
   mainland_n <- M
   verbose <- FALSE
@@ -225,7 +184,7 @@ test_that("silent with non-empty 2 type island full stt", {
   island_replicates <- list()
   prop_type2_pool <- 0.4
   island_replicates <- DAISIE:::DAISIE_sim_min_type2(
-    time = totaltime,
+    time = total_time,
     M = M,
     pars = pars,
     replicates = replicates,
@@ -244,7 +203,7 @@ test_that("silent with non-empty 2 type island full stt", {
   expect_silent(
     formatted_CS_sim <- DAISIE:::DAISIE_format_CS(
       island_replicates = island_replicates,
-      time = totaltime,
+      time = total_time,
       M = mainland_n,
       verbose = verbose
     )
@@ -273,7 +232,7 @@ test_that("use full stt", {
   set.seed(1)
   island_replicates <- list()
   out <- list()
-  out[[1]] <- DAISIE:::DAISIE_sim_core_constant_rate(
+  out[[1]] <- DAISIE:::DAISIE_sim_core_cr(
     time = time,
     pars = pars,
     mainland_n = mainland_n,
@@ -321,7 +280,7 @@ test_that("use full stt", {
 
   expect_equal(
     formatted_CS_sim[[1]][[2]]$branching_times,
-    c(5.0000000000000000, 1.3487418169725700, 0.0921013811906803)
+    c(5.0000000000000000, 2.22760715636035, 1.3487418169725700, 0.0921013811906803)
   )
 
   expect_equal(
@@ -330,23 +289,22 @@ test_that("use full stt", {
   )
 
   expect_equal(
-    formatted_CS_sim[[1]][[2]]$other_clades_same_ancestor[[1]]$brts_miss,
-    c(1.3487418169725700, 0.0921013811906803)
+    formatted_CS_sim[[1]][[2]]$all_colonisations[[1]]$event_times,
+    c(5.0, 2.22760716)
   )
 
   expect_equal(
-    formatted_CS_sim[[1]][[2]]$other_clades_same_ancestor[[1]]$species_type,
+    formatted_CS_sim[[1]][[2]]$all_colonisations[[1]]$species_type,
+    "A"
+  )
+  expect_equal(
+    formatted_CS_sim[[1]][[2]]$all_colonisations[[2]]$event_times,
+    c(5.0, 1.34874181697257, 0.0921013811906803)
+  )
+
+  expect_equal(
+    formatted_CS_sim[[1]][[2]]$all_colonisations[[2]]$species_type,
     "C"
-  )
-
-  expect_equal(
-    formatted_CS_sim[[1]][[2]]$other_clades_same_ancestor[[2]]$brts_miss,
-    0.37899779115803
-  )
-
-  expect_equal(
-    formatted_CS_sim[[1]][[2]]$other_clades_same_ancestor[[2]]$species_type,
-    "I"
   )
 
   expect_equal(
@@ -356,7 +314,7 @@ test_that("use full stt", {
 })
 
 test_that("use complete stt with ontogeny", {
-  totaltime <- 10
+  total_time <- 10
   mainland_n <- 1
   verbose <- FALSE
   sample_freq <- Inf
@@ -377,20 +335,20 @@ test_that("use complete stt with ontogeny", {
   nonoceanic_pars <- c(0, 0)
   island_ontogeny = DAISIE:::translate_island_ontogeny("beta")
   sea_level = DAISIE:::translate_sea_level("const")
-  peak <- DAISIE:::calc_peak(totaltime = totaltime,
+  peak <- DAISIE:::calc_peak(total_time = total_time,
                              area_pars = area_pars)
-  Amax <- DAISIE:::get_global_max_area(totaltime = totaltime,
+  Amax <- DAISIE:::get_global_max_area(total_time = total_time,
                                        area_pars = area_pars,
                                        peak = peak,
                                        island_ontogeny = island_ontogeny,
                                        sea_level = sea_level)
-  Amin <- DAISIE:::get_global_min_area(totaltime = totaltime,
+  Amin <- DAISIE:::get_global_min_area(total_time = total_time,
                                        area_pars = area_pars,
                                        peak = peak,
                                        island_ontogeny = island_ontogeny,
                                        sea_level = sea_level)
-  out[[1]] <- DAISIE:::DAISIE_sim_core_time_dependent(
-    time = totaltime,
+  out[[1]] <- DAISIE:::DAISIE_sim_core_time_dep(
+    time = total_time,
     pars = pars,
     mainland_n = mainland_n,
     island_ontogeny = island_ontogeny,
@@ -407,7 +365,7 @@ test_that("use complete stt with ontogeny", {
   expect_silent(
     formatted_CS_sim <- DAISIE:::DAISIE_format_CS(
       island_replicates = island_replicates,
-      time = totaltime,
+      time = total_time,
       M = mainland_n,
       sample_freq = sample_freq,
       verbose = verbose
@@ -436,8 +394,8 @@ test_that("use complete stt with ontogeny", {
   )
   expect_equal(
     formatted_CS_sim[[1]][[2]]$branching_times,
-    c(10.00000000000000, 6.27382233420251989, 2.14112644569665012,
-      1.41912369348019007, 1.13725415915635009, 0.54321135189076997,
+    c(10.00000000000000, 6.27382233420251989, 4.99629097366935,
+      2.14112644569665012, 1.13725415915635009, 0.54321135189076997,
       0.15055819094851100)
   )
 
@@ -472,7 +430,7 @@ test_that("full stt works with multiple replicates", {
   island_replicates <- list()
   island_replicates[[1]] <- island_replicates
   out <- list()
-  out[[1]] <- DAISIE:::DAISIE_sim_core_constant_rate(
+  out[[1]] <- DAISIE:::DAISIE_sim_core_cr(
     time = time,
     pars = pars,
     mainland_n = mainland_n,
@@ -480,7 +438,7 @@ test_that("full stt works with multiple replicates", {
     hyper_pars = hyper_pars,
     nonoceanic_pars = nonoceanic_pars
   )
-  out[[2]] <- DAISIE:::DAISIE_sim_core_constant_rate(
+  out[[2]] <- DAISIE:::DAISIE_sim_core_cr(
     time = time,
     pars = pars,
     mainland_n = mainland_n,
@@ -502,7 +460,7 @@ test_that("full stt works with multiple replicates", {
 
 test_that("full stt works with empty island", {
   pars <- c(0.4, 0.2, 10, 0.0000001, 0.5)
-  totaltime <- 1
+  total_time <- 1
   mainland_n <- 1
   verbose <- FALSE
   sample_freq <- Inf
@@ -525,8 +483,8 @@ test_that("full stt works with empty island", {
     out <- list()
     for (m_spec in 1:mainland_n) {
       out$branching_times <- c(10)
-        out <- DAISIE:::DAISIE_sim_core_constant_rate(
-          time = totaltime,
+        out <- DAISIE:::DAISIE_sim_core_cr(
+          time = total_time,
           mainland_n = 1,
           pars = pars,
           area_pars = area_pars,
@@ -540,7 +498,7 @@ test_that("full stt works with empty island", {
   expect_silent(
     formatted_CS_sim <- DAISIE:::DAISIE_format_CS(
       island_replicates = island_replicates,
-      time = totaltime,
+      time = total_time,
       M = mainland_n,
       sample_freq = sample_freq,
       verbose = verbose
@@ -565,7 +523,7 @@ test_that("full stt with two trait states", {
   set.seed(1)
   island_replicates <- list()
   out <- list()
-  out[[1]] <- DAISIE:::DAISIE_sim_core_trait_dependent(
+  out[[1]] <- DAISIE:::DAISIE_sim_core_trait_dep(
     time = time,
     pars = pars,
     mainland_n = mainland_n,
@@ -626,7 +584,7 @@ test_that("full stt with two trait states", {
 
   expect_equal(
     formatted_CS_sim[[1]][[2]]$branching_times,
-    c(5.00000000, 4.24481817, 0.01277218)
+    c(5, 4.24481817, 3.61806444, 1.25876988, 0.01277218)
   )
 
   expect_equal(
@@ -639,3 +597,4 @@ test_that("full stt with two trait states", {
     0
   )
 })
+

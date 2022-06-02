@@ -377,7 +377,7 @@ DAISIE_nonoceanic_spec <- function(prob_samp, prob_nonend, mainland_n) {
 #' Update internal Gillespie bookeeping objects
 #'
 #' @param stt_table A species=through-time table.
-#' @param totaltime Simulated amount of time.
+#' @param total_time Simulated amount of time.
 #' @param timeval Current time of simulation.
 #' @param mainland_spec A vector with the numeric IDs of the mainland species
 #' (i.e. potential colonizers).
@@ -388,14 +388,15 @@ DAISIE_nonoceanic_spec <- function(prob_samp, prob_nonend, mainland_n) {
 #'
 #' @noRd
 DAISIE_spec_tables <- function(stt_table,
-                               totaltime,
+                               total_time,
                                timeval,
                                nonoceanic_sample,
-                               island_spec) {
+                               island_spec,
+                               maxspecID) {
   init_nonend_spec <- nonoceanic_sample$init_nonend_spec
   init_end_spec <- nonoceanic_sample$init_end_spec
   mainland_spec <- nonoceanic_sample$mainland_spec
-  stt_table[1, ] <- c(totaltime,
+  stt_table[1, ] <- c(total_time,
                       init_nonend_spec,
                       init_end_spec,
                       0)
@@ -413,8 +414,9 @@ DAISIE_spec_tables <- function(stt_table,
   }
   if (init_end_spec != 0) {
     for (j in seq_along(1:init_end_spec)) {
+      maxspecID <- maxspecID + 1
       island_spec <- rbind(island_spec,
-                           c(nonoceanic_sample$init_end_spec_vec[j] + 1,
+                           c(maxspecID,
                              nonoceanic_sample$init_end_spec_vec[j],
                              timeval,
                              "A",
@@ -427,38 +429,27 @@ DAISIE_spec_tables <- function(stt_table,
               init_nonend_spec = init_nonend_spec,
               init_end_spec = init_end_spec,
               mainland_spec = mainland_spec,
-              island_spec = island_spec))
+              island_spec = island_spec,
+              maxspecID = maxspecID))
 }
 
-#' Creates the list object for CS_version argument in DAISIE_ML_CS
+#' Add a column to a data frame
 #'
-#' @param model the CS model to run, options are \code{1} for single rate
-#' DAISIE model, \code{2} for multi-rate DAISIE, or \code{0} for IW test
-#' model
-#' @param relaxed_par the parameter to relax (integrate over). Options are
-#' \code{"cladogenesis"}, \code{"extinction"}, \code{"carrying_capacity"},
-#' \code{"immigration"}, or \code{"anagenesis"}
-#' @return A list of two elements
-#' \itemize{
-#'   \item{model: the CS model to run, options are \code{1} for single rate
-#'   DAISIE model, \code{2} for multi-rate DAISIE, or \code{0} for IW test
-#'   model}
-#'   \item{relaxed_par: the parameter to relax (integrate over). Options are
-#' \code{"cladogenesis"}, \code{"extinction"}, \code{"carrying_capacity"},
-#' \code{"immigration"}, or \code{"anagenesis"}}
-#' }
-#' @export
-create_CS_version <- function(model = 1,
-                              relaxed_par = NULL) {
-
-  if (model != 1 && model != 2 && model != 3) {
-    stop("model must be either 1, 2 or 3")
+#' @param df data frame to add the column to
+#' @param position location in data frame where to insert the column.
+#' Position can also be a name of a column
+#' @param column_to_insert the elements of the column to insert. If
+#' the column has a name, this name will be copied into the data frame.
+#' Id is does not have a name, it will get the name "nc".
+#'
+#' @return A data frame with the column inserted
+add_column_to_dataframe <- function(df, position, column_to_insert) {
+  if(is.character(position)) {
+    position <- which(names(df) == position)
   }
-  if (model == 2 && is.null(relaxed_par)) {
-    stop("relaxed_par required for multi-rate model")
-  }
-  CS_version <- list(model = model,
-                     relaxed_par = relaxed_par)
-  return(CS_version)
+  df <- data.frame(df[1:position],
+                   nc = column_to_insert,
+                   df[(position + 1):ncol(df)])
+  names(df)[names(df) == 'nc'] <- names(column_to_insert)
+  return(df)
 }
-

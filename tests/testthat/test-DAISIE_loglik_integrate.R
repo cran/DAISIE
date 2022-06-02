@@ -1,5 +1,3 @@
-context("DAISIE_loglik_integrate")
-
 test_that("DAISIE_loglik_integrate produces correct ouput on single lineage", {
   pars1 <- c(2.000, 2.700, 20.000, 0.009, 1.010)
   pars2 <- c(1.0e+02, 1.1e+01, 0.0e+00, 0.0e+00, NA, 0.0e+00, 1.0e-04,
@@ -56,7 +54,7 @@ test_that("DAISIE_loglik_integrate produces correct ouput on radiation", {
     reltolint = reltolint,
     verbose = verbose
   )
-  testthat::expect_equal(loglik, -15.1289048939324)
+  testthat::expect_equal(loglik, -15.12736391328775)
 })
 
 test_that("DAISIE_loglik_integrand produces correct output", {
@@ -73,8 +71,20 @@ test_that("DAISIE_loglik_integrand produces correct output", {
     reltolint = 1e-10,
     verbose = FALSE,
     pick = 1,
-    mean = 2.550687345,
-    sd = 1)
+    par_mean = 2.550687345,
+    par_sd = 1)
   expect_equal(output, -2.13638048160996)
 })
 
+test_that("rho produces correct output", {
+  output <- rho(DAISIE_par = 0.5,
+                DAISIE_dist_pars = list(
+                  par_mean = 1,
+                  par_sd = 1))
+  expect_equal(output, -0.5)
+})
+
+test_that("transform_gamma_pars produces correct output", {
+  output <- transform_gamma_pars(par_mean = 1, par_sd = 1)
+  expect_equal(output, list(shape = 1, scale = 1))
+})

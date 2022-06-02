@@ -20,7 +20,8 @@ DAISIE_ML_IW(
   optimmethod = "subplex",
   verbose = 0,
   tolint = c(1e-16, 1e-14),
-  jitter = 0
+  jitter = 0,
+  num_cycles = 1
 )
 }
 \arguments{
@@ -87,7 +88,9 @@ rate\cr ddmodel = 21: exponential dependence in speciation rate and in
 immigration rate\cr}
 
 \item{cond}{cond = 0 : conditioning on island age \cr cond = 1 :
-conditioning on island age and non-extinction of the island biota \cr.}
+conditioning on island age and non-extinction of the island biota \cr.
+cond > 1 : conditioning on island age and having at least cond colonizations
+on the island. This last option is not yet available for the IW model \cr}
 
 \item{tol}{Sets the tolerances in the optimization. Consists of: \cr reltolx
 = relative tolerance of parameter values in optimization \cr reltolf =
@@ -96,12 +99,21 @@ tolerance of parameter values in optimization.}
 
 \item{maxiter}{Sets the maximum number of iterations in the optimization.}
 
-\item{methode}{Method of the ODE-solver. See package deSolve for details.
-Default is "lsodes".}
+\item{methode}{Method of the ODE-solver. Supported Boost \code{ODEINT}
+solvers (steppers) are:
+\code{"odeint::runge_kutta_cash_karp54"}
+\code{"odeint::runge_kutta_fehlberg78"}
+\code{"odeint::runge_kutta_dopri5"}
+\code{"odeint::bulirsch_stoer"}
+without \code{odeint::}-prefix, \code{\link{deSolve}{ode}} method is
+assumed. The default method overall is
+\code{"lsodes"} for \code{\link{DAISIE_ML_CS}()}
+and \code{"ode45"} from \code{\link[deSolve]{ode}()} for
+\code{\link{DAISIE_ML_IW}()}.}
 
 \item{optimmethod}{Method used in likelihood optimization. Default is
-"subplex" (see subplex package). Alternative is 'simplex' which was the
-method in previous versions.}
+`subplex` (see `\link[subplex]{subplex}()` for full details).
+Alternative is \code{"simplex"} which was the method in previous versions.}
 
 \item{verbose}{In simulation and dataprep functions a logical,
 \code{Default = TRUE} gives intermediate output should be printed.
@@ -115,8 +127,11 @@ tolerance of the integration.}
 
 \item{jitter}{Numeric for \code{\link[DDD]{optimizer}()}. Jitters the
 parameters being optimized by the specified amount which should be very
-small, e.g. 1e-5. Jitter when \code{link[subplex]{subplex}()} produces
+small, e.g. 1e-5. Jitter when \code{link{subplex}{subplex}()} produces
 incorrect output due to parameter transformation.}
+
+\item{num_cycles}{The number of cycles the optimizer will go through.
+Default is 1.}
 }
 \value{
 The output is a dataframe containing estimated parameters and
@@ -150,7 +165,7 @@ Galapagos islands. Ecology Letters 18: 844-852. <DOI:10.1111/ele.12461>.
 }
 \seealso{
 \code{\link{DAISIE_loglik_IW}}, \code{\link{DAISIE_ML_CS}}
-\code{\link{DAISIE_sim_constant_rate}}
+\code{\link{DAISIE_sim_cr}}
 }
 \author{
 Rampal S. Etienne

@@ -16,9 +16,9 @@ DAISIE_format_CS(
 }
 \arguments{
 \item{island_replicates}{List output from
-\code{\link{DAISIE_sim_core_constant_rate}()},
-\code{\link{DAISIE_sim_core_time_dependent}()},
-\code{\link{DAISIE_sim_core_constant_rate_shift}()} or
+\code{\link{DAISIE_sim_core_cr}()},
+\code{\link{DAISIE_sim_core_time_dep}()},
+\code{\link{DAISIE_sim_core_cr_shift}()} or
 \code{\link{DAISIE_sim_min_type2}()} functions. Minimally, this must be a
 list that has as many elements as replicates. Each element must be a list
 with the elements \code{island_age}, \code{not_present} and \code{stt_all}.
@@ -45,7 +45,7 @@ intermediate output of the parameters and loglikelihood, \code{verbose = 2}
 means also intermediate progress during loglikelihood computation is shown.}
 
 \item{trait_pars}{A named list containing diversification rates considering
-two trait states created by \code{\link{create_trait_pars}}:
+  two trait states created by \code{\link{create_trait_pars}}:
 \itemize{
   \item{[1]:A numeric with the per capita transition rate with state1}
   \item{[2]:A numeric with the per capita immigration rate with state2}

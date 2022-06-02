@@ -9,9 +9,9 @@ DAISIE_loglik_IW(
   pars1,
   pars2,
   datalist,
-  methode = "ode45",
-  abstolint = 1e-16,
-  reltolint = 1e-14,
+  methode = "lsodes",
+  abstolint = 1e-12,
+  reltolint = 1e-10,
   verbose = FALSE
 )
 }
@@ -73,8 +73,16 @@ the radiation.\cr
 number of island species that were not sampled for particular clade (only
 applicable for endemic clades) \cr}
 
-\item{methode}{Method of the ODE-solver. See package deSolve for details.
-Default is "ode45"}
+\item{methode}{Method of the ODE-solver. Supported Boost \code{ODEINT}
+solvers (steppers) are:
+\code{'odeint::runge_kutta_cash_karp54'}
+\code{'odeint::runge_kutta_fehlberg78'} [default]
+\code{'odeint::runge_kutta_dopri5'}
+\code{'odeint::bulirsch_stoer'}
+\code{'odeint::adams_bashforth_[1|2|3|4|5|6|7|8]}
+\code{'odeint::adams_bashforth_moulton_[1|2|3|4|5|6|7|8]}
+without \code{odeint::}-prefix, \code{\link[deSolve]{ode}} method is
+assumed.}
 
 \item{abstolint}{Absolute tolerance of the integration}
 
@@ -100,7 +108,7 @@ Galapagos islands. Ecology Letters 18: 844-852.
 }
 \seealso{
 \code{\link{DAISIE_ML_IW}}, \code{\link{DAISIE_loglik_CS}},
-\code{\link{DAISIE_sim_constant_rate}}
+\code{\link{DAISIE_sim_cr}}
 }
 \author{
 Rampal S. Etienne & Bart Haegeman
