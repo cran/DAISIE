@@ -1,5 +1,6 @@
 test_that("DAISIE_loglik_CS_choice produces correct output for CS_version 1", {
   skip_if(Sys.getenv("CI") == "", message = "Run only on CI")
+  skip_on_cran()
   pars1 <- c(2.000, 2.700, 20.000, 0.009, 1.010)
   pars2 <- c(1.0e+02, 1.1e+01, 0.0e+00, 0.0e+00, NA, 0.0e+00, 1.0e-04,
              1.0e-05, 1.0e-07, 3.0e+03, 9.5e-01, 9.8e-01)
@@ -21,6 +22,7 @@ test_that("DAISIE_loglik_CS_choice produces correct output for CS_version 1", {
 test_that("DAISIE_loglik_CS_choice produces correct output for relaxed-rate
           model (CS_version = 2)", {
   skip_if(Sys.getenv("CI") == "", message = "Run only on CI")
+  skip_on_cran()
   pars1 <- c(2.000, 2.700, 20.000, 0.009, 1.010)
   pars2 <- c(1.0e+02, 1.1e+01, 0.0e+00, 0.0e+00, NA, 0.0e+00, 1.0e-04,
              1.0e-05, 1.0e-07, 3.0e+03, 9.5e-01, 9.8e-01)
@@ -30,7 +32,8 @@ test_that("DAISIE_loglik_CS_choice produces correct output for relaxed-rate
   missnumspec <- 0
   CS_version <- list(model = 2,
                      relaxed_par = "cladogenesis",
-                     sd = 1)
+                     par_sd = 1,
+                     par_upper_bound = Inf)
 
   invisible(capture.output(loglik <- DAISIE_loglik_CS_choice(pars1 = pars1,
                                                              pars2 = pars2,
@@ -45,7 +48,7 @@ test_that("DAISIE_loglik_CS_choice produces correct output for relaxed-rate
 
 test_that("DAISIE_loglik_CS_choice produces same output for CS_version = 0
           (with M = 1) and CS_version = 1 ", {
-
+  skip_on_cran()
   skip_if(Sys.getenv("CI") == "", message = "Run only on CI")
   pars1 <- c(2.000, 2.700, 20.000, 0.009, 1.010)
   pars2 <- c(100, 11, 0, 0, NA, 0.0e+00, 1.0e-04,
@@ -76,6 +79,7 @@ test_that("DAISIE_loglik_CS_choice produces same output for CS_version = 0
 
 test_that("DAISIE_loglik_all produces correct output for relaxed-rate model", {
   skip_if(Sys.getenv("CI") == "", message = "Run only on CI")
+  skip_on_cran()
   utils::data(Galapagos_datalist)
   invisible(capture.output(suppressWarnings(
     loglik <- DAISIE::DAISIE_loglik_all(
@@ -85,7 +89,8 @@ test_that("DAISIE_loglik_all produces correct output for relaxed-rate model", {
       methode = "lsodes",
       CS_version = list(model = 2,
                         relaxed_par = "cladogenesis",
-                        sd = 1),
+                        par_sd = 1,
+                        par_upper_bound = Inf),
       abstolint = 1e-16,
       reltolint = 1e-10
     )
@@ -96,6 +101,7 @@ test_that("DAISIE_loglik_all produces correct output for relaxed-rate model", {
 
 test_that("DAISIE_loglik produces correct output", {
   skip_if(Sys.getenv("CI") == "", message = "Run only on CI")
+  skip_on_cran()
   output <- DAISIE_loglik(pars1 = c(2.061154e-09, 2.683455e+00, 1.000000e+01,
                                     9.332070e-03, 1.010073e+00),
                           pars2 = c(100, 0, 0, 0, NA),
@@ -113,7 +119,7 @@ test_that("DAISIE_loglik produces correct output", {
 test_that("DAISIE_loglik_all produces same output for CS_version 0 and 1 with
           and without conditioning", {
   skip_if(Sys.getenv("CI") == "", message = "Run only on CI")
-
+  skip_on_cran()
   utils::data(Galapagos_datalist)
   Galapagos_datalist2 <- Galapagos_datalist
   for(i in 2:9) {
@@ -160,6 +166,7 @@ test_that("DAISIE_loglik_all produces same output for CS_version 0 and 1 with
 test_that("DAISIE_loglik_CS_choice produces equivalent output for ODEINT RKCK54
           and deSolve lsodes", {
   skip_if(Sys.getenv("CI") == "", message = "Run only on CI")
+  skip_on_cran()
   pars1 <- c(2.000, 2.700, 20.000, 0.009, 1.010)
   pars2 <- c(1.0e+02, 1.1e+01, 0.0e+00, 0.0e+00, NA, 0.0e+00, 1.0e-04,
              1.0e-05, 1.0e-07, 3.0e+03, 9.5e-01, 9.8e-01)

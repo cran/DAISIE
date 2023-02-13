@@ -63,6 +63,7 @@ test_that("clade specific rate-shift loglik works", {
 test_that("IW and CS loglik is same when K = Inf", {
   skip_if(Sys.getenv("CI") == "" && !(Sys.getenv("USERNAME") == "rampa"),
           message = "Run only on CI")
+  skip_on_cran()
   data(Galapagos_datalist, package = "DAISIE")
   pars1 <- c(0.35, 0.3, Inf, 0.001, 0.3)
   pars2 <- c(80, 11, 1, 0)
@@ -103,6 +104,7 @@ test_that("IW and CS loglik is same when K = Inf", {
 test_that("DAISIE_ML simple case works", {
   skip_if(Sys.getenv("CI") == "" && !(Sys.getenv("USERNAME") == "rampa"),
           message = "Run only on CI")
+  skip_on_cran()
   expected_mle <- data.frame(
     lambda_c = 2.583731356303842,
     mu = 2.708828027514834,
@@ -131,6 +133,7 @@ test_that("DAISIE_ML simple case works", {
 test_that("DAISIE_ML simple case works with zero probability of initial presence", {
   skip_if(Sys.getenv("CI") == "" && !(Sys.getenv("USERNAME") == "rampa"),
           message = "Run only on CI")
+  skip_on_cran()
   expected_mle <- data.frame(
     lambda_c = 2.583731356303842,
     mu = 2.708828027514834,
@@ -190,43 +193,19 @@ test_that("DAISIE_ML simple case works with estimating probability of initial
           presence", {
   skip_if(Sys.getenv("CI") == "" && !(Sys.getenv("USERNAME") == "rampa"),
           message = "Run only on CI")
-  if (identical(Sys.getenv("OS"), "Windows_NT")) {
-    expected_mle <- data.frame(
-      lambda_c = 2.53430497145461,
-      mu = 2.66658569091753,
-      K = 2136343.97554965,
-      gamma = 0.00930345848936764,
-      lambda_a = 1.0119011474385,
-      prob_init_pres = 3.21939792431987e-10,
-      loglik = -75.9925548510873,
-      df = 6L,
-      conv = 0L
-    )
-  } else if (identical(Sys.info()["sysname"], c(sysname = "Darwin"))) {
-    expected_mle <- data.frame(
-      lambda_c = 2.5330538395353,
-      mu = 2.66544727106831,
-      K = 8477857.16185865,
-      gamma = 0.00929919368081989,
-      lambda_a = 1.01226940726093,
-      prob_init_pres = 2.08612789348566e-08,
-      loglik = -75.9925781743204,
-      df = 6L,
-      conv = 0L
-    )
-  } else {
-    expected_mle <- data.frame(
-      lambda_c = 2.53432108511347,
-      mu = 2.66677757261811,
-      K = 2155153.9420102,
-      gamma = 0.00930305175196706,
-      lambda_a = 1.01184784588089,
-      prob_init_pres = 2.33936540081158e-10,
-      loglik = -75.9925542005831,
-      df = 6L,
-      conv = 0L
-    )
-  }
+  skip_on_cran()
+
+  expected_mle <- data.frame(
+    lambda_c = 2.54079308283855,
+    mu = 2.66563367593515,
+    K = 6249.71023359369,
+    gamma = 0.00919247416324124,
+    lambda_a = 1.01076206116211,
+    prob_init_pres = 9.45796543536632e-06,
+    loglik = -75.9935681347126,
+    df = 6L,
+    conv = 0L
+  )
 
   utils::data(Galapagos_datalist)
   invisible(capture.output(
