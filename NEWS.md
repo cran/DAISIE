@@ -1,3 +1,63 @@
+# DAISIE 4.4.0
+
+* No longer include patched version of `boost/numeric/odeint/stepper/bulirsch_stoer.hpp`,
+address the issue by passing previously uninitialised variable as `boost::units::quantity<boost::units::si::dimensionless, double>`.
+* Document return type of exported Rcpp functions.
+* Move all internal non-error printing to console `message()` and `warning()`. 
+Add internal functions to address this. `verbose` variable is now numeric, 
+varying from 0 to 3. Increasing values increase amount of messages to be 
+printed. Change default of printing some output to golden rule of silence 
+`verbose == 0`. To print again, set `verbose >= 1`.
+* Remove calls to `options(warn = -1)` that suppress warnings in non standard 
+way. Use `suppressWarnings()` where appropriate.
+* Safely restore graphics settings after plot.
+* Fix references in `DESCRIPTION`.
+* Remove internal (unnecessary) calls to internal functions via `:::`.
+* No longer use roxygen2 tag `internal` to document without index but use
+`noRd` instead. `are_area_pars()` is now internal.
+* Replace `\dontrun` examples in documentation with `\donttest`. Speed up 
+examples.
+* License package C++ source files as BSL-1.0 (c) Hanno Hildenbrandt, FORTRAN 
+files as BSL-1.0 (c) Rampal S. Etienne.
+* Add `LICENSE.note`, `inst/COPYRIGHTS` to clarify license and copyrights. Pipe
+such files in `DESCRIPTION`.
+
+# DAISIE 4.3.4
+
+* Require C++17 via `CXX_STD` flag on Makevars[.win].
+* Add SystemRequirements: C++17 to DESCRIPTION as for that standard 
+"Writing R Extensions" requires it be explicitly stated.
+* Depends on R (>= 4.2.0) due to C++17 requirement on Windows due to Rtools 4.0,
+which is used for R 4.0-4.1. Toolchain for Rtools 4.0 is gcc 8.3 but "GCC 9.1 
+was the first release with non-experimental C++17 support". as per 
+https://gcc.gnu.org/.
+
+# DAISIE 4.3.3
+
+* Address problem detected by valgrind: unitialized member variable 
+bulirsch_stoer<>::m_dt_last.
+  * Patched version of `boost/numeric/odeint/stepper/bulirsch_stoer.hpp`. This
+  is done by including the patched header file `src/patched_bulrisch_stoer.h` 
+  before `boost/numeric/odeint` to shadow 
+  `boost/numeric/odeint/stepper/bulrisch_stoer.hpp`
+  The issue is *not* fixed in BOOST_VERSION == 1.81.0.
+  Must check for fixes in upcomming boost (BH) releases.
+* Fix tab spacing in `src/DAISIE_loglik_rhs_FORTRAN.f95`.
+* Re-implement clang16 `-D_HAS_AUTO_PTR_ETC` flag fix via Makevars[.win] to 
+comply with CRAN requests and to force C++ standard C++14 without using 
+SystemRequirements line in DESCRIPTION, at CRAN's request.
+* Skip plotting tests that cause problems in headless systems. These should
+be run manually.
+* Skip tests of as-of-now experimental steppers from ODEINT rosenbrock4 and 
+adams bashfort moulton 1 because they are too slow.
+
+# DAISIE 4.3.2
+
+* Apply CRAN suggested fixes to clang16 issues with deprecated C++ functions included the Boost library, which are used in some of the stepper functions.
+  * Add config.h in a macro, checking for, and setting, `_HAS_AUTO_PTR_ETC` and `BOOST_NO_AUTO_PTR`.
+  * Change SystemRequirements in DESCRIPTION from C++17 to C++14.
+This same fix was applied in package `'DDD'` version 5.2.1.
+
 # DAISIE 4.3.1
 
 * Fix issue that prevented 'covr' from running correctly.

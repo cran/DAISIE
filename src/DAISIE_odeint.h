@@ -1,20 +1,45 @@
-#pragma once
+//
+//  Copyright (c) 2023, Hanno Hildenbrandt
+//
+//  Distributed under the Boost Software License, Version 1.0. (See
+//  accompanying file LICENSE_1_0.txt or copy at
+//  http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #ifndef DAISIE_ODEINT_H_INCLUDED
 #define DAISIE_ODEINT_H_INCLUDED
 
-
-#include "ublas_types.h"
+#include "config.h"
+#include "DAISIE_types.h"
 #include <boost/numeric/odeint.hpp>
 #include <algorithm>
 #include <stdexcept>
+#include <memory>
+
+
+#ifdef USE_BULRISCH_STOER_PATCH
+
+#include <boost/units/quantity.hpp>
+#include <boost/units/systems/si/dimensionless.hpp>
+
+using bstime_t = boost::units::quantity<boost::units::si::dimensionless, double>;
+
+#else // USE_BULRISCH_STOER_PATCH
+
+// The default. Causes unitialized member m_last_dt in
+// boost::odeint::bulrisch_stoer<>, declared in
+// boost/numreic/odeint/stepper/bulrisch_stoer.hpp
+using bstime_t = double;
+
+#endif // USE_BULRISCH_STOER_PATCH
 
 
 using namespace Rcpp;
 using namespace boost::numeric::odeint;
 
-
 // type of the ode state
 using state_type = vector_t<double>;
+
 
 
 // zero-value padded view into vector
@@ -41,10 +66,9 @@ private:
 
 namespace daisie_odeint {
 
+  extern double abm_factor;   // defined in DAISIE_CS.cpp
 
-  extern double abm_factor;
 
-  
   template <typename Stepper, typename Rhs>
   inline void do_integrate(double atol, double rtol, Rhs rhs, state_type& y, double t0, double t1)
   {
@@ -72,7 +96,7 @@ namespace daisie_odeint {
 
   namespace jacobian_policy {
 
-    // Evaluator of the Jacobian for linear, time independent systems 
+    // Evaluator of the Jacobian for linear, time independent systems
     // dxdt = Ax => Jacobian = t(A)
     template <typename RHS>
     struct const_from_linear_rhs
@@ -85,6 +109,7 @@ namespace daisie_odeint {
       {
         if (!J_) {
           // once-only, generic evaluation
+
           J_ = std::make_unique<matrix_t<double>>(J.size1(), J.size2());
           auto single = vector_t<double>(x.size(), 0);
           auto dxdt = vector_t<double>(x.size());
@@ -102,7 +127,7 @@ namespace daisie_odeint {
 
       RHS& rhs_;
       std::unique_ptr<matrix_t<double>> J_;
-    };
+  };
 
   }
 
@@ -130,8 +155,8 @@ namespace daisie_odeint {
     }
     else if ("odeint::bulirsch_stoer" == stepper) {
       // outlier in calling convention
-      using stepper_t = bulirsch_stoer<state_type>;
-      integrate_adaptive(stepper_t(atol, rtol), rhs, y, t0, t1, 0.1 * (t1 - t0));
+      using stepper_t = bulirsch_stoer<state_type, double, state_type, bstime_t>;
+      integrate_adaptive(stepper_t(atol, rtol), rhs, y, bstime_t{t0}, bstime_t{t1}, bstime_t{0.1 * (t1 - t0)});
     }
     else if (0 == stepper.compare(0, stepper.size() - 2, "odeint::adams_bashforth")) {
       const char steps = stepper.back();
