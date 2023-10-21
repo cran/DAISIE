@@ -27,10 +27,15 @@ DAISIE_loglik_integrate <- function(
                   "immigration",
                   "anagenesis") == CS_version$relaxed_par)
   par_mean <- pars1[pick]
+
+  if (is.infinite(par_mean) || is.infinite(par_sd)) {
+    stop("The relaxed parameter mean or standard deviation is infinite")
+  }
+
   integrated_loglik <- integral_peak(
     logfun = Vectorize(DAISIE_loglik_integrand,
                        vectorize.args = "DAISIE_par"),
-    xx = sort(c(seq(-20, 20, 2),
+    xx = sort(c(seq(-20, min(20,log(par_upper_bound)), 2),
                 seq(log(par_mean) - 1, log(par_mean) + 1),
                 log((par_mean + 10 * par_sd) / par_mean))),
     pars1 = pars1,
@@ -140,11 +145,11 @@ cum_rho <- function(par_upper_bound, DAISIE_dist_pars) {
 #' @description computes the logarithm of the integral of exp(logfun) from 0
 #' to Inf under the following assumptions:
 #' \itemize{
-#'  \item{"exp(logfun)"}{has a single, sharply peaked maximum}
-#'  \item{"exp(logfun)"}{is increasing to the left of the peak and
+#'  \item{"exp(logfun)" has a single, sharply peaked maximum}
+#'  \item{"exp(logfun)" is increasing to the left of the peak and
 #'  decreasing to the right of the peak}
-#'  \item{"exp(logfun)"}{can be zero or positive at zero}
-#'  \item{"exp(logfun)"}{tends to zero at infinity}
+#'  \item{"exp(logfun)" can be zero or positive at zero}
+#'  \item{"exp(logfun)" tends to zero at infinity}
 #' }
 #' @param logfun the logarithm of the function to integrate
 #' @param xx the initial set of points on which to evaluate the function
@@ -152,10 +157,10 @@ cum_rho <- function(par_upper_bound, DAISIE_dist_pars) {
 #' sets the width of the interval to find the maximum in
 #' @param ymaxthreshold sets the deviation allowed in finding the maximum
 #' among the xx
-#' @param ... any arguments of the function to optimize
 #' @return the result of the integration
 #' @references Haegeman, B. & R.S. Etienne (2017). A general sampling formula
-#' for community structure data. Methods in Ecology & Evolution. In press.
+#' for community structure data. Methods in Ecology & Evolution 8: 1506-1519.
+#' https://doi.org/10.1111/2041-210X.12807
 #' @keywords internal
 integral_peak <- function(logfun,
                           xx = seq(-20, 20, 2),
@@ -189,7 +194,6 @@ integral_peak <- function(logfun,
                par_mean,
                par_sd))
   }
-
   # determine integrand peak
   yy <- xx + logfun(exp(xx),
                     pars1,
@@ -262,7 +266,7 @@ integral_peak <- function(logfun,
   }
   Q1 <- stats::integrate(f = fun,
                          lower = lower,
-                         upper = exp(xmax),
+                         upper = min(par_upper_bound,exp(xmax)),
                          subdivisions = 1000,
                          rel.tol = 1e-10,
                          abs.tol = 1e-10)$value

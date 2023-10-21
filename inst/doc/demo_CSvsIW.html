@@ -343,7 +343,7 @@ island-wide diversity-dependence models in DAISIE</h1>
 
 
 <p>Load required package <a href="https://github.com/rsetienne/DAISIE">DAISIE</a></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DAISIE)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(DAISIE)</span></code></pre></div>
 <div id="load-prepare-and-visualize-data" class="section level3">
 <h3>1. Load, prepare and visualize data</h3>
 <ul>
@@ -358,7 +358,7 @@ extracted from the dated molecular phylogeny of Dugo-Cota et al 2019
 (<em>Ecology Letters</em> 22:884–893). The dataset includes 65 extant
 species, which are the result of five independent colonisation events of
 the island of Hispaniola.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(frogs_datatable, <span class="at">package =</span> <span class="st">&quot;DAISIE&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">data</span>(frogs_datatable, <span class="at">package =</span> <span class="st">&quot;DAISIE&quot;</span>)</span></code></pre></div>
 <p>You can load your own data in a table/tibble format, making sure the
 table headers match the ones in the example.</p>
 <table>
@@ -451,17 +451,17 @@ number of missing species to the column
 <p>In this case we are assuming an island age of 30 million years for
 Hispaniola and a mainland pool size of 300 species (this is the number
 of species that may colonize the island).</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>frogs_datalist <span class="ot">&lt;-</span> <span class="fu">DAISIE_dataprep</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">datatable =</span> frogs_datatable,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">island_age =</span> <span class="dv">30</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">M =</span> <span class="dv">300</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>frogs_datalist <span class="ot">&lt;-</span> <span class="fu">DAISIE_dataprep</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>        <span class="at">datatable =</span> frogs_datatable,</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>        <span class="at">island_age =</span> <span class="dv">30</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>        <span class="at">M =</span> <span class="dv">300</span>)</span></code></pre></div>
 <p><br />
 </p>
 </div>
 <div id="view-daisie-datalist" class="section level3">
 <h3>1.2. View DAISIE datalist</h3>
 <p>Just type:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>frogs_datalist</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>frogs_datalist</span></code></pre></div>
 <p>The DAISIE datalist includes the data from the table
 <code>frogs</code> in the format of a DAISIE object that can be read in
 the subsequent maximum likelihood functions (e.g <code>DAISIE_ML</code>,
@@ -472,7 +472,7 @@ their colonization and branching times.</p>
 </div>
 <div id="visualise-the-data" class="section level3">
 <h3>1.3. Visualise the data</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DAISIE_plot_island</span>(frogs_datalist)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">DAISIE_plot_island</span>(frogs_datalist)</span></code></pre></div>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
 <p>This plot shows the different colonization events, their times of
 colonization and branching times (horizontal ticks). Dashed line shows
@@ -487,14 +487,14 @@ missing.</p>
  </p>
 <div id="plot-age-versus-diversity" class="section level4">
 <h4>Plot age versus diversity</h4>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DAISIE_plot_age_diversity(frogs_datalist)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># DAISIE_plot_age_diversity(frogs_datalist)</span></span></code></pre></div>
 </div>
 </div>
 <div id="fit-daisie-models" class="section level3">
 <h3>2. Fit DAISIE models</h3>
 <p>If you skipped step 1, first load the Hispaniola
 <em>Eleutherodactylus</em> datalist.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(frogs_datalist)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">data</span>(frogs_datalist)</span></code></pre></div>
 <p>_</p>
 <p>We will fit five different DAISIE models to the phylogenetic data
 contained in <code>frogs_datalist</code>:</p>
@@ -567,14 +567,14 @@ models can be run on a regular computer or laptop. </strong></p>
 5 - anagenesis<br />
 K’ is fixed to <code>Inf</code><br />
 Set <code>ddmodel=0</code></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DAISIE_ML</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">datalist =</span> frogs_datalist,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">initparsopt =</span> <span class="fu">c</span>(<span class="fl">0.18</span>,<span class="fl">0.03</span>,<span class="fl">0.0006</span>,<span class="dv">2</span>),</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">idparsopt =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ddmodel =</span> <span class="dv">0</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">parsfix =</span> <span class="cn">Inf</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">idparsfix =</span> <span class="dv">3</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">DAISIE_ML</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="at">datalist =</span> frogs_datalist,</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="at">initparsopt =</span> <span class="fu">c</span>(<span class="fl">0.18</span>,<span class="fl">0.03</span>,<span class="fl">0.0006</span>,<span class="dv">2</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="at">idparsopt =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  <span class="at">ddmodel =</span> <span class="dv">0</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  <span class="at">parsfix =</span> <span class="cn">Inf</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>  <span class="at">idparsfix =</span> <span class="dv">3</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>#&gt;    lambda_c         mu   K        gamma lambda_a    loglik df conv
 #&gt; 1 0.1789218 0.02509053 Inf 0.0006259365  1568.88 -209.8634  4    0</code></pre>
 <p> </p>
@@ -588,14 +588,14 @@ Set <code>ddmodel=0</code></p>
 4 - colonisation<br />
 5 - anagenesis<br />
 Set <code>ddmodel=11</code></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DAISIE_ML</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">datalist =</span> frogs_datalist,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">initparsopt =</span> <span class="fu">c</span>(<span class="fl">0.44</span>,<span class="fl">0.11</span>,<span class="fl">36.44</span>,<span class="fl">0.0007</span>,<span class="dv">2</span>),</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">idparsopt =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ddmodel =</span> <span class="dv">11</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">parsfix =</span> <span class="cn">NULL</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">idparsfix =</span> <span class="cn">NULL</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">DAISIE_ML</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  <span class="at">datalist =</span> frogs_datalist,</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  <span class="at">initparsopt =</span> <span class="fu">c</span>(<span class="fl">0.44</span>,<span class="fl">0.11</span>,<span class="fl">36.44</span>,<span class="fl">0.0007</span>,<span class="dv">2</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  <span class="at">idparsopt =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  <span class="at">ddmodel =</span> <span class="dv">11</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  <span class="at">parsfix =</span> <span class="cn">NULL</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>  <span class="at">idparsfix =</span> <span class="cn">NULL</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>Output not shown here.  </p>
 </div>
 <div id="fit-cs_no_ana-model" class="section level3">
@@ -606,14 +606,14 @@ Set <code>ddmodel=11</code></p>
 3 - K’<br />
 4 - colonisation<br />
 Set <code>ddmodel=11</code></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DAISIE_ML</span>(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">datalist =</span> frogs_datalist,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">initparsopt =</span> <span class="fu">c</span>(<span class="fl">0.44</span>,<span class="fl">0.11</span>,<span class="fl">36.44</span>,<span class="fl">0.0007</span>),</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">idparsopt =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ddmodel =</span> <span class="dv">11</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">parsfix =</span> <span class="dv">0</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">idparsfix =</span> <span class="dv">5</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">DAISIE_ML</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>  <span class="at">datalist =</span> frogs_datalist,</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  <span class="at">initparsopt =</span> <span class="fu">c</span>(<span class="fl">0.44</span>,<span class="fl">0.11</span>,<span class="fl">36.44</span>,<span class="fl">0.0007</span>),</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>  <span class="at">idparsopt =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>  <span class="at">ddmodel =</span> <span class="dv">11</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>  <span class="at">parsfix =</span> <span class="dv">0</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>  <span class="at">idparsfix =</span> <span class="dv">5</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>Output not shown here.</p>
 <p> </p>
 </div>
@@ -626,14 +626,14 @@ Set <code>ddmodel=11</code></p>
 4 - colonisation<br />
 5 - anagenesis<br />
 Set <code>ddmodel=11</code></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DAISIE_ML_IW</span>(</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">datalist =</span> frogs_datalist,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">initparsopt =</span> <span class="fu">c</span>(<span class="fl">0.41</span>, <span class="fl">0.17</span>, <span class="fl">131.7</span>, <span class="fl">0.0012</span>, <span class="dv">2</span>),</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">idparsopt =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ddmodel =</span> <span class="dv">11</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">parsfix =</span> <span class="cn">NULL</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">idparsfix =</span> <span class="cn">NULL</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">DAISIE_ML_IW</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="at">datalist =</span> frogs_datalist,</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  <span class="at">initparsopt =</span> <span class="fu">c</span>(<span class="fl">0.41</span>, <span class="fl">0.17</span>, <span class="fl">131.7</span>, <span class="fl">0.0012</span>, <span class="dv">2</span>),</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>  <span class="at">idparsopt =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>  <span class="at">ddmodel =</span> <span class="dv">11</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>  <span class="at">parsfix =</span> <span class="cn">NULL</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>  <span class="at">idparsfix =</span> <span class="cn">NULL</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>Output not shown here (recommended to be run on a cluster).</p>
 <p> </p>
 </div>
@@ -645,14 +645,14 @@ Set <code>ddmodel=11</code></p>
 3 - K’<br />
 4 - colonisation<br />
 Set <code>ddmodel=11</code></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DAISIE_ML_IW</span>(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">datalist =</span> frogs_datalist,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">initparsopt =</span> <span class="fu">c</span>(<span class="fl">0.40</span>, <span class="fl">0.17</span>, <span class="fl">131.83</span>, <span class="fl">0.0012</span>),</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">idparsopt =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ddmodel =</span> <span class="dv">11</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">parsfix =</span> <span class="dv">0</span>,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">idparsfix =</span> <span class="dv">5</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">DAISIE_ML_IW</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>  <span class="at">datalist =</span> frogs_datalist,</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  <span class="at">initparsopt =</span> <span class="fu">c</span>(<span class="fl">0.40</span>, <span class="fl">0.17</span>, <span class="fl">131.83</span>, <span class="fl">0.0012</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  <span class="at">idparsopt =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  <span class="at">ddmodel =</span> <span class="dv">11</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  <span class="at">parsfix =</span> <span class="dv">0</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>  <span class="at">idparsfix =</span> <span class="dv">5</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>Output not shown here (recommended to be run on a cluster).  </p>
 </div>
 <div id="simulate-islands-under-given-daisie-models" class="section level3">
@@ -685,429 +685,429 @@ diversity-dependence; or <code>IW</code> for island-wide
 diversity-dependence</li>
 </ul>
 <p>Simulate a CS model for 30 million years, 100 replicates:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>frog_sims_CS <span class="ot">&lt;-</span> <span class="fu">DAISIE_sim_cr</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">time=</span><span class="dv">30</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">M=</span><span class="dv">300</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pars=</span><span class="fu">c</span>(<span class="fl">0.44</span>,<span class="fl">0.11</span>,<span class="fl">36.44</span>,<span class="fl">0.0007</span>,<span class="dv">0</span>),</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">divdepmodel =</span> <span class="st">&quot;CS&quot;</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">replicates=</span> <span class="dv">100</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot_sims =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 1</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 2</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 3</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 4</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 5</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 6</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 7</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 8</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 9</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 10</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 11</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 12</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 13</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 14</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 15</span></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 16</span></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 17</span></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 18</span></span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 19</span></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 20</span></span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 21</span></span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 22</span></span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 23</span></span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 24</span></span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 25</span></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 26</span></span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 27</span></span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 28</span></span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 29</span></span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 30</span></span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 31</span></span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 32</span></span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 33</span></span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 34</span></span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 35</span></span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 36</span></span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 37</span></span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 38</span></span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 39</span></span>
-<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 40</span></span>
-<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 41</span></span>
-<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 42</span></span>
-<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 43</span></span>
-<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 44</span></span>
-<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 45</span></span>
-<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 46</span></span>
-<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 47</span></span>
-<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 48</span></span>
-<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 49</span></span>
-<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 50</span></span>
-<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 51</span></span>
-<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 52</span></span>
-<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 53</span></span>
-<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 54</span></span>
-<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 55</span></span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 56</span></span>
-<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 57</span></span>
-<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 58</span></span>
-<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 59</span></span>
-<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 60</span></span>
-<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 61</span></span>
-<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 62</span></span>
-<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 63</span></span>
-<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 64</span></span>
-<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 65</span></span>
-<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 66</span></span>
-<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 67</span></span>
-<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 68</span></span>
-<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 69</span></span>
-<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 70</span></span>
-<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 71</span></span>
-<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 72</span></span>
-<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 73</span></span>
-<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 74</span></span>
-<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 75</span></span>
-<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 76</span></span>
-<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 77</span></span>
-<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 78</span></span>
-<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 79</span></span>
-<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 80</span></span>
-<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 81</span></span>
-<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 82</span></span>
-<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 83</span></span>
-<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 84</span></span>
-<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 85</span></span>
-<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 86</span></span>
-<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 87</span></span>
-<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 88</span></span>
-<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 89</span></span>
-<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 90</span></span>
-<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 91</span></span>
-<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 92</span></span>
-<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 93</span></span>
-<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 94</span></span>
-<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 95</span></span>
-<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 96</span></span>
-<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 97</span></span>
-<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 98</span></span>
-<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 99</span></span>
-<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 100</span></span>
-<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 1/100</span></span>
-<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 2/100</span></span>
-<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 3/100</span></span>
-<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 4/100</span></span>
-<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 5/100</span></span>
-<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 6/100</span></span>
-<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 7/100</span></span>
-<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 8/100</span></span>
-<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 9/100</span></span>
-<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 10/100</span></span>
-<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 11/100</span></span>
-<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 12/100</span></span>
-<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 13/100</span></span>
-<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 14/100</span></span>
-<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 15/100</span></span>
-<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 16/100</span></span>
-<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 17/100</span></span>
-<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 18/100</span></span>
-<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 19/100</span></span>
-<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 20/100</span></span>
-<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 21/100</span></span>
-<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 22/100</span></span>
-<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 23/100</span></span>
-<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 24/100</span></span>
-<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 25/100</span></span>
-<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 26/100</span></span>
-<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 27/100</span></span>
-<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 28/100</span></span>
-<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 29/100</span></span>
-<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 30/100</span></span>
-<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 31/100</span></span>
-<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 32/100</span></span>
-<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 33/100</span></span>
-<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 34/100</span></span>
-<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 35/100</span></span>
-<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 36/100</span></span>
-<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 37/100</span></span>
-<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 38/100</span></span>
-<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 39/100</span></span>
-<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 40/100</span></span>
-<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 41/100</span></span>
-<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 42/100</span></span>
-<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 43/100</span></span>
-<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 44/100</span></span>
-<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 45/100</span></span>
-<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 46/100</span></span>
-<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 47/100</span></span>
-<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 48/100</span></span>
-<span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 49/100</span></span>
-<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 50/100</span></span>
-<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 51/100</span></span>
-<span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 52/100</span></span>
-<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 53/100</span></span>
-<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 54/100</span></span>
-<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 55/100</span></span>
-<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 56/100</span></span>
-<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 57/100</span></span>
-<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 58/100</span></span>
-<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 59/100</span></span>
-<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 60/100</span></span>
-<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 61/100</span></span>
-<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 62/100</span></span>
-<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 63/100</span></span>
-<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 64/100</span></span>
-<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 65/100</span></span>
-<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 66/100</span></span>
-<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 67/100</span></span>
-<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 68/100</span></span>
-<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 69/100</span></span>
-<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 70/100</span></span>
-<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 71/100</span></span>
-<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 72/100</span></span>
-<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 73/100</span></span>
-<span id="cb14-182"><a href="#cb14-182" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 74/100</span></span>
-<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 75/100</span></span>
-<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 76/100</span></span>
-<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 77/100</span></span>
-<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 78/100</span></span>
-<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 79/100</span></span>
-<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 80/100</span></span>
-<span id="cb14-189"><a href="#cb14-189" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 81/100</span></span>
-<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 82/100</span></span>
-<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 83/100</span></span>
-<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 84/100</span></span>
-<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 85/100</span></span>
-<span id="cb14-194"><a href="#cb14-194" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 86/100</span></span>
-<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 87/100</span></span>
-<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 88/100</span></span>
-<span id="cb14-197"><a href="#cb14-197" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 89/100</span></span>
-<span id="cb14-198"><a href="#cb14-198" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 90/100</span></span>
-<span id="cb14-199"><a href="#cb14-199" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 91/100</span></span>
-<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 92/100</span></span>
-<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 93/100</span></span>
-<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 94/100</span></span>
-<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 95/100</span></span>
-<span id="cb14-204"><a href="#cb14-204" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 96/100</span></span>
-<span id="cb14-205"><a href="#cb14-205" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 97/100</span></span>
-<span id="cb14-206"><a href="#cb14-206" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 98/100</span></span>
-<span id="cb14-207"><a href="#cb14-207" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 99/100</span></span>
-<span id="cb14-208"><a href="#cb14-208" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 100/100</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>frog_sims_CS <span class="ot">&lt;-</span> <span class="fu">DAISIE_sim_cr</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>  <span class="at">time=</span><span class="dv">30</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>  <span class="at">M=</span><span class="dv">300</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>  <span class="at">pars=</span><span class="fu">c</span>(<span class="fl">0.44</span>,<span class="fl">0.11</span>,<span class="fl">36.44</span>,<span class="fl">0.0007</span>,<span class="dv">0</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>  <span class="at">divdepmodel =</span> <span class="st">&quot;CS&quot;</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>  <span class="at">replicates=</span> <span class="dv">100</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>  <span class="at">plot_sims =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co">#&gt; Island replicate 1</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co">#&gt; Island replicate 2</span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="co">#&gt; Island replicate 3</span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co">#&gt; Island replicate 4</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co">#&gt; Island replicate 5</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="co">#&gt; Island replicate 6</span></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co">#&gt; Island replicate 7</span></span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="co">#&gt; Island replicate 8</span></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="co">#&gt; Island replicate 9</span></span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="co">#&gt; Island replicate 10</span></span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="co">#&gt; Island replicate 11</span></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="co">#&gt; Island replicate 12</span></span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a><span class="co">#&gt; Island replicate 13</span></span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a><span class="co">#&gt; Island replicate 14</span></span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a><span class="co">#&gt; Island replicate 15</span></span>
+<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a><span class="co">#&gt; Island replicate 16</span></span>
+<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a><span class="co">#&gt; Island replicate 17</span></span>
+<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a><span class="co">#&gt; Island replicate 18</span></span>
+<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a><span class="co">#&gt; Island replicate 19</span></span>
+<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a><span class="co">#&gt; Island replicate 20</span></span>
+<span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a><span class="co">#&gt; Island replicate 21</span></span>
+<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a><span class="co">#&gt; Island replicate 22</span></span>
+<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a><span class="co">#&gt; Island replicate 23</span></span>
+<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a><span class="co">#&gt; Island replicate 24</span></span>
+<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a><span class="co">#&gt; Island replicate 25</span></span>
+<span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a><span class="co">#&gt; Island replicate 26</span></span>
+<span id="cb14-35"><a href="#cb14-35" tabindex="-1"></a><span class="co">#&gt; Island replicate 27</span></span>
+<span id="cb14-36"><a href="#cb14-36" tabindex="-1"></a><span class="co">#&gt; Island replicate 28</span></span>
+<span id="cb14-37"><a href="#cb14-37" tabindex="-1"></a><span class="co">#&gt; Island replicate 29</span></span>
+<span id="cb14-38"><a href="#cb14-38" tabindex="-1"></a><span class="co">#&gt; Island replicate 30</span></span>
+<span id="cb14-39"><a href="#cb14-39" tabindex="-1"></a><span class="co">#&gt; Island replicate 31</span></span>
+<span id="cb14-40"><a href="#cb14-40" tabindex="-1"></a><span class="co">#&gt; Island replicate 32</span></span>
+<span id="cb14-41"><a href="#cb14-41" tabindex="-1"></a><span class="co">#&gt; Island replicate 33</span></span>
+<span id="cb14-42"><a href="#cb14-42" tabindex="-1"></a><span class="co">#&gt; Island replicate 34</span></span>
+<span id="cb14-43"><a href="#cb14-43" tabindex="-1"></a><span class="co">#&gt; Island replicate 35</span></span>
+<span id="cb14-44"><a href="#cb14-44" tabindex="-1"></a><span class="co">#&gt; Island replicate 36</span></span>
+<span id="cb14-45"><a href="#cb14-45" tabindex="-1"></a><span class="co">#&gt; Island replicate 37</span></span>
+<span id="cb14-46"><a href="#cb14-46" tabindex="-1"></a><span class="co">#&gt; Island replicate 38</span></span>
+<span id="cb14-47"><a href="#cb14-47" tabindex="-1"></a><span class="co">#&gt; Island replicate 39</span></span>
+<span id="cb14-48"><a href="#cb14-48" tabindex="-1"></a><span class="co">#&gt; Island replicate 40</span></span>
+<span id="cb14-49"><a href="#cb14-49" tabindex="-1"></a><span class="co">#&gt; Island replicate 41</span></span>
+<span id="cb14-50"><a href="#cb14-50" tabindex="-1"></a><span class="co">#&gt; Island replicate 42</span></span>
+<span id="cb14-51"><a href="#cb14-51" tabindex="-1"></a><span class="co">#&gt; Island replicate 43</span></span>
+<span id="cb14-52"><a href="#cb14-52" tabindex="-1"></a><span class="co">#&gt; Island replicate 44</span></span>
+<span id="cb14-53"><a href="#cb14-53" tabindex="-1"></a><span class="co">#&gt; Island replicate 45</span></span>
+<span id="cb14-54"><a href="#cb14-54" tabindex="-1"></a><span class="co">#&gt; Island replicate 46</span></span>
+<span id="cb14-55"><a href="#cb14-55" tabindex="-1"></a><span class="co">#&gt; Island replicate 47</span></span>
+<span id="cb14-56"><a href="#cb14-56" tabindex="-1"></a><span class="co">#&gt; Island replicate 48</span></span>
+<span id="cb14-57"><a href="#cb14-57" tabindex="-1"></a><span class="co">#&gt; Island replicate 49</span></span>
+<span id="cb14-58"><a href="#cb14-58" tabindex="-1"></a><span class="co">#&gt; Island replicate 50</span></span>
+<span id="cb14-59"><a href="#cb14-59" tabindex="-1"></a><span class="co">#&gt; Island replicate 51</span></span>
+<span id="cb14-60"><a href="#cb14-60" tabindex="-1"></a><span class="co">#&gt; Island replicate 52</span></span>
+<span id="cb14-61"><a href="#cb14-61" tabindex="-1"></a><span class="co">#&gt; Island replicate 53</span></span>
+<span id="cb14-62"><a href="#cb14-62" tabindex="-1"></a><span class="co">#&gt; Island replicate 54</span></span>
+<span id="cb14-63"><a href="#cb14-63" tabindex="-1"></a><span class="co">#&gt; Island replicate 55</span></span>
+<span id="cb14-64"><a href="#cb14-64" tabindex="-1"></a><span class="co">#&gt; Island replicate 56</span></span>
+<span id="cb14-65"><a href="#cb14-65" tabindex="-1"></a><span class="co">#&gt; Island replicate 57</span></span>
+<span id="cb14-66"><a href="#cb14-66" tabindex="-1"></a><span class="co">#&gt; Island replicate 58</span></span>
+<span id="cb14-67"><a href="#cb14-67" tabindex="-1"></a><span class="co">#&gt; Island replicate 59</span></span>
+<span id="cb14-68"><a href="#cb14-68" tabindex="-1"></a><span class="co">#&gt; Island replicate 60</span></span>
+<span id="cb14-69"><a href="#cb14-69" tabindex="-1"></a><span class="co">#&gt; Island replicate 61</span></span>
+<span id="cb14-70"><a href="#cb14-70" tabindex="-1"></a><span class="co">#&gt; Island replicate 62</span></span>
+<span id="cb14-71"><a href="#cb14-71" tabindex="-1"></a><span class="co">#&gt; Island replicate 63</span></span>
+<span id="cb14-72"><a href="#cb14-72" tabindex="-1"></a><span class="co">#&gt; Island replicate 64</span></span>
+<span id="cb14-73"><a href="#cb14-73" tabindex="-1"></a><span class="co">#&gt; Island replicate 65</span></span>
+<span id="cb14-74"><a href="#cb14-74" tabindex="-1"></a><span class="co">#&gt; Island replicate 66</span></span>
+<span id="cb14-75"><a href="#cb14-75" tabindex="-1"></a><span class="co">#&gt; Island replicate 67</span></span>
+<span id="cb14-76"><a href="#cb14-76" tabindex="-1"></a><span class="co">#&gt; Island replicate 68</span></span>
+<span id="cb14-77"><a href="#cb14-77" tabindex="-1"></a><span class="co">#&gt; Island replicate 69</span></span>
+<span id="cb14-78"><a href="#cb14-78" tabindex="-1"></a><span class="co">#&gt; Island replicate 70</span></span>
+<span id="cb14-79"><a href="#cb14-79" tabindex="-1"></a><span class="co">#&gt; Island replicate 71</span></span>
+<span id="cb14-80"><a href="#cb14-80" tabindex="-1"></a><span class="co">#&gt; Island replicate 72</span></span>
+<span id="cb14-81"><a href="#cb14-81" tabindex="-1"></a><span class="co">#&gt; Island replicate 73</span></span>
+<span id="cb14-82"><a href="#cb14-82" tabindex="-1"></a><span class="co">#&gt; Island replicate 74</span></span>
+<span id="cb14-83"><a href="#cb14-83" tabindex="-1"></a><span class="co">#&gt; Island replicate 75</span></span>
+<span id="cb14-84"><a href="#cb14-84" tabindex="-1"></a><span class="co">#&gt; Island replicate 76</span></span>
+<span id="cb14-85"><a href="#cb14-85" tabindex="-1"></a><span class="co">#&gt; Island replicate 77</span></span>
+<span id="cb14-86"><a href="#cb14-86" tabindex="-1"></a><span class="co">#&gt; Island replicate 78</span></span>
+<span id="cb14-87"><a href="#cb14-87" tabindex="-1"></a><span class="co">#&gt; Island replicate 79</span></span>
+<span id="cb14-88"><a href="#cb14-88" tabindex="-1"></a><span class="co">#&gt; Island replicate 80</span></span>
+<span id="cb14-89"><a href="#cb14-89" tabindex="-1"></a><span class="co">#&gt; Island replicate 81</span></span>
+<span id="cb14-90"><a href="#cb14-90" tabindex="-1"></a><span class="co">#&gt; Island replicate 82</span></span>
+<span id="cb14-91"><a href="#cb14-91" tabindex="-1"></a><span class="co">#&gt; Island replicate 83</span></span>
+<span id="cb14-92"><a href="#cb14-92" tabindex="-1"></a><span class="co">#&gt; Island replicate 84</span></span>
+<span id="cb14-93"><a href="#cb14-93" tabindex="-1"></a><span class="co">#&gt; Island replicate 85</span></span>
+<span id="cb14-94"><a href="#cb14-94" tabindex="-1"></a><span class="co">#&gt; Island replicate 86</span></span>
+<span id="cb14-95"><a href="#cb14-95" tabindex="-1"></a><span class="co">#&gt; Island replicate 87</span></span>
+<span id="cb14-96"><a href="#cb14-96" tabindex="-1"></a><span class="co">#&gt; Island replicate 88</span></span>
+<span id="cb14-97"><a href="#cb14-97" tabindex="-1"></a><span class="co">#&gt; Island replicate 89</span></span>
+<span id="cb14-98"><a href="#cb14-98" tabindex="-1"></a><span class="co">#&gt; Island replicate 90</span></span>
+<span id="cb14-99"><a href="#cb14-99" tabindex="-1"></a><span class="co">#&gt; Island replicate 91</span></span>
+<span id="cb14-100"><a href="#cb14-100" tabindex="-1"></a><span class="co">#&gt; Island replicate 92</span></span>
+<span id="cb14-101"><a href="#cb14-101" tabindex="-1"></a><span class="co">#&gt; Island replicate 93</span></span>
+<span id="cb14-102"><a href="#cb14-102" tabindex="-1"></a><span class="co">#&gt; Island replicate 94</span></span>
+<span id="cb14-103"><a href="#cb14-103" tabindex="-1"></a><span class="co">#&gt; Island replicate 95</span></span>
+<span id="cb14-104"><a href="#cb14-104" tabindex="-1"></a><span class="co">#&gt; Island replicate 96</span></span>
+<span id="cb14-105"><a href="#cb14-105" tabindex="-1"></a><span class="co">#&gt; Island replicate 97</span></span>
+<span id="cb14-106"><a href="#cb14-106" tabindex="-1"></a><span class="co">#&gt; Island replicate 98</span></span>
+<span id="cb14-107"><a href="#cb14-107" tabindex="-1"></a><span class="co">#&gt; Island replicate 99</span></span>
+<span id="cb14-108"><a href="#cb14-108" tabindex="-1"></a><span class="co">#&gt; Island replicate 100</span></span>
+<span id="cb14-109"><a href="#cb14-109" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 1/100</span></span>
+<span id="cb14-110"><a href="#cb14-110" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 2/100</span></span>
+<span id="cb14-111"><a href="#cb14-111" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 3/100</span></span>
+<span id="cb14-112"><a href="#cb14-112" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 4/100</span></span>
+<span id="cb14-113"><a href="#cb14-113" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 5/100</span></span>
+<span id="cb14-114"><a href="#cb14-114" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 6/100</span></span>
+<span id="cb14-115"><a href="#cb14-115" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 7/100</span></span>
+<span id="cb14-116"><a href="#cb14-116" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 8/100</span></span>
+<span id="cb14-117"><a href="#cb14-117" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 9/100</span></span>
+<span id="cb14-118"><a href="#cb14-118" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 10/100</span></span>
+<span id="cb14-119"><a href="#cb14-119" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 11/100</span></span>
+<span id="cb14-120"><a href="#cb14-120" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 12/100</span></span>
+<span id="cb14-121"><a href="#cb14-121" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 13/100</span></span>
+<span id="cb14-122"><a href="#cb14-122" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 14/100</span></span>
+<span id="cb14-123"><a href="#cb14-123" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 15/100</span></span>
+<span id="cb14-124"><a href="#cb14-124" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 16/100</span></span>
+<span id="cb14-125"><a href="#cb14-125" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 17/100</span></span>
+<span id="cb14-126"><a href="#cb14-126" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 18/100</span></span>
+<span id="cb14-127"><a href="#cb14-127" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 19/100</span></span>
+<span id="cb14-128"><a href="#cb14-128" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 20/100</span></span>
+<span id="cb14-129"><a href="#cb14-129" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 21/100</span></span>
+<span id="cb14-130"><a href="#cb14-130" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 22/100</span></span>
+<span id="cb14-131"><a href="#cb14-131" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 23/100</span></span>
+<span id="cb14-132"><a href="#cb14-132" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 24/100</span></span>
+<span id="cb14-133"><a href="#cb14-133" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 25/100</span></span>
+<span id="cb14-134"><a href="#cb14-134" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 26/100</span></span>
+<span id="cb14-135"><a href="#cb14-135" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 27/100</span></span>
+<span id="cb14-136"><a href="#cb14-136" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 28/100</span></span>
+<span id="cb14-137"><a href="#cb14-137" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 29/100</span></span>
+<span id="cb14-138"><a href="#cb14-138" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 30/100</span></span>
+<span id="cb14-139"><a href="#cb14-139" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 31/100</span></span>
+<span id="cb14-140"><a href="#cb14-140" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 32/100</span></span>
+<span id="cb14-141"><a href="#cb14-141" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 33/100</span></span>
+<span id="cb14-142"><a href="#cb14-142" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 34/100</span></span>
+<span id="cb14-143"><a href="#cb14-143" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 35/100</span></span>
+<span id="cb14-144"><a href="#cb14-144" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 36/100</span></span>
+<span id="cb14-145"><a href="#cb14-145" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 37/100</span></span>
+<span id="cb14-146"><a href="#cb14-146" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 38/100</span></span>
+<span id="cb14-147"><a href="#cb14-147" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 39/100</span></span>
+<span id="cb14-148"><a href="#cb14-148" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 40/100</span></span>
+<span id="cb14-149"><a href="#cb14-149" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 41/100</span></span>
+<span id="cb14-150"><a href="#cb14-150" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 42/100</span></span>
+<span id="cb14-151"><a href="#cb14-151" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 43/100</span></span>
+<span id="cb14-152"><a href="#cb14-152" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 44/100</span></span>
+<span id="cb14-153"><a href="#cb14-153" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 45/100</span></span>
+<span id="cb14-154"><a href="#cb14-154" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 46/100</span></span>
+<span id="cb14-155"><a href="#cb14-155" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 47/100</span></span>
+<span id="cb14-156"><a href="#cb14-156" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 48/100</span></span>
+<span id="cb14-157"><a href="#cb14-157" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 49/100</span></span>
+<span id="cb14-158"><a href="#cb14-158" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 50/100</span></span>
+<span id="cb14-159"><a href="#cb14-159" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 51/100</span></span>
+<span id="cb14-160"><a href="#cb14-160" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 52/100</span></span>
+<span id="cb14-161"><a href="#cb14-161" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 53/100</span></span>
+<span id="cb14-162"><a href="#cb14-162" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 54/100</span></span>
+<span id="cb14-163"><a href="#cb14-163" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 55/100</span></span>
+<span id="cb14-164"><a href="#cb14-164" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 56/100</span></span>
+<span id="cb14-165"><a href="#cb14-165" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 57/100</span></span>
+<span id="cb14-166"><a href="#cb14-166" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 58/100</span></span>
+<span id="cb14-167"><a href="#cb14-167" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 59/100</span></span>
+<span id="cb14-168"><a href="#cb14-168" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 60/100</span></span>
+<span id="cb14-169"><a href="#cb14-169" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 61/100</span></span>
+<span id="cb14-170"><a href="#cb14-170" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 62/100</span></span>
+<span id="cb14-171"><a href="#cb14-171" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 63/100</span></span>
+<span id="cb14-172"><a href="#cb14-172" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 64/100</span></span>
+<span id="cb14-173"><a href="#cb14-173" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 65/100</span></span>
+<span id="cb14-174"><a href="#cb14-174" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 66/100</span></span>
+<span id="cb14-175"><a href="#cb14-175" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 67/100</span></span>
+<span id="cb14-176"><a href="#cb14-176" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 68/100</span></span>
+<span id="cb14-177"><a href="#cb14-177" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 69/100</span></span>
+<span id="cb14-178"><a href="#cb14-178" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 70/100</span></span>
+<span id="cb14-179"><a href="#cb14-179" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 71/100</span></span>
+<span id="cb14-180"><a href="#cb14-180" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 72/100</span></span>
+<span id="cb14-181"><a href="#cb14-181" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 73/100</span></span>
+<span id="cb14-182"><a href="#cb14-182" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 74/100</span></span>
+<span id="cb14-183"><a href="#cb14-183" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 75/100</span></span>
+<span id="cb14-184"><a href="#cb14-184" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 76/100</span></span>
+<span id="cb14-185"><a href="#cb14-185" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 77/100</span></span>
+<span id="cb14-186"><a href="#cb14-186" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 78/100</span></span>
+<span id="cb14-187"><a href="#cb14-187" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 79/100</span></span>
+<span id="cb14-188"><a href="#cb14-188" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 80/100</span></span>
+<span id="cb14-189"><a href="#cb14-189" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 81/100</span></span>
+<span id="cb14-190"><a href="#cb14-190" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 82/100</span></span>
+<span id="cb14-191"><a href="#cb14-191" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 83/100</span></span>
+<span id="cb14-192"><a href="#cb14-192" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 84/100</span></span>
+<span id="cb14-193"><a href="#cb14-193" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 85/100</span></span>
+<span id="cb14-194"><a href="#cb14-194" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 86/100</span></span>
+<span id="cb14-195"><a href="#cb14-195" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 87/100</span></span>
+<span id="cb14-196"><a href="#cb14-196" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 88/100</span></span>
+<span id="cb14-197"><a href="#cb14-197" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 89/100</span></span>
+<span id="cb14-198"><a href="#cb14-198" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 90/100</span></span>
+<span id="cb14-199"><a href="#cb14-199" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 91/100</span></span>
+<span id="cb14-200"><a href="#cb14-200" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 92/100</span></span>
+<span id="cb14-201"><a href="#cb14-201" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 93/100</span></span>
+<span id="cb14-202"><a href="#cb14-202" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 94/100</span></span>
+<span id="cb14-203"><a href="#cb14-203" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 95/100</span></span>
+<span id="cb14-204"><a href="#cb14-204" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 96/100</span></span>
+<span id="cb14-205"><a href="#cb14-205" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 97/100</span></span>
+<span id="cb14-206"><a href="#cb14-206" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 98/100</span></span>
+<span id="cb14-207"><a href="#cb14-207" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 99/100</span></span>
+<span id="cb14-208"><a href="#cb14-208" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 100/100</span></span></code></pre></div>
 <p>Simulate an IW model for 30 million years, 100 replicates:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>frog_sims_CS <span class="ot">&lt;-</span> <span class="fu">DAISIE_sim_cr</span>(</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">time=</span><span class="dv">30</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">M=</span><span class="dv">300</span>,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pars=</span><span class="fu">c</span>(<span class="fl">0.40</span>,<span class="fl">0.17</span>,<span class="fl">131.83</span>,<span class="fl">0.0012</span>,<span class="dv">0</span>),</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">divdepmodel =</span> <span class="st">&quot;IW&quot;</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">replicates=</span> <span class="dv">100</span>,</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot_sims =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 1</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 2</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 3</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 4</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 5</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 6</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 7</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 8</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 9</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 10</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 11</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 12</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 13</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 14</span></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 15</span></span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 16</span></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 17</span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 18</span></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 19</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 20</span></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 21</span></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 22</span></span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 23</span></span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 24</span></span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 25</span></span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 26</span></span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 27</span></span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 28</span></span>
-<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 29</span></span>
-<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 30</span></span>
-<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 31</span></span>
-<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 32</span></span>
-<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 33</span></span>
-<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 34</span></span>
-<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 35</span></span>
-<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 36</span></span>
-<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 37</span></span>
-<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 38</span></span>
-<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 39</span></span>
-<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 40</span></span>
-<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 41</span></span>
-<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 42</span></span>
-<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 43</span></span>
-<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 44</span></span>
-<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 45</span></span>
-<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 46</span></span>
-<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 47</span></span>
-<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 48</span></span>
-<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 49</span></span>
-<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 50</span></span>
-<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 51</span></span>
-<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 52</span></span>
-<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 53</span></span>
-<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 54</span></span>
-<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 55</span></span>
-<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 56</span></span>
-<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 57</span></span>
-<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 58</span></span>
-<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 59</span></span>
-<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 60</span></span>
-<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 61</span></span>
-<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 62</span></span>
-<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 63</span></span>
-<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 64</span></span>
-<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 65</span></span>
-<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 66</span></span>
-<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 67</span></span>
-<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 68</span></span>
-<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 69</span></span>
-<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 70</span></span>
-<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 71</span></span>
-<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 72</span></span>
-<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 73</span></span>
-<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 74</span></span>
-<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 75</span></span>
-<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 76</span></span>
-<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 77</span></span>
-<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 78</span></span>
-<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 79</span></span>
-<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 80</span></span>
-<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 81</span></span>
-<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 82</span></span>
-<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 83</span></span>
-<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 84</span></span>
-<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 85</span></span>
-<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 86</span></span>
-<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 87</span></span>
-<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 88</span></span>
-<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 89</span></span>
-<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 90</span></span>
-<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 91</span></span>
-<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 92</span></span>
-<span id="cb15-101"><a href="#cb15-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 93</span></span>
-<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 94</span></span>
-<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 95</span></span>
-<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 96</span></span>
-<span id="cb15-105"><a href="#cb15-105" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 97</span></span>
-<span id="cb15-106"><a href="#cb15-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 98</span></span>
-<span id="cb15-107"><a href="#cb15-107" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 99</span></span>
-<span id="cb15-108"><a href="#cb15-108" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island replicate 100</span></span>
-<span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 1/100</span></span>
-<span id="cb15-110"><a href="#cb15-110" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 2/100</span></span>
-<span id="cb15-111"><a href="#cb15-111" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 3/100</span></span>
-<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 4/100</span></span>
-<span id="cb15-113"><a href="#cb15-113" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 5/100</span></span>
-<span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 6/100</span></span>
-<span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 7/100</span></span>
-<span id="cb15-116"><a href="#cb15-116" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 8/100</span></span>
-<span id="cb15-117"><a href="#cb15-117" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 9/100</span></span>
-<span id="cb15-118"><a href="#cb15-118" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 10/100</span></span>
-<span id="cb15-119"><a href="#cb15-119" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 11/100</span></span>
-<span id="cb15-120"><a href="#cb15-120" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 12/100</span></span>
-<span id="cb15-121"><a href="#cb15-121" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 13/100</span></span>
-<span id="cb15-122"><a href="#cb15-122" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 14/100</span></span>
-<span id="cb15-123"><a href="#cb15-123" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 15/100</span></span>
-<span id="cb15-124"><a href="#cb15-124" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 16/100</span></span>
-<span id="cb15-125"><a href="#cb15-125" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 17/100</span></span>
-<span id="cb15-126"><a href="#cb15-126" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 18/100</span></span>
-<span id="cb15-127"><a href="#cb15-127" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 19/100</span></span>
-<span id="cb15-128"><a href="#cb15-128" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 20/100</span></span>
-<span id="cb15-129"><a href="#cb15-129" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 21/100</span></span>
-<span id="cb15-130"><a href="#cb15-130" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 22/100</span></span>
-<span id="cb15-131"><a href="#cb15-131" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 23/100</span></span>
-<span id="cb15-132"><a href="#cb15-132" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 24/100</span></span>
-<span id="cb15-133"><a href="#cb15-133" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 25/100</span></span>
-<span id="cb15-134"><a href="#cb15-134" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 26/100</span></span>
-<span id="cb15-135"><a href="#cb15-135" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 27/100</span></span>
-<span id="cb15-136"><a href="#cb15-136" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 28/100</span></span>
-<span id="cb15-137"><a href="#cb15-137" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 29/100</span></span>
-<span id="cb15-138"><a href="#cb15-138" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 30/100</span></span>
-<span id="cb15-139"><a href="#cb15-139" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 31/100</span></span>
-<span id="cb15-140"><a href="#cb15-140" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 32/100</span></span>
-<span id="cb15-141"><a href="#cb15-141" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 33/100</span></span>
-<span id="cb15-142"><a href="#cb15-142" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 34/100</span></span>
-<span id="cb15-143"><a href="#cb15-143" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 35/100</span></span>
-<span id="cb15-144"><a href="#cb15-144" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 36/100</span></span>
-<span id="cb15-145"><a href="#cb15-145" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 37/100</span></span>
-<span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 38/100</span></span>
-<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 39/100</span></span>
-<span id="cb15-148"><a href="#cb15-148" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 40/100</span></span>
-<span id="cb15-149"><a href="#cb15-149" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 41/100</span></span>
-<span id="cb15-150"><a href="#cb15-150" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 42/100</span></span>
-<span id="cb15-151"><a href="#cb15-151" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 43/100</span></span>
-<span id="cb15-152"><a href="#cb15-152" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 44/100</span></span>
-<span id="cb15-153"><a href="#cb15-153" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 45/100</span></span>
-<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 46/100</span></span>
-<span id="cb15-155"><a href="#cb15-155" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 47/100</span></span>
-<span id="cb15-156"><a href="#cb15-156" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 48/100</span></span>
-<span id="cb15-157"><a href="#cb15-157" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 49/100</span></span>
-<span id="cb15-158"><a href="#cb15-158" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 50/100</span></span>
-<span id="cb15-159"><a href="#cb15-159" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 51/100</span></span>
-<span id="cb15-160"><a href="#cb15-160" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 52/100</span></span>
-<span id="cb15-161"><a href="#cb15-161" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 53/100</span></span>
-<span id="cb15-162"><a href="#cb15-162" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 54/100</span></span>
-<span id="cb15-163"><a href="#cb15-163" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 55/100</span></span>
-<span id="cb15-164"><a href="#cb15-164" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 56/100</span></span>
-<span id="cb15-165"><a href="#cb15-165" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 57/100</span></span>
-<span id="cb15-166"><a href="#cb15-166" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 58/100</span></span>
-<span id="cb15-167"><a href="#cb15-167" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 59/100</span></span>
-<span id="cb15-168"><a href="#cb15-168" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 60/100</span></span>
-<span id="cb15-169"><a href="#cb15-169" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 61/100</span></span>
-<span id="cb15-170"><a href="#cb15-170" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 62/100</span></span>
-<span id="cb15-171"><a href="#cb15-171" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 63/100</span></span>
-<span id="cb15-172"><a href="#cb15-172" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 64/100</span></span>
-<span id="cb15-173"><a href="#cb15-173" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 65/100</span></span>
-<span id="cb15-174"><a href="#cb15-174" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 66/100</span></span>
-<span id="cb15-175"><a href="#cb15-175" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 67/100</span></span>
-<span id="cb15-176"><a href="#cb15-176" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 68/100</span></span>
-<span id="cb15-177"><a href="#cb15-177" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 69/100</span></span>
-<span id="cb15-178"><a href="#cb15-178" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 70/100</span></span>
-<span id="cb15-179"><a href="#cb15-179" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 71/100</span></span>
-<span id="cb15-180"><a href="#cb15-180" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 72/100</span></span>
-<span id="cb15-181"><a href="#cb15-181" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 73/100</span></span>
-<span id="cb15-182"><a href="#cb15-182" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 74/100</span></span>
-<span id="cb15-183"><a href="#cb15-183" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 75/100</span></span>
-<span id="cb15-184"><a href="#cb15-184" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 76/100</span></span>
-<span id="cb15-185"><a href="#cb15-185" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 77/100</span></span>
-<span id="cb15-186"><a href="#cb15-186" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 78/100</span></span>
-<span id="cb15-187"><a href="#cb15-187" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 79/100</span></span>
-<span id="cb15-188"><a href="#cb15-188" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 80/100</span></span>
-<span id="cb15-189"><a href="#cb15-189" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 81/100</span></span>
-<span id="cb15-190"><a href="#cb15-190" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 82/100</span></span>
-<span id="cb15-191"><a href="#cb15-191" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 83/100</span></span>
-<span id="cb15-192"><a href="#cb15-192" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 84/100</span></span>
-<span id="cb15-193"><a href="#cb15-193" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 85/100</span></span>
-<span id="cb15-194"><a href="#cb15-194" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 86/100</span></span>
-<span id="cb15-195"><a href="#cb15-195" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 87/100</span></span>
-<span id="cb15-196"><a href="#cb15-196" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 88/100</span></span>
-<span id="cb15-197"><a href="#cb15-197" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 89/100</span></span>
-<span id="cb15-198"><a href="#cb15-198" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 90/100</span></span>
-<span id="cb15-199"><a href="#cb15-199" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 91/100</span></span>
-<span id="cb15-200"><a href="#cb15-200" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 92/100</span></span>
-<span id="cb15-201"><a href="#cb15-201" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 93/100</span></span>
-<span id="cb15-202"><a href="#cb15-202" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 94/100</span></span>
-<span id="cb15-203"><a href="#cb15-203" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 95/100</span></span>
-<span id="cb15-204"><a href="#cb15-204" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 96/100</span></span>
-<span id="cb15-205"><a href="#cb15-205" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 97/100</span></span>
-<span id="cb15-206"><a href="#cb15-206" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 98/100</span></span>
-<span id="cb15-207"><a href="#cb15-207" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 99/100</span></span>
-<span id="cb15-208"><a href="#cb15-208" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 100/100</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>frog_sims_CS <span class="ot">&lt;-</span> <span class="fu">DAISIE_sim_cr</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>  <span class="at">time=</span><span class="dv">30</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>  <span class="at">M=</span><span class="dv">300</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>  <span class="at">pars=</span><span class="fu">c</span>(<span class="fl">0.40</span>,<span class="fl">0.17</span>,<span class="fl">131.83</span>,<span class="fl">0.0012</span>,<span class="dv">0</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>  <span class="at">divdepmodel =</span> <span class="st">&quot;IW&quot;</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>  <span class="at">replicates=</span> <span class="dv">100</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>  <span class="at">plot_sims =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co">#&gt; Island replicate 1</span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="co">#&gt; Island replicate 2</span></span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="co">#&gt; Island replicate 3</span></span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="co">#&gt; Island replicate 4</span></span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a><span class="co">#&gt; Island replicate 5</span></span>
+<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a><span class="co">#&gt; Island replicate 6</span></span>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="co">#&gt; Island replicate 7</span></span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a><span class="co">#&gt; Island replicate 8</span></span>
+<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a><span class="co">#&gt; Island replicate 9</span></span>
+<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a><span class="co">#&gt; Island replicate 10</span></span>
+<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a><span class="co">#&gt; Island replicate 11</span></span>
+<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a><span class="co">#&gt; Island replicate 12</span></span>
+<span id="cb15-21"><a href="#cb15-21" tabindex="-1"></a><span class="co">#&gt; Island replicate 13</span></span>
+<span id="cb15-22"><a href="#cb15-22" tabindex="-1"></a><span class="co">#&gt; Island replicate 14</span></span>
+<span id="cb15-23"><a href="#cb15-23" tabindex="-1"></a><span class="co">#&gt; Island replicate 15</span></span>
+<span id="cb15-24"><a href="#cb15-24" tabindex="-1"></a><span class="co">#&gt; Island replicate 16</span></span>
+<span id="cb15-25"><a href="#cb15-25" tabindex="-1"></a><span class="co">#&gt; Island replicate 17</span></span>
+<span id="cb15-26"><a href="#cb15-26" tabindex="-1"></a><span class="co">#&gt; Island replicate 18</span></span>
+<span id="cb15-27"><a href="#cb15-27" tabindex="-1"></a><span class="co">#&gt; Island replicate 19</span></span>
+<span id="cb15-28"><a href="#cb15-28" tabindex="-1"></a><span class="co">#&gt; Island replicate 20</span></span>
+<span id="cb15-29"><a href="#cb15-29" tabindex="-1"></a><span class="co">#&gt; Island replicate 21</span></span>
+<span id="cb15-30"><a href="#cb15-30" tabindex="-1"></a><span class="co">#&gt; Island replicate 22</span></span>
+<span id="cb15-31"><a href="#cb15-31" tabindex="-1"></a><span class="co">#&gt; Island replicate 23</span></span>
+<span id="cb15-32"><a href="#cb15-32" tabindex="-1"></a><span class="co">#&gt; Island replicate 24</span></span>
+<span id="cb15-33"><a href="#cb15-33" tabindex="-1"></a><span class="co">#&gt; Island replicate 25</span></span>
+<span id="cb15-34"><a href="#cb15-34" tabindex="-1"></a><span class="co">#&gt; Island replicate 26</span></span>
+<span id="cb15-35"><a href="#cb15-35" tabindex="-1"></a><span class="co">#&gt; Island replicate 27</span></span>
+<span id="cb15-36"><a href="#cb15-36" tabindex="-1"></a><span class="co">#&gt; Island replicate 28</span></span>
+<span id="cb15-37"><a href="#cb15-37" tabindex="-1"></a><span class="co">#&gt; Island replicate 29</span></span>
+<span id="cb15-38"><a href="#cb15-38" tabindex="-1"></a><span class="co">#&gt; Island replicate 30</span></span>
+<span id="cb15-39"><a href="#cb15-39" tabindex="-1"></a><span class="co">#&gt; Island replicate 31</span></span>
+<span id="cb15-40"><a href="#cb15-40" tabindex="-1"></a><span class="co">#&gt; Island replicate 32</span></span>
+<span id="cb15-41"><a href="#cb15-41" tabindex="-1"></a><span class="co">#&gt; Island replicate 33</span></span>
+<span id="cb15-42"><a href="#cb15-42" tabindex="-1"></a><span class="co">#&gt; Island replicate 34</span></span>
+<span id="cb15-43"><a href="#cb15-43" tabindex="-1"></a><span class="co">#&gt; Island replicate 35</span></span>
+<span id="cb15-44"><a href="#cb15-44" tabindex="-1"></a><span class="co">#&gt; Island replicate 36</span></span>
+<span id="cb15-45"><a href="#cb15-45" tabindex="-1"></a><span class="co">#&gt; Island replicate 37</span></span>
+<span id="cb15-46"><a href="#cb15-46" tabindex="-1"></a><span class="co">#&gt; Island replicate 38</span></span>
+<span id="cb15-47"><a href="#cb15-47" tabindex="-1"></a><span class="co">#&gt; Island replicate 39</span></span>
+<span id="cb15-48"><a href="#cb15-48" tabindex="-1"></a><span class="co">#&gt; Island replicate 40</span></span>
+<span id="cb15-49"><a href="#cb15-49" tabindex="-1"></a><span class="co">#&gt; Island replicate 41</span></span>
+<span id="cb15-50"><a href="#cb15-50" tabindex="-1"></a><span class="co">#&gt; Island replicate 42</span></span>
+<span id="cb15-51"><a href="#cb15-51" tabindex="-1"></a><span class="co">#&gt; Island replicate 43</span></span>
+<span id="cb15-52"><a href="#cb15-52" tabindex="-1"></a><span class="co">#&gt; Island replicate 44</span></span>
+<span id="cb15-53"><a href="#cb15-53" tabindex="-1"></a><span class="co">#&gt; Island replicate 45</span></span>
+<span id="cb15-54"><a href="#cb15-54" tabindex="-1"></a><span class="co">#&gt; Island replicate 46</span></span>
+<span id="cb15-55"><a href="#cb15-55" tabindex="-1"></a><span class="co">#&gt; Island replicate 47</span></span>
+<span id="cb15-56"><a href="#cb15-56" tabindex="-1"></a><span class="co">#&gt; Island replicate 48</span></span>
+<span id="cb15-57"><a href="#cb15-57" tabindex="-1"></a><span class="co">#&gt; Island replicate 49</span></span>
+<span id="cb15-58"><a href="#cb15-58" tabindex="-1"></a><span class="co">#&gt; Island replicate 50</span></span>
+<span id="cb15-59"><a href="#cb15-59" tabindex="-1"></a><span class="co">#&gt; Island replicate 51</span></span>
+<span id="cb15-60"><a href="#cb15-60" tabindex="-1"></a><span class="co">#&gt; Island replicate 52</span></span>
+<span id="cb15-61"><a href="#cb15-61" tabindex="-1"></a><span class="co">#&gt; Island replicate 53</span></span>
+<span id="cb15-62"><a href="#cb15-62" tabindex="-1"></a><span class="co">#&gt; Island replicate 54</span></span>
+<span id="cb15-63"><a href="#cb15-63" tabindex="-1"></a><span class="co">#&gt; Island replicate 55</span></span>
+<span id="cb15-64"><a href="#cb15-64" tabindex="-1"></a><span class="co">#&gt; Island replicate 56</span></span>
+<span id="cb15-65"><a href="#cb15-65" tabindex="-1"></a><span class="co">#&gt; Island replicate 57</span></span>
+<span id="cb15-66"><a href="#cb15-66" tabindex="-1"></a><span class="co">#&gt; Island replicate 58</span></span>
+<span id="cb15-67"><a href="#cb15-67" tabindex="-1"></a><span class="co">#&gt; Island replicate 59</span></span>
+<span id="cb15-68"><a href="#cb15-68" tabindex="-1"></a><span class="co">#&gt; Island replicate 60</span></span>
+<span id="cb15-69"><a href="#cb15-69" tabindex="-1"></a><span class="co">#&gt; Island replicate 61</span></span>
+<span id="cb15-70"><a href="#cb15-70" tabindex="-1"></a><span class="co">#&gt; Island replicate 62</span></span>
+<span id="cb15-71"><a href="#cb15-71" tabindex="-1"></a><span class="co">#&gt; Island replicate 63</span></span>
+<span id="cb15-72"><a href="#cb15-72" tabindex="-1"></a><span class="co">#&gt; Island replicate 64</span></span>
+<span id="cb15-73"><a href="#cb15-73" tabindex="-1"></a><span class="co">#&gt; Island replicate 65</span></span>
+<span id="cb15-74"><a href="#cb15-74" tabindex="-1"></a><span class="co">#&gt; Island replicate 66</span></span>
+<span id="cb15-75"><a href="#cb15-75" tabindex="-1"></a><span class="co">#&gt; Island replicate 67</span></span>
+<span id="cb15-76"><a href="#cb15-76" tabindex="-1"></a><span class="co">#&gt; Island replicate 68</span></span>
+<span id="cb15-77"><a href="#cb15-77" tabindex="-1"></a><span class="co">#&gt; Island replicate 69</span></span>
+<span id="cb15-78"><a href="#cb15-78" tabindex="-1"></a><span class="co">#&gt; Island replicate 70</span></span>
+<span id="cb15-79"><a href="#cb15-79" tabindex="-1"></a><span class="co">#&gt; Island replicate 71</span></span>
+<span id="cb15-80"><a href="#cb15-80" tabindex="-1"></a><span class="co">#&gt; Island replicate 72</span></span>
+<span id="cb15-81"><a href="#cb15-81" tabindex="-1"></a><span class="co">#&gt; Island replicate 73</span></span>
+<span id="cb15-82"><a href="#cb15-82" tabindex="-1"></a><span class="co">#&gt; Island replicate 74</span></span>
+<span id="cb15-83"><a href="#cb15-83" tabindex="-1"></a><span class="co">#&gt; Island replicate 75</span></span>
+<span id="cb15-84"><a href="#cb15-84" tabindex="-1"></a><span class="co">#&gt; Island replicate 76</span></span>
+<span id="cb15-85"><a href="#cb15-85" tabindex="-1"></a><span class="co">#&gt; Island replicate 77</span></span>
+<span id="cb15-86"><a href="#cb15-86" tabindex="-1"></a><span class="co">#&gt; Island replicate 78</span></span>
+<span id="cb15-87"><a href="#cb15-87" tabindex="-1"></a><span class="co">#&gt; Island replicate 79</span></span>
+<span id="cb15-88"><a href="#cb15-88" tabindex="-1"></a><span class="co">#&gt; Island replicate 80</span></span>
+<span id="cb15-89"><a href="#cb15-89" tabindex="-1"></a><span class="co">#&gt; Island replicate 81</span></span>
+<span id="cb15-90"><a href="#cb15-90" tabindex="-1"></a><span class="co">#&gt; Island replicate 82</span></span>
+<span id="cb15-91"><a href="#cb15-91" tabindex="-1"></a><span class="co">#&gt; Island replicate 83</span></span>
+<span id="cb15-92"><a href="#cb15-92" tabindex="-1"></a><span class="co">#&gt; Island replicate 84</span></span>
+<span id="cb15-93"><a href="#cb15-93" tabindex="-1"></a><span class="co">#&gt; Island replicate 85</span></span>
+<span id="cb15-94"><a href="#cb15-94" tabindex="-1"></a><span class="co">#&gt; Island replicate 86</span></span>
+<span id="cb15-95"><a href="#cb15-95" tabindex="-1"></a><span class="co">#&gt; Island replicate 87</span></span>
+<span id="cb15-96"><a href="#cb15-96" tabindex="-1"></a><span class="co">#&gt; Island replicate 88</span></span>
+<span id="cb15-97"><a href="#cb15-97" tabindex="-1"></a><span class="co">#&gt; Island replicate 89</span></span>
+<span id="cb15-98"><a href="#cb15-98" tabindex="-1"></a><span class="co">#&gt; Island replicate 90</span></span>
+<span id="cb15-99"><a href="#cb15-99" tabindex="-1"></a><span class="co">#&gt; Island replicate 91</span></span>
+<span id="cb15-100"><a href="#cb15-100" tabindex="-1"></a><span class="co">#&gt; Island replicate 92</span></span>
+<span id="cb15-101"><a href="#cb15-101" tabindex="-1"></a><span class="co">#&gt; Island replicate 93</span></span>
+<span id="cb15-102"><a href="#cb15-102" tabindex="-1"></a><span class="co">#&gt; Island replicate 94</span></span>
+<span id="cb15-103"><a href="#cb15-103" tabindex="-1"></a><span class="co">#&gt; Island replicate 95</span></span>
+<span id="cb15-104"><a href="#cb15-104" tabindex="-1"></a><span class="co">#&gt; Island replicate 96</span></span>
+<span id="cb15-105"><a href="#cb15-105" tabindex="-1"></a><span class="co">#&gt; Island replicate 97</span></span>
+<span id="cb15-106"><a href="#cb15-106" tabindex="-1"></a><span class="co">#&gt; Island replicate 98</span></span>
+<span id="cb15-107"><a href="#cb15-107" tabindex="-1"></a><span class="co">#&gt; Island replicate 99</span></span>
+<span id="cb15-108"><a href="#cb15-108" tabindex="-1"></a><span class="co">#&gt; Island replicate 100</span></span>
+<span id="cb15-109"><a href="#cb15-109" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 1/100</span></span>
+<span id="cb15-110"><a href="#cb15-110" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 2/100</span></span>
+<span id="cb15-111"><a href="#cb15-111" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 3/100</span></span>
+<span id="cb15-112"><a href="#cb15-112" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 4/100</span></span>
+<span id="cb15-113"><a href="#cb15-113" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 5/100</span></span>
+<span id="cb15-114"><a href="#cb15-114" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 6/100</span></span>
+<span id="cb15-115"><a href="#cb15-115" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 7/100</span></span>
+<span id="cb15-116"><a href="#cb15-116" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 8/100</span></span>
+<span id="cb15-117"><a href="#cb15-117" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 9/100</span></span>
+<span id="cb15-118"><a href="#cb15-118" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 10/100</span></span>
+<span id="cb15-119"><a href="#cb15-119" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 11/100</span></span>
+<span id="cb15-120"><a href="#cb15-120" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 12/100</span></span>
+<span id="cb15-121"><a href="#cb15-121" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 13/100</span></span>
+<span id="cb15-122"><a href="#cb15-122" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 14/100</span></span>
+<span id="cb15-123"><a href="#cb15-123" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 15/100</span></span>
+<span id="cb15-124"><a href="#cb15-124" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 16/100</span></span>
+<span id="cb15-125"><a href="#cb15-125" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 17/100</span></span>
+<span id="cb15-126"><a href="#cb15-126" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 18/100</span></span>
+<span id="cb15-127"><a href="#cb15-127" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 19/100</span></span>
+<span id="cb15-128"><a href="#cb15-128" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 20/100</span></span>
+<span id="cb15-129"><a href="#cb15-129" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 21/100</span></span>
+<span id="cb15-130"><a href="#cb15-130" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 22/100</span></span>
+<span id="cb15-131"><a href="#cb15-131" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 23/100</span></span>
+<span id="cb15-132"><a href="#cb15-132" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 24/100</span></span>
+<span id="cb15-133"><a href="#cb15-133" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 25/100</span></span>
+<span id="cb15-134"><a href="#cb15-134" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 26/100</span></span>
+<span id="cb15-135"><a href="#cb15-135" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 27/100</span></span>
+<span id="cb15-136"><a href="#cb15-136" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 28/100</span></span>
+<span id="cb15-137"><a href="#cb15-137" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 29/100</span></span>
+<span id="cb15-138"><a href="#cb15-138" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 30/100</span></span>
+<span id="cb15-139"><a href="#cb15-139" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 31/100</span></span>
+<span id="cb15-140"><a href="#cb15-140" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 32/100</span></span>
+<span id="cb15-141"><a href="#cb15-141" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 33/100</span></span>
+<span id="cb15-142"><a href="#cb15-142" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 34/100</span></span>
+<span id="cb15-143"><a href="#cb15-143" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 35/100</span></span>
+<span id="cb15-144"><a href="#cb15-144" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 36/100</span></span>
+<span id="cb15-145"><a href="#cb15-145" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 37/100</span></span>
+<span id="cb15-146"><a href="#cb15-146" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 38/100</span></span>
+<span id="cb15-147"><a href="#cb15-147" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 39/100</span></span>
+<span id="cb15-148"><a href="#cb15-148" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 40/100</span></span>
+<span id="cb15-149"><a href="#cb15-149" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 41/100</span></span>
+<span id="cb15-150"><a href="#cb15-150" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 42/100</span></span>
+<span id="cb15-151"><a href="#cb15-151" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 43/100</span></span>
+<span id="cb15-152"><a href="#cb15-152" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 44/100</span></span>
+<span id="cb15-153"><a href="#cb15-153" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 45/100</span></span>
+<span id="cb15-154"><a href="#cb15-154" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 46/100</span></span>
+<span id="cb15-155"><a href="#cb15-155" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 47/100</span></span>
+<span id="cb15-156"><a href="#cb15-156" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 48/100</span></span>
+<span id="cb15-157"><a href="#cb15-157" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 49/100</span></span>
+<span id="cb15-158"><a href="#cb15-158" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 50/100</span></span>
+<span id="cb15-159"><a href="#cb15-159" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 51/100</span></span>
+<span id="cb15-160"><a href="#cb15-160" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 52/100</span></span>
+<span id="cb15-161"><a href="#cb15-161" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 53/100</span></span>
+<span id="cb15-162"><a href="#cb15-162" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 54/100</span></span>
+<span id="cb15-163"><a href="#cb15-163" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 55/100</span></span>
+<span id="cb15-164"><a href="#cb15-164" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 56/100</span></span>
+<span id="cb15-165"><a href="#cb15-165" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 57/100</span></span>
+<span id="cb15-166"><a href="#cb15-166" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 58/100</span></span>
+<span id="cb15-167"><a href="#cb15-167" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 59/100</span></span>
+<span id="cb15-168"><a href="#cb15-168" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 60/100</span></span>
+<span id="cb15-169"><a href="#cb15-169" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 61/100</span></span>
+<span id="cb15-170"><a href="#cb15-170" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 62/100</span></span>
+<span id="cb15-171"><a href="#cb15-171" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 63/100</span></span>
+<span id="cb15-172"><a href="#cb15-172" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 64/100</span></span>
+<span id="cb15-173"><a href="#cb15-173" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 65/100</span></span>
+<span id="cb15-174"><a href="#cb15-174" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 66/100</span></span>
+<span id="cb15-175"><a href="#cb15-175" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 67/100</span></span>
+<span id="cb15-176"><a href="#cb15-176" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 68/100</span></span>
+<span id="cb15-177"><a href="#cb15-177" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 69/100</span></span>
+<span id="cb15-178"><a href="#cb15-178" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 70/100</span></span>
+<span id="cb15-179"><a href="#cb15-179" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 71/100</span></span>
+<span id="cb15-180"><a href="#cb15-180" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 72/100</span></span>
+<span id="cb15-181"><a href="#cb15-181" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 73/100</span></span>
+<span id="cb15-182"><a href="#cb15-182" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 74/100</span></span>
+<span id="cb15-183"><a href="#cb15-183" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 75/100</span></span>
+<span id="cb15-184"><a href="#cb15-184" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 76/100</span></span>
+<span id="cb15-185"><a href="#cb15-185" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 77/100</span></span>
+<span id="cb15-186"><a href="#cb15-186" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 78/100</span></span>
+<span id="cb15-187"><a href="#cb15-187" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 79/100</span></span>
+<span id="cb15-188"><a href="#cb15-188" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 80/100</span></span>
+<span id="cb15-189"><a href="#cb15-189" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 81/100</span></span>
+<span id="cb15-190"><a href="#cb15-190" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 82/100</span></span>
+<span id="cb15-191"><a href="#cb15-191" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 83/100</span></span>
+<span id="cb15-192"><a href="#cb15-192" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 84/100</span></span>
+<span id="cb15-193"><a href="#cb15-193" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 85/100</span></span>
+<span id="cb15-194"><a href="#cb15-194" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 86/100</span></span>
+<span id="cb15-195"><a href="#cb15-195" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 87/100</span></span>
+<span id="cb15-196"><a href="#cb15-196" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 88/100</span></span>
+<span id="cb15-197"><a href="#cb15-197" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 89/100</span></span>
+<span id="cb15-198"><a href="#cb15-198" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 90/100</span></span>
+<span id="cb15-199"><a href="#cb15-199" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 91/100</span></span>
+<span id="cb15-200"><a href="#cb15-200" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 92/100</span></span>
+<span id="cb15-201"><a href="#cb15-201" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 93/100</span></span>
+<span id="cb15-202"><a href="#cb15-202" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 94/100</span></span>
+<span id="cb15-203"><a href="#cb15-203" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 95/100</span></span>
+<span id="cb15-204"><a href="#cb15-204" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 96/100</span></span>
+<span id="cb15-205"><a href="#cb15-205" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 97/100</span></span>
+<span id="cb15-206"><a href="#cb15-206" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 98/100</span></span>
+<span id="cb15-207"><a href="#cb15-207" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 99/100</span></span>
+<span id="cb15-208"><a href="#cb15-208" tabindex="-1"></a><span class="co">#&gt; Island being formatted: 100/100</span></span></code></pre></div>
 <p> </p>
 </div>
 <div id="plot-the-species-through-time-plots-resulting-from-the-simulations." class="section level4">
 <h4>3.2 Plot the species-through-time plots resulting from the
 simulations.</h4>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DAISIE_plot_sims</span>(frog_sims_CS)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">DAISIE_plot_sims</span>(frog_sims_CS)</span></code></pre></div>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
 </div>
 </div>
