@@ -271,7 +271,7 @@
 #'   \code{"odeint::runge_kutta_fehlberg78"}
 #'   \code{"odeint::runge_kutta_dopri5"}
 #'   \code{"odeint::bulirsch_stoer"}
-#'   without \code{odeint::}-prefix, \code{\link{deSolve}{ode}} method is
+#'   without \code{odeint::}-prefix, \code{\link[deSolve]{ode}} method is
 #'   assumed. The default method overall is
 #'   \code{"lsodes"} for \code{\link{DAISIE_ML_CS}()}
 #'   and \code{"ode45"} from \code{\link[deSolve]{ode}()} for
@@ -420,6 +420,10 @@
 #'   incorrect output due to parameter transformation.
 #' @param num_cycles The number of cycles the optimizer will go through.
 #'   Default is 1.
+#' @param function_to_optimize Here one can indicate to use a function
+#'   ('DAISIE_approx') that approximates the DAISIE likelihood or the default
+#'   value 'DAISIE_exact'). The approximate likelihood can for example be used
+#'   in case the exact one fails. This is still under development.
 #' @param trait_pars A named list containing diversification rates considering
 #'   two trait states created by \code{\link{create_trait_pars}}:
 #' \itemize{
@@ -589,6 +593,7 @@ default_params_doc <- function(
   current_area,
   jitter,
   num_cycles,
+  function_to_optimize,
   trait_pars,
   relaxed_par,
   relaxed_rate_pars,

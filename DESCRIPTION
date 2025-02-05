@@ -2,8 +2,8 @@ Package: DAISIE
 Type: Package
 Title: Dynamical Assembly of Islands by Speciation, Immigration and
         Extinction
-Version: 4.4.1
-Date: 2023-10-20
+Version: 4.5.0
+Date: 2025-02-05
 Depends: R (>= 4.2.0)
 biocViews:
 Imports: deSolve, graphics, stats, utils, DDD (>= 5.0), subplex,
@@ -90,8 +90,8 @@ VignetteBuilder: knitr
 URL: https://github.com/rsetienne/DAISIE,
         https://rsetienne.github.io/DAISIE/
 BugReports: https://github.com/rsetienne/DAISIE/issues
-RoxygenNote: 7.2.3
-Packaged: 2023-10-21 13:57:04 UTC; rampa
+RoxygenNote: 7.3.2
+Packaged: 2025-02-05 12:32:10 UTC; rampa
 Author: Rampal S. Etienne [aut, cre] (<https://orcid.org/0000-0003-2142-7612>),
   Luis Valente [aut] (<https://orcid.org/0000-0003-4247-8785>),
   Albert B. Phillimore [aut] (<https://orcid.org/0000-0002-6553-1553>),
@@ -107,4 +107,4 @@ Author: Rampal S. Etienne [aut, cre] (<https://orcid.org/0000-0003-2142-7612>),
   Raphael Scherrer [ctb] (<https://orcid.org/0000-0002-1447-7630>)
 Maintainer: Rampal S. Etienne <r.s.etienne@rug.nl>
 Repository: CRAN
-Date/Publication: 2023-10-21 23:10:10 UTC
+Date/Publication: 2025-02-05 13:20:01 UTC

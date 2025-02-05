@@ -75,15 +75,22 @@ DAISIE_loglik_all_choosepar <- function(trparsopt,
 #' @keywords internal
 #'
 #' @return The output is a dataframe containing estimated parameters and
-#' maximum loglikelihood.  \item{lambda_c}{ gives the maximum likelihood
-#' estimate of lambda^c, the rate of cladogenesis} \item{mu}{ gives the maximum
-#' likelihood estimate of mu, the extinction rate} \item{K}{ gives the maximum
-#' likelihood estimate of K, the carrying-capacity} \item{gamma}{ gives the
+#' maximum loglikelihood.
+#' \item{lambda_c}{ gives the maximum likelihood
+#' estimate of lambda^c, the rate of cladogenesis}
+#' \item{mu}{ gives the maximum
+#' likelihood estimate of mu, the extinction rate}
+#' \item{K}{ gives the maximum
+#' likelihood estimate of K, the carrying-capacity}
+#' \item{gamma}{ gives the
 #' maximum likelihood estimate of gamma, the immigration rate }
 #' \item{lambda_a}{ gives the maximum likelihood estimate of lambda^a, the rate
-#' of anagenesis} \item{loglik}{ gives the maximum loglikelihood} \item{df}{
+#' of anagenesis}
+#' \item{loglik}{ gives the maximum loglikelihood}
+#' \item{df}{
 #' gives the number
-#' of estimated parameters, i.e. degrees of feedom} \item{conv}{ gives a
+#' of estimated parameters, i.e. degrees of feedom}
+#' \item{conv}{ gives a
 #' message on convergence of optimization; conv = 0 means convergence}
 DAISIE_ML1 <- function(
   datalist,
@@ -107,7 +114,8 @@ DAISIE_ML1 <- function(
   tolint = c(1E-16, 1E-10),
   island_ontogeny = NA,
   jitter = 0,
-  num_cycles = 1) {
+  num_cycles = 1,
+  function_to_optimize = 'DAISIE_exact') {
   # datalist = list of all data: branching times, status of clade, and numnber of missing species
   # datalist[[,]][1] = list of branching times (positive, from present to past)
   # - max(brts) = age of the island
@@ -156,6 +164,14 @@ DAISIE_ML1 <- function(
   #  . eqmodel = 4 : equilibrium is assumed on immigrants using deterministic equation for endemics and immigrants
   #  . eqmodel = 5 : equilibrium is assumed on endemics and immigrants using deterministic equation for endemics and immigrants
 
+  if(function_to_optimize == 'DAISIE_exact') {
+    function_to_optimize <- DAISIE_loglik_all_choosepar
+  } else
+  {
+    #function_to_optimize <- DAISIE_loglik_all_choosepar_approx
+    function_to_optimize <- DAISIE_loglik_all_choosepar
+    #This needs to be fixed later
+  }
 
   out2err <- data.frame(
     lambda_c = NA,
@@ -288,7 +304,7 @@ DAISIE_ML1 <- function(
   )
 
   optimpars <- c(tol, maxiter)
-  initloglik <- DAISIE_loglik_all_choosepar(
+  initloglik <- function_to_optimize(
     trparsopt = trparsopt,
     trparsfix = trparsfix,
     idparsopt = idparsopt,

@@ -545,14 +545,14 @@ DAISIE_loglik_CS_M1 <- DAISIE_loglik <- function(pars1,
           # means that any colonization that took place before this maximum
           # colonization time (including presence in the non-oceanic scenario)
           # does not count and should be followed by another colonization.
-          # To allow this we introduce a third set of equations for the
-          # probability that colonization might have happened before but
-          # recolonization has not taken place yet (Q_M,n).
+          # To allow this we introduce a third and fourth set of equations for
+          # the probability that colonization might have happened before but
+          # recolonization has not taken place yet (Q_M,n and Q^M_{M,n}).
           epss <- 1.01E-5 #We're taking the risk
           if (abs(brts[2] - brts[1]) >= epss) {
             probs[(2 * lx + 1):(4 * lx)] <- probs[1:(2 * lx)]
             probs[1:(2 * lx)] <- 0
-          } else {
+          } else { #max age equals island age
             probs[(2 * lx + 1):(4 * lx)] <- 0
           }
 
@@ -1421,4 +1421,40 @@ logcondprob <- function(numcolmin, numimm, logp0, fac = 2) {
     }
   }
   return(logcond)
+}
+
+#' @name DAISIE_logp0
+#' @title Computes the log probability of no species present under the DAISIE
+#' model with clade-specific diversity-dependence
+#' @description Computes the log probability of no species present under the DAISIE
+#' model with clade-specific diversity-dependence. The output is a log value.
+#' @inheritParams default_params_doc
+#' @param island_age the island age \cr
+#' @return The logarithm of the probability
+#' @author Rampal S. Etienne & Bart Haegeman
+#' @keywords internal
+#' @export DAISIE_logp0
+DAISIE_logp0 <- function(pars1,
+                         pars2,
+                         island_age,
+                         methode = "odeint::runge_kutta_fehlberg78",
+                         abstolint = 1E-16,
+                         reltolint = 1E-10) {
+  logp0 <- DAISIE_loglik_CS_choice(
+    pars1 = pars1,
+    pars2 = pars2,
+    brts = island_age,
+    stac = 0,
+    missnumspec = 0,
+    methode = methode,
+    CS_version = 1,
+    abstolint = abstolint,
+    reltolint = reltolint)
+  if(logp0 >= 0 & pars1[2]/pars1[1] > 100)
+  {
+    logp0 <- approximate_logp0(gamma = pars1[4],
+                               mu = pars1[2],
+                               t = island_age)
+  }
+  return(logp0)
 }
