@@ -32,57 +32,57 @@ DAISIE_plot_island(frogs_datalist)
 data(frogs_datalist)
 
 ## ----ML_DAISIE_M1, warning=TRUE, eval = FALSE---------------------------------
-#  DAISIE_ML(
-#    datalist = frogs_datalist,
-#    initparsopt = c(0.18,0.03,0.0006,2),
-#    idparsopt = c(1,2,4,5),
-#    ddmodel = 0,
-#    parsfix = Inf,
-#    idparsfix = 3
-#  )
+# DAISIE_ML(
+#   datalist = frogs_datalist,
+#   initparsopt = c(0.18,0.03,0.0006,2),
+#   idparsopt = c(1,2,4,5),
+#   ddmodel = 0,
+#   parsfix = Inf,
+#   idparsfix = 3
+# )
 
 ## ----echo=FALSE---------------------------------------------------------------
 readRDS(file = system.file("extdata", "frog_M1_ML.rds", package = "DAISIE", mustWork = TRUE))
 
 ## ----ML_DAISIE_M2, eval=FALSE-------------------------------------------------
-#  DAISIE_ML(
-#    datalist = frogs_datalist,
-#    initparsopt = c(0.44,0.11,36.44,0.0007,2),
-#    idparsopt = c(1,2,3,4,5),
-#    ddmodel = 11,
-#    parsfix = NULL,
-#    idparsfix = NULL
-#  )
+# DAISIE_ML(
+#   datalist = frogs_datalist,
+#   initparsopt = c(0.44,0.11,36.44,0.0007,2),
+#   idparsopt = c(1,2,3,4,5),
+#   ddmodel = 11,
+#   parsfix = NULL,
+#   idparsfix = NULL
+# )
 
 ## ----ML_DAISIE_M3, eval=FALSE-------------------------------------------------
-#  DAISIE_ML(
-#    datalist = frogs_datalist,
-#    initparsopt = c(0.44,0.11,36.44,0.0007),
-#    idparsopt = c(1,2,3,4),
-#    ddmodel = 11,
-#    parsfix = 0,
-#    idparsfix = 5
-#  )
+# DAISIE_ML(
+#   datalist = frogs_datalist,
+#   initparsopt = c(0.44,0.11,36.44,0.0007),
+#   idparsopt = c(1,2,3,4),
+#   ddmodel = 11,
+#   parsfix = 0,
+#   idparsfix = 5
+# )
 
 ## ----ML_DAISIE_M4, eval=FALSE-------------------------------------------------
-#  DAISIE_ML_IW(
-#    datalist = frogs_datalist,
-#    initparsopt = c(0.41, 0.17, 131.7, 0.0012, 2),
-#    idparsopt = c(1,2,3,4,5),
-#    ddmodel = 11,
-#    parsfix = NULL,
-#    idparsfix = NULL
-#  )
+# DAISIE_ML_IW(
+#   datalist = frogs_datalist,
+#   initparsopt = c(0.41, 0.17, 131.7, 0.0012, 2),
+#   idparsopt = c(1,2,3,4,5),
+#   ddmodel = 11,
+#   parsfix = NULL,
+#   idparsfix = NULL
+# )
 
 ## ----ML_DAISIE_M5, eval=FALSE-------------------------------------------------
-#  DAISIE_ML_IW(
-#    datalist = frogs_datalist,
-#    initparsopt = c(0.40, 0.17, 131.83, 0.0012),
-#    idparsopt = c(1,2,3,4),
-#    ddmodel = 11,
-#    parsfix = 0,
-#    idparsfix = 5
-#  )
+# DAISIE_ML_IW(
+#   datalist = frogs_datalist,
+#   initparsopt = c(0.40, 0.17, 131.83, 0.0012),
+#   idparsopt = c(1,2,3,4),
+#   ddmodel = 11,
+#   parsfix = 0,
+#   idparsfix = 5
+# )
 
 ## ----DAISIE_sim_CS, results='hide'--------------------------------------------
 set.seed(1)
