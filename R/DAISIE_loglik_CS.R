@@ -530,7 +530,7 @@ DAISIE_loglik_CS_M1 <- DAISIE_loglik <- function(pars1,
                                                  abstolint = 1E-16,
                                                  reltolint = 1E-10,
                                                  verbose = 0,
-                                                 CS_version = list(model = 1, function_to_optimize = 'DAISIE')) {
+                                                 CS_version = list(model = 1, function_to_optimize = 'DAISIE', sampling = 'n')) {
   # stac = status of the clade formed by the immigrant
   #  . stac == 1 : immigrant is present but has not formed an extant clade
   #  . stac == 2 : immigrant is not present but has formed an extant clade
@@ -549,7 +549,6 @@ DAISIE_loglik_CS_M1 <- DAISIE_loglik <- function(pars1,
       message('One of the parameters is infinite.')
     }
   }
-
   if(is.na(pars2[4]))
   {
     pars2[4] = 0
@@ -569,7 +568,7 @@ DAISIE_loglik_CS_M1 <- DAISIE_loglik <- function(pars1,
   if(length(brts) == 1 & sum(brts == 0) == 1)
   {
     stop('The branching times contain only a 0. This means the island emerged at the present which is not allowed.');
-    loglik = -Inf
+    loglik <- -Inf
     return(loglik)
   }
   if (sum(brts == 0) == 0) {
@@ -606,16 +605,14 @@ DAISIE_loglik_CS_M1 <- DAISIE_loglik <- function(pars1,
   loglik <- -lgamma(S2 + missnumspec + 1) +
     lgamma(S2 + 1) + lgamma(missnumspec + 1)
   if (min(pars1) < 0) {
-    message("One or more parameters are negative.")
+    warning("One or more parameters are negative.")
     loglik <- -Inf
     return(loglik)
   }
   if ((ddep == 1 | ddep == 11) & ceiling(K) < (S + missnumspec)) {
-    if (verbose) {
-      message('The proposed value of K is incompatible with the number of species
+    warning('The proposed value of K is incompatible with the number of species
           in the clade. Likelihood for this parameter set
           will be set to -Inf. \n')
-    }
     loglik <- -Inf
     return(loglik)
   }
@@ -682,13 +679,16 @@ DAISIE_loglik_CS_M1 <- DAISIE_loglik <- function(pars1,
               probs2 <- rep(0, 4 * lx)
               probs2[(2 * lx + 1):(4 * lx)] <- probs[1:(2 * lx)]
               probs2[1:(2 * lx)] <- 0
+              #probs2[1:(2 * lx)] <- probs[1:(2 * lx)]
+              #probs2[(2 * lx + 1):(4 * lx)] <- 0
               probs <- probs2
               rm(probs2)
               probs <- DAISIE_integrate(probs,brts[2:3],DAISIE_loglik_rhs1,c(pars1,k1,ddep),rtol = reltolint,atol = abstolint,method = methode)
               cp <- checkprobs2(lx, loglik, probs, verbose); loglik <- cp[[1]]; probs <- cp[[2]]
               if (stac %in% c(1, 5))
               {
-                loglik <- loglik + log(probs[(stac == 1) * lx + (stac == 5) + 1 + missnumspec])
+                #loglik <- loglik + log(probs[(stac == 1) * lx + (stac == 5) + 1 + missnumspec])
+                loglik <- loglik + log((missnumspec + 1) * probs[(stac == 1) * lx + (stac == 5) + 1 + missnumspec])
               } else if (stac %in% c(6, 7, 8, 9))
               {
                 probs2 <- rep(0, 3 * lx)
@@ -718,26 +718,24 @@ DAISIE_loglik_CS_M1 <- DAISIE_loglik <- function(pars1,
               nndd <- nndivdep_CS(lx1 = lx1, lx2 = lx2, K = K, k = 0)
               parslist <- list(pars = pars1, k = 0, ddep = ddep, nndd = nndd)
               probs <- DAISIE_integrate(probs,brts[2:3],DAISIE_loglik_rhs3,parslist,rtol = reltolint,atol = abstolint,method = methode)
+              probs2 <- rep(0, 3 * lx)
+              probs3 <- probs[(lx1 + 1):(lx1 + lx1 * lx2)]
+              dim(probs3) <- c(lx1,lx2)
+              probs3[1:lx1,1:(lx2 - 1)] <- probs3[1:lx1,2:lx2] * matrix(1:(lx2 - 1),lx1,lx2 - 1,byrow = T)
+              probs4 <- probs[(lx1 + lx1 * lx2 + 1):(lx1 + 2 * lx1 * lx2)]
+              dim(probs4) <- c(lx1,lx2)
+              probs5 <- probs4
+              probs4[1:lx1,1:(lx2 - 1)] <- probs4[1:lx1,2:lx2] * matrix(1:(lx2 - 1),lx1,lx2 - 1,byrow = T)
+              for(cnt in 2:(lx + 1)) {
+                probs2[cnt - 1] <- sum(probs3[row(probs3) + col(probs3) == cnt])
+                probs2[lx + cnt - 1] <- sum(probs4[row(probs4) + col(probs4) == cnt])
+                probs2[2 * lx + cnt - 1] <- sum(probs5[row(probs5) + col(probs5) == cnt])
+              }
+              probs <- probs2
+              rm(probs2, probs3, probs4, probs5)
               if (stac %in% c(1, 5))
               {
-                loglik <- loglik + log(probs[lx + (stac == 1) * (lx1 * lx2) + (stac == 5) * lx1 + 1 + missnumspec])
-              } else if (stac %in% c(6, 7, 8, 9))
-              {
-                probs2 <- rep(0, 3 * lx)
-                probs3 <- probs[(lx1 + 1):(lx1 + lx1 * lx2)]
-                dim(probs3) <- c(lx1,lx2)
-                probs3[1:lx1,1:(lx2 - 1)] <- probs3[1:lx1,2:lx2] * matrix(1:(lx2 - 1),lx1,lx2 - 1,byrow = T)
-                probs4 <- probs[(lx1 + lx1 * lx2 + 1):(lx1 + 2 * lx1 * lx2)]
-                dim(probs4) <- c(lx1,lx2)
-                probs5 <- probs4
-                probs4[1:lx1,1:(lx2 - 1)] <- probs4[1:lx1,2:lx2] * matrix(1:(lx2 - 1),lx1,lx2 - 1,byrow = T)
-                for(cnt in 2:(lx + 1)) {
-                  probs2[cnt - 1] <- sum(probs3[row(probs3) + col(probs3) == cnt])
-                  probs2[lx + cnt - 1] <- sum(probs4[row(probs4) + col(probs4) == cnt])
-                  probs2[2 * lx + cnt - 1] <- sum(probs5[row(probs5) + col(probs5) == cnt])
-                }
-                probs <- probs2
-                rm(probs2, probs3, probs4, probs5)
+                loglik <- loglik + log(probs[(stac == 1) * 2 * lx + 1 + missnumspec])
               }
             }
           } else
@@ -751,7 +749,7 @@ DAISIE_loglik_CS_M1 <- DAISIE_loglik <- function(pars1,
             cp <- checkprobs2(lx, loglik, probs, verbose); loglik <- cp[[1]]; probs <- cp[[2]]
             if (stac %in% c(1, 5))
             {
-              loglik <- loglik + log(probs[(stac == 1) * lx + (stac == 5) + 1 + missnumspec])
+              loglik <- loglik + log((missnumspec + 1) * probs[(stac == 1) * lx + (stac == 5) + 1 + missnumspec])
             } else if (stac %in% c(6, 7, 8, 9))
             {
               probs2 <- rep(0, 3 * lx)
@@ -818,8 +816,7 @@ DAISIE_loglik_CS_M1 <- DAISIE_loglik <- function(pars1,
               k1 = k1,
               ddep = ddep
             )
-            #if(stac %in% c(2,3,6,7))
-            #{
+            #if(stac %in% c(2,3,6,7)) {
             probs2 <- rep(0, 2 * lx + 1)
             probs2[1:lx] <- lacvec[1:lx] * (probs[1:lx] + probs[(2 * lx + 1):(3 * lx)])
             probs2[(lx + 1):(2 * lx)] <- lacvec[2:(lx + 1)] * probs[(lx + 1):(2 * lx)]
@@ -874,7 +871,6 @@ DAISIE_loglik_CS_M1 <- DAISIE_loglik <- function(pars1,
       }
     }
   }
-
   if (length(pars1) == 11) {
     print_parameters_and_loglik(pars = c(stac, pars1[1:10]), # should this be 6:10, or 6:11?
                                 loglik = loglik,
@@ -894,7 +890,6 @@ DAISIE_loglik_CS_M1 <- DAISIE_loglik <- function(pars1,
     loglik <- -Inf
   }
   loglik <- as.numeric(loglik)
-  #testit::assert(is.numeric(loglik))
   return(loglik)
 }
 
@@ -906,7 +901,7 @@ DAISIE_loglik_CS_choice <- function(
     stac,
     missnumspec,
     methode = "odeint::runge_kutta_cash_karp54",
-    CS_version = list(model = 1, function_to_optimize = 'DAISIE'),
+    CS_version = list(model = 1, function_to_optimize = 'DAISIE', sampling = 'n'),
     abstolint = 1E-16,
     reltolint = 1E-10
 )
@@ -1067,9 +1062,25 @@ DAISIE_loglik_CS <- DAISIE_loglik_all <- function(
     pars2,
     datalist,
     methode = "odeint::runge_kutta_cash_karp54",
-    CS_version = list(model = 1, function_to_optimize = 'DAISIE'),
+    CS_version = list(model = 1, function_to_optimize = 'DAISIE', sampling = 'n'),
     abstolint = 1E-16,
     reltolint = 1E-10) {
+
+  if (length(CS_version) > 1) {
+    if (length(CS_version$function_to_optimize) > 0) {
+      if( CS_version$function_to_optimize == 'DAISIE_DE') {
+        loglik <- DAISIE_DE_loglik_CS(pars1 = pars1,
+                                      pars2 = pars2,
+                                      datalist = datalist,
+                                      methode = methode,
+                                      abstolint = abstolint,
+                                      reltolint = reltolint,
+                                      equal_extinction = TRUE,
+                                      sampling = CS_version$sampling)
+        return(loglik)
+      }
+    }
+  }
   if (length(pars1) == 14) {
     if (datalist[[1]]$island_age > pars1[11]) {
       stop(
@@ -1097,7 +1108,6 @@ DAISIE_loglik_CS <- DAISIE_loglik_all <- function(
       peak
     )
   }
-
   pars1 <- as.numeric(pars1)
   cond <- pars2[3]
   if (length(pars1) == 6) {
@@ -1105,12 +1115,12 @@ DAISIE_loglik_CS <- DAISIE_loglik_all <- function(
   } else {
     endpars1 <- 5
   }
-
   if(length(pars1) %in% c(5,6) | !is.na(pars2[5])) {
     if(!is.na(pars2[5]))
     {
       endpars1 <- length(pars1)
     }
+
     logp0 <- DAISIE_loglik_CS_choice(
       pars1 = pars1,
       pars2 = pars2,
@@ -1132,7 +1142,7 @@ DAISIE_loglik_CS <- DAISIE_loglik_all <- function(
     {
       message('Positive values of loglik encountered without possibility for approximation. Setting loglik to -Inf.')
       loglik <- -Inf
-      print_parameters_and_loglik(pars = pars,
+      print_parameters_and_loglik(pars = pars1,
                                   loglik = loglik,
                                   verbose = pars2[4],
                                   type = 'island_loglik')
@@ -1218,6 +1228,8 @@ DAISIE_loglik_CS <- DAISIE_loglik_all <- function(
 
   if(length(datalist) > 1)
   {
+    duplicates_check_list <- list()
+    k <- 1
     for(i in 2:length(datalist))
     {
       if(datalist[[i]]$type1or2 == 1)
@@ -1226,21 +1238,48 @@ DAISIE_loglik_CS <- DAISIE_loglik_all <- function(
       } else {
         pars <- pars1[6:10]
       }
-      loglik <- loglik + DAISIE_loglik_CS_choice(
-        pars1 = pars,
-        pars2 = pars2,
-        datalist = datalist[[i]],
-        brts = datalist[[i]]$branching_times,
-        stac = datalist[[i]]$stac,
-        missnumspec = datalist[[i]]$missing_species,
-        methode = methode,
-        CS_version = CS_version,
-        abstolint = abstolint,
-        reltolint = reltolint)
+      found <- FALSE
+      if(i > 2)
+      {
+        z <- 1
+        while(found == FALSE & z <= length(duplicates_check_list)) {
+          if(duplicates_check_list[[z]]$stac == datalist[[i]]$stac &
+             suppressWarnings(all(duplicates_check_list[[z]]$brts == datalist[[i]]$branching_times)) &
+             duplicates_check_list[[z]]$missnumspec == datalist[[i]]$missing_species &
+             duplicates_check_list[[z]]$type1or2 == datalist[[i]]$type1or2) {
+            loglik_i <- duplicates_check_list[[z]]$loglik
+            found <- TRUE
+          }
+          z <- z + 1
+        }
+      }
+      if(found == FALSE) {
+        loglik_i <- DAISIE_loglik_CS_choice(
+          pars1 = pars,
+          pars2 = pars2,
+          datalist = datalist[[i]],
+          brts = datalist[[i]]$branching_times,
+          stac = datalist[[i]]$stac,
+          missnumspec = datalist[[i]]$missing_species,
+          methode = methode,
+          CS_version = CS_version,
+          abstolint = abstolint,
+          reltolint = reltolint)
+      }
+      if(loglik_i == -Inf) return(loglik = -Inf)
+      loglik <- loglik + loglik_i
+      if(i == 2 | found == FALSE) {
+        duplicates_check_list[[k]] <- list(stac = datalist[[i]]$stac,
+                                           brts = datalist[[i]]$branching_times,
+                                           missnumspec = datalist[[i]]$missing_species,
+                                           type1or2 = datalist[[i]]$type1or2,
+                                           loglik = loglik_i)
+        k <- k + 1
+      }
     }
   }
-
-  print_parameters_and_loglik(pars = pars,
+  if(length(pars1) == 5) pars1[6] <- 0
+  print_parameters_and_loglik(pars = pars1,
                               loglik = loglik,
                               verbose = pars2[4],
                               parnames = c("lambda^c", "mu", "K", "gamma", "lambda^a", "prob_init_pres"),
@@ -1525,9 +1564,9 @@ DAISIE_ode_cs <- function(
   }
   if (startsWith(methode, "odeint")) {
     if(runmod == "daisie_runmod3") {
-       parsvec <- c(unlist(parsvec), kk)
-       parsvec <- parsvec[-c(1:2)]
-       kk <- lx
+      parsvec <- c(unlist(parsvec), kk)
+      parsvec <- parsvec[-c(1:2)]
+      kk <- lx
     }
     probs <- .Call("daisie_odeint_cs", runmod, initprobs, tvec, lx, kk, parsvec[-length(parsvec)], methode, atol, rtol)
   } else if (startsWith(methode, "deSolve_R::")) {
@@ -1542,10 +1581,10 @@ DAISIE_ode_cs <- function(
     probs <- y[-1,-1]
   } else {
     if(runmod == "daisie_runmod3") {
-       parsvec <- c(unlist(parsvec), kk)
-       parsvec <- parsvec[-c(1:2)]
-       kk <- lx
-       initmod <- "daisie_initmod3"
+      parsvec <- c(unlist(parsvec), kk)
+      parsvec <- parsvec[-c(1:2)]
+      kk <- lx
+      initmod <- "daisie_initmod3"
     } else
     {
       initmod <- "daisie_initmod"
@@ -1663,7 +1702,7 @@ DAISIE_logp0 <- function(pars1,
                          pars2,
                          island_age,
                          methode = "odeint::runge_kutta_cash_karp54",
-                         CS_version = list(model = 1, function_to_optimize = 'DAISIE'),
+                         CS_version = list(model = 1, function_to_optimize = 'DAISIE', sampling = 'n'),
                          abstolint = 1E-16,
                          reltolint = 1E-10) {
   logp0 <- DAISIE_loglik_CS_choice(

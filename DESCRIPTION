@@ -2,8 +2,7 @@ Package: DAISIE
 Type: Package
 Title: Dynamical Assembly of Islands by Speciation, Immigration and
         Extinction
-Version: 4.6.0
-Date: 2025-05-30
+Version: 5.0.2
 Depends: R (>= 4.2.0)
 biocViews:
 Imports: DDD (>= 5.0), deSolve, doParallel, foreach, graphics,
@@ -11,8 +10,8 @@ Imports: DDD (>= 5.0), deSolve, doParallel, foreach, graphics,
         subplex, tensor, testit, utils
 LinkingTo: Rcpp (>= 1.0.10), RcppEigen, BH (>= 1.81.0-1)
 Suggests: ape, covr, dplyr, future, future.apply, ggplot2, ggtree (>=
-        3.0.0), gridExtra, knitr, phytools, purrr, rmarkdown, testthat
-        (>= 2.1.0), tibble, tidytree, tidyr
+        3.0.0), gridExtra, knitr, phytools, pnd, purrr, rmarkdown,
+        testthat (>= 2.1.0), tibble, tidytree, tidyr
 Enhances: doMC
 Authors@R: c(
     person(given = "Rampal S.",
@@ -58,6 +57,11 @@ Authors@R: c(
            email = "h.hildenbrandt@rug.nl",
            role = c("aut"),
            comment = c(ORCID = "0000-0002-6784-1037")),
+    person(given = "Ornela",
+           family = "Dehayem Nanwou",
+           email = "o.d.nanwou@rug.nl",
+           role = c("aut"),
+           comment = c(ORCID = "0009-0009-0507-1215")),
     person(given = "Torsten",
            family = "Hauffe",
            email = "torsten.hauffe@gmail.com",
@@ -73,11 +77,11 @@ Authors@R: c(
            email = "nadiah@nadiah.org",
            role = c("ctb"),
            comment = c(ORCID = "0000-0002-9720-4581")),
-    person(given = "Ornela",
-           family = "Dehayem Nanwou",
-           email = "o.d.nanwou@rug.nl",
+    person(given = "Thijs",
+           family = "Janzen",
+           email = "t.janzen@rug.nl",
            role = c("ctb"),
-           comment = c(ORCID = "0009-0009-0507-1215")),
+           comment = c(ORCID = "0000-0002-4162-1140")),
     person(given = "Raphael",
            family = "Scherrer",
            email = "r.scherrer@rug.nl",
@@ -95,8 +99,8 @@ VignetteBuilder: knitr
 URL: https://github.com/rsetienne/DAISIE,
         https://rsetienne.github.io/DAISIE/
 BugReports: https://github.com/rsetienne/DAISIE/issues
-RoxygenNote: 7.3.2
-Packaged: 2025-05-31 21:23:13 UTC; rampa
+RoxygenNote: 7.3.3
+Packaged: 2026-07-30 18:11:35 UTC; rampa
 Author: Rampal S. Etienne [aut, cre] (ORCID:
     <https://orcid.org/0000-0003-2142-7612>),
   Luis Valente [aut] (ORCID: <https://orcid.org/0000-0003-4247-8785>),
@@ -112,14 +116,15 @@ Author: Rampal S. Etienne [aut, cre] (ORCID:
     <https://orcid.org/0000-0003-1107-7049>),
   Hanno Hildenbrandt [aut] (ORCID:
     <https://orcid.org/0000-0002-6784-1037>),
+  Ornela Dehayem Nanwou [aut] (ORCID:
+    <https://orcid.org/0009-0009-0507-1215>),
   Torsten Hauffe [ctb] (ORCID: <https://orcid.org/0000-0001-5711-9457>),
   Giovanni Laudanno [ctb] (ORCID:
     <https://orcid.org/0000-0002-2952-3345>),
   Nadiah Kristensen [ctb] (ORCID:
     <https://orcid.org/0000-0002-9720-4581>),
-  Ornela Dehayem Nanwou [ctb] (ORCID:
-    <https://orcid.org/0009-0009-0507-1215>),
+  Thijs Janzen [ctb] (ORCID: <https://orcid.org/0000-0002-4162-1140>),
   Raphael Scherrer [ctb] (ORCID: <https://orcid.org/0000-0002-1447-7630>)
 Maintainer: Rampal S. Etienne <r.s.etienne@rug.nl>
 Repository: CRAN
-Date/Publication: 2025-06-01 21:20:02 UTC
+Date/Publication: 2026-07-31 00:00:43 UTC

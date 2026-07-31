@@ -20,7 +20,7 @@ DAISIE_MW_ML(
   maxiter = 1000 * round((1.25)^length(idparsopt)),
   methode = "odeint::runge_kutta_cash_karp54",
   optimmethod = "simplex",
-  CS_version = list(model = 1, function_to_optimize = "DAISIE"),
+  CS_version = list(model = 1, function_to_optimize = "DAISIE", sampling = "n"),
   verbose = 0,
   tolint = c(1e-16, 1e-10),
   distance_type = "continent",
@@ -86,8 +86,17 @@ abstolx = absolute tolerance of parameter values in optimization}
 
 \item{maxiter}{Sets the maximum number of iterations in the optimization}
 
-\item{methode}{Method of the ODE-solver. See package deSolve for details.
-Default is "lsodes"}
+\item{methode}{Method of the ODE-solver. Supported Boost \code{ODEINT}
+solvers (steppers) are:
+\code{"odeint::runge_kutta_cash_karp54"}
+\code{"odeint::runge_kutta_fehlberg78"}
+\code{"odeint::runge_kutta_dopri5"}
+\code{"odeint::bulirsch_stoer"}
+without \code{odeint::}-prefix, \code{\link[deSolve]{ode}} method is
+assumed. The default method overall is
+\code{"lsodes"} for \code{\link{DAISIE_ML_CS}()}
+and \code{"ode45"} from \code{\link[deSolve]{ode}()} for
+\code{\link{DAISIE_ML_IW}()}.}
 
 \item{optimmethod}{Method used in likelihood optimization. Default is
 "subplex" (see subplex package). Alternative is 'simplex' which was the
@@ -107,6 +116,9 @@ contain more elements:
   \code{"DAISIE_approx"}, an approximate loglikelihood
   \code{"DAISIE_DE"}, an exact loglikelkhood for K = Inf based on the D-E
   approach}
+  \item{sampling}, choice between 'n' (n-sampling) and 'rho' (rho-sampling).
+  This choice only has effect when function_to_optimize is DAISIE_DE; for
+  the others sampling is always n-sampling.
   \item{integration_method: the method used to do integraion in the relaxed
   rate model. Options are:
   \code{'standard'} the default numerical integration
@@ -150,9 +162,9 @@ sigmoids in both colonization and anagenesis. \cr
 A key for the different options of distance_dep that should be specified to run the
 models from Valente et al 2020 (Supplementary Data Table 1 and 2) is given below: \cr
 * M1 to M14 - 'power' \cr
-* M15 -'area_additive_clado' \cr
-* M16 and M19 -'area_interactive_clado' \cr
-* M17 -'area_interactive_clado1' \cr
+* M15 - 'area_additive_clado' \cr
+* M16 and M19 - 'area_interactive_clado' (M19 assumes y = 0)\cr
+* M17 - 'area_interactive_clado1' \cr
 * M18 - 'area_interactive_clado2' \cr
 * M20 and M24 - sigmoidal_col' \cr
 * M21, M25 and M28 - sigmoidal_ana' \cr
@@ -193,6 +205,8 @@ rate of colonization}
 estimate of lambda^a0, the rate of anagenesis for unit distance}
 \item{beta}{ gives the maximum likelihood estimate of beta, the exponent of
 1/distance for the rate of anagenesis}
+\item{d0}{ gives the maximum likelihood estimate of d0, the parameter that
+controls the interactive or sigmoidal functions}
 \item{loglik}{ gives the maximum loglikelihood}
 \item{df}{ gives the number of estimated parameters, i.e. degrees of feedom}
 \item{conv}{ gives a message on convergence of optimization;

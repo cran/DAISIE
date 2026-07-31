@@ -1,5 +1,5 @@
 test_that("DAISIE_ML_CS: DAISIE_DE with equal_extinction = TRUE matches DAISIE", {
-  #skip("WIP")
+  skip_on_cran()
   utils::data(Galapagos_datalist)
 
   invisible(capture.output(ML_estimates_DAISIE <- DAISIE_ML_CS(
@@ -10,6 +10,7 @@ test_that("DAISIE_ML_CS: DAISIE_DE with equal_extinction = TRUE matches DAISIE",
     idparsfix = 3,
     ddmodel = 0,
     verbose = 0,
+    methode = 'odeint::runge_kutta_cash_karp54',
     CS_version = list(
       model = 1,
       function_to_optimize = "DAISIE")
@@ -23,29 +24,75 @@ test_that("DAISIE_ML_CS: DAISIE_DE with equal_extinction = TRUE matches DAISIE",
     idparsfix = 3,
     ddmodel = 0,
     verbose = 0,
-    methode = 'lsodes',
-    CS_version = list(model = 1, function_to_optimize = 'DAISIE_DE'),
+    methode = 'odeint::runge_kutta_cash_karp54',
+    CS_version = list(model = 1,
+                      function_to_optimize = 'DAISIE_DE',
+                      sampling = 'rho'),
     equal_extinction = TRUE
   )))
 
   testthat::expect_equal(ML_estimates_DAISIE_DE$loglik, ML_estimates_DAISIE$loglik, tol = 1E-6)
   testthat::expect_equal(ML_estimates_DAISIE_DE, ML_estimates_DAISIE, tol = 1E-3)
-})
+
+  utils::data(made_up_datalist)
+
+  pars1 <- c(2.546591, 2.678781, 2.678781, 0.009326754, 1.008583)
+  loglik_DE <- DAISIE_DE_loglik_CS(pars1 = pars1,
+                                  pars2 = c(100, 11, 0, 0),
+                                  datalist = made_up_datalist,
+                                  methode = "lsodes",
+                                  abstolint = 1e-10,
+                                  reltolint = 1e-10,
+                                  equal_extinction = TRUE)
+  pars1[3] <- Inf
+  pars1[6] <- 0
+  loglik <- DAISIE_loglik_CS(pars1 = pars1,
+                             pars2 = c(100, 11, 0, 0),
+                             datalist = made_up_datalist,
+                             methode = "odeint::runge_kutta_cash_karp54",
+                             abstolint = 1e-10,
+                             reltolint = 1e-10,
+                             CS_version = list(model = 1, function_to_optimize = "DAISIE", sampling = 'n'))
+  testthat::expect_equal(loglik_DE, loglik, tol = 1E-4)
+
+  utils::data(Biwa_datalist)
+  pars1 <- c(2.546591, 2.678781, 2.678781, 0.009326754, 1.008583)
+  loglik_DE <- DAISIE_DE_loglik_CS(pars1 = pars1,
+                      pars2 = c(100, 11, 0, 2),
+                      datalist = Biwa_datalist,
+                      methode = "lsodes",
+                      abstolint = 1e-10,
+                      reltolint = 1e-10,
+                      equal_extinction = TRUE)
+  pars1[3] <- Inf
+  pars1[6] <- 0
+  loglik <- DAISIE_loglik_CS(pars1 = pars1,
+                   pars2 = c(100, 11, 0, 2),
+                   datalist = Biwa_datalist,
+                   methode = "odeint::runge_kutta_cash_karp54",
+                   abstolint = 1e-10,
+                   reltolint = 1e-10,
+                   CS_version = list(model = 1, function_to_optimize = "DAISIE", sampling = 'n'))
+  testthat::expect_equal(loglik_DE, loglik, tol = 1E-4)
+  })
 
 test_that("DAISIE_DE and DAISIE give same results when there are missing species", {
-
+  skip_on_cran()
   pars1 <- c(0.2, 0.1, 0.1, 0.02, 0.03)
   brts <- c(4.000, 0.855)
   missnumspec <- 5
-  loglik_DE <- DAISIE_DE_logpES(brts = brts,
+  S <- length(brts) - 1
+  fac <- S * (log(S) - log(S + missnumspec))
+
+  loglik_DE <- DAISIE:::DAISIE_DE_logpES(brts = brts,
                                 missnumspec = missnumspec,
                                 pars1 = pars1,
-                                methode = "lsodes",
+                                stac = 2,
+                                methode = "odeint::runge_kutta_cash_karp54",
                                 reltolint = 1e-16,
-                                abstolint = 1e-16)
+                                abstolint = 1e-16) + fac
   pars1[3] <- Inf
   lik <- 0
-  S <- length(brts) - 1
   for(i in 0:300) {
     lik <- lik + exp(dbinom(i, S + i,prob = missnumspec/(S + missnumspec), log = TRUE) +
                        DAISIE:::DAISIE_loglik(brts = brts,
@@ -59,4 +106,26 @@ test_that("DAISIE_DE and DAISIE give same results when there are missing species
   }
   loglik <- log(lik)
   testthat::expect_equal(loglik, loglik_DE)
+})
+
+test_that("DAISIE_DE gives output when extinction rates between endemic and non-endemic species differ", {
+  skip_on_cran()
+  utils::data(Galapagos_datalist)
+  invisible(capture.output(ML_estimates_DAISIE_DE <- DAISIE_ML_CS(
+    datalist = Galapagos_datalist,
+    initparsopt = c(2.550682, 2.683817, 2.683817, 0.009344, 1.00728),
+    idparsopt = c(1, 2, 3, 4, 5),
+    idparsfix = NULL,
+    parsfix = NULL,
+    ddmodel = 0,
+    verbose = 0,
+    methode = 'odeint::runge_kutta_cash_karp54',
+    CS_version = list(model = 1,
+                      function_to_optimize = 'DAISIE_DE',
+                      sampling = 'rho'),
+    equal_extinction = FALSE
+  )))
+
+  testthat::expect_false(ML_estimates_DAISIE_DE[2] == ML_estimates_DAISIE_DE[3])
+  testthat::expect_true(names(ML_estimates_DAISIE_DE)[3] == 'mu_NE')
 })
